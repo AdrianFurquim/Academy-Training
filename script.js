@@ -5,6 +5,8 @@ let table_quinta = document.getElementById("table_quinta");
 let table_sexta = document.getElementById("table_sexta");
 let table_sabado = document.getElementById("table_sabado");
 
+let trs = document.getElementsByTagName("tr")
+
 function segunda(){
     table_segunda.style.display = "block";
     table_terca.style.display = "none";
@@ -12,6 +14,7 @@ function segunda(){
     table_quinta.style.display = "none";
     table_sexta.style.display = "none";
     table_sabado.style.display = "none";
+    trs[1].style.background = "black";
 }
 
 function terca(){

@@ -3,36 +3,37 @@ body{
     margin: 0;
     background-color: rgb(75, 75, 75);
     color: white;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 header{
     background-color: yellow;
     width: 100%;
-    padding-top: 0.1em;
-    padding-bottom: 0.1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     position: fixed;
-    bottom: 0;
+    bottom: 0;    
 }
 
 nav a{
     color: black;
+    margin-top: -0.5em;
     text-decoration: none;
-    margin-right: 1em;
 }
 
 nav{
     margin: auto;
-    margin-right: 1em;
     display: flex;
+    gap: 1em;
 }
 
 header h2{
     color: black;
 }
 
-.criar_treino{
+.criar_treino, .login_link{
     background-color: black;
     color: white;
     width: 35px;
@@ -42,6 +43,40 @@ header h2{
     font-weight: bold;
     justify-content: center;
     border-radius: 100%;
+    transition: 0.3s;
+    align-items: center;
+}
+
+.meus_treinos_link{
+    margin-top: -0.6em;
+    background-color: black;
+    color: white;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    font-size: 40px;
+    justify-content: center;
+    border-radius: 100%;
+    transition: 0.3s;
+    align-items: center;
+}
+
+.criar_treino{
+    margin-top: -0.25em;
+}
+
+.criar_treino:hover, .login_link:hover{
+    width: 45px;
+    height: 45px;
+    font-size: 40px;
+    color: rgb(255, 255, 130);
+}
+
+.meus_treinos_link:hover{
+    width: 55px;
+    height: 55px;
+    font-size: 50px;
+    color: rgb(255, 255, 130);
 }
 
 .conteiner_dia_treino{
@@ -85,4 +120,58 @@ th, td {
 .table_treinos{
     display: flex;
     justify-content: center;
+}
+
+/* Adicionar Treino ==================================================================================================================== */
+
+.escolha{
+    display: flex;
+    flex-direction: column;
+}
+
+.escolha button{
+    background-color: yellow;
+    width: 90%;
+    padding: 30px;
+    margin: auto;
+    font-size: 40px;
+    margin-top: 2em;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.escolha svg{
+    width: 30px;
+    height: 30px;
+}
+
+.escolha button:hover{
+    background-color: yellow;
+    width: 95%;
+    padding: 35px;    
+}
+
+/* Login ============================================================================================================================================================== */
+
+.conteiner_login{
+    border: 1px solid white;
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    margin-top: 1.2em;
+}
+
+.foto_login{
+    width: 50%;
+    border-radius: 100%;
+    border: 2px solid white;
+    margin-top: 1em;
+}
+
+.imagem_login{
+    text-align: center;
+}
+
+.dados_login{
+    margin-left: 3em;
 }
