@@ -36,8 +36,8 @@ header h2{
 .criar_treino, .login_link{
     background-color: black;
     color: white;
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     display: flex;
     font-size: 30px;
     font-weight: bold;
@@ -47,12 +47,23 @@ header h2{
     align-items: center;
 }
 
+.login_link svg{
+    width: 25px;
+    height: 25px;
+    transition: 0.3s;
+}
+
+.login_link:hover  svg{
+    width: 35px;
+    height: 35px;
+}
+
 .meus_treinos_link{
     margin-top: -0.6em;
     background-color: black;
     color: white;
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     display: flex;
     font-size: 40px;
     justify-content: center;
@@ -61,34 +72,59 @@ header h2{
     align-items: center;
 }
 
+.meus_treinos_link svg{
+    width: 25px;
+    height: 25px;
+    transition: 0.3s;
+}
+
 .criar_treino{
     margin-top: -0.25em;
 }
 
 .criar_treino:hover, .login_link:hover{
-    width: 45px;
-    height: 45px;
-    font-size: 40px;
-    color: rgb(255, 255, 130);
-}
-
-.meus_treinos_link:hover{
     width: 55px;
     height: 55px;
     font-size: 50px;
     color: rgb(255, 255, 130);
 }
 
+.meus_treinos_link:hover{
+    width: 65px;
+    height: 65px;
+    font-size: 60px;
+    color: rgb(255, 255, 130);
+}
+
+.meus_treinos_link:hover svg {
+    width: 35px;
+    height: 35px;
+}
+
 .conteiner_dia_treino{
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .conteiner_dia_treino button{
     background-color: rgb(255, 255, 46);
     border: none;
-    padding: 10px;
+    padding: 15px;
+    width: 80%;
     border-radius: 10px;
+    font-size: 17px;
     cursor: pointer;
+    margin: auto;
+    margin-top: 1em;
+}
+
+.button_voltar{
+    display: none;
+}
+
+.buttons_dias{
+    display: block;
 }
 
 table {
@@ -100,6 +136,7 @@ table {
     letter-spacing: 1px;
     padding: 10px;
     margin-top: 2em;
+    max-width: 95%;
   }
   
 caption {

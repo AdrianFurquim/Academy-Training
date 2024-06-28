@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academy Training</title>
+    <link rel="icon" tipe="image/ico" href="./assets/img/logo.JPG">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,12 +29,15 @@
     
     <section class="conteiner_dia_treino">
         <h1>Selecione o dia:</h1>
-        <button onclick="segunda()">Segunda</button>
-        <button onclick="terca()">Terça</button>
-        <button onclick="quarta()">Quarta</button>
-        <button onclick="quinta()">Quinta</button>
-        <button onclick="sexta()">Sexta</button>
-        <button onclick="sabado()">Sabado</button>
+        <button class="button_voltar" onclick="voltar()">Voltar</button>
+        <div class="buttons_dias">
+            <button onclick="segunda()">Segunda</button>
+            <button onclick="terca()">Terça</button>
+            <button onclick="quarta()">Quarta</button>
+            <button onclick="quinta()">Quinta</button>
+            <button onclick="sexta()">Sexta</button>
+            <button onclick="sabado()">Sabado</button>
+        </div>
     </section>
 
     <section class="table_treinos">
@@ -104,7 +108,7 @@
                 <td>3 x 10</td>
             </tr>
             <tr>
-                <th scope="row" colspan="3">Peitoral</th>
+                <th scope="row" colspan="3">Abdômen</th>
             </tr>
             <tr>
                 <td>1</td>
