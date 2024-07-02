@@ -10,7 +10,7 @@ header{
     background-color: yellow;
     width: 100%;
     padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-bottom: 2em;
     display: flex;
     justify-content: center;
     position: fixed;
@@ -76,6 +76,10 @@ header h2{
     width: 25px;
     height: 25px;
     transition: 0.3s;
+}
+
+button{
+    color: black;
 }
 
 .criar_treino{
