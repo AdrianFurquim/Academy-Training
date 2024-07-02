@@ -7,7 +7,7 @@ let table_sabado = document.getElementById("table_sabado");
 let buttons_dias = document.querySelector(".buttons_dias");
 let button_voltar = document.querySelector(".button_voltar");
 
-let trs = document.getElementsByTagName("tr")
+let trs = document.getElementsByTagName("tr");
 
 function voltar(){
     table_segunda.style.display = "none";
@@ -85,4 +85,12 @@ function sabado(){
     table_sabado.style.display = "block";
     buttons_dias.style.display = "none";
     button_voltar.style.display = "block";
+}
+
+function confereTreino(index) {
+    if (trs[index].style.background === "transparent" || trs[index].style.background === "") {
+        trs[index].style.background = "rgb(10, 230, 10, 0.5)";
+    } else{
+        trs[index].style.background = "transparent";
+    }
 }
