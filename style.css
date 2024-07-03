@@ -182,6 +182,10 @@ th, td {
     cursor: pointer;
 }
 
+.escolha a{
+    text-align: center;
+}
+
 .escolha svg{
     width: 30px;
     height: 30px;
@@ -191,6 +195,37 @@ th, td {
     background-color: yellow;
     width: 95%;
     padding: 35px;    
+}
+
+/* Criar Treino ========================================================================================================================================================*/
+
+.montando_treino{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.escolha_dia, .escolha_membro{
+    display: flex;
+    flex-direction: column;
+}
+
+.escolha_membro{
+    display: none;
+}
+
+.montando_treino button{
+    background-color: yellow;
+    width: 75%;
+    padding: 10px;
+    margin: auto;
+    font-size: 20px;
+    margin-top: 0.2em;
+    transition: 0.3s;
+    cursor: pointer;
+    justify-content: center;
+    border: none;
+
 }
 
 /* Login ============================================================================================================================================================== */

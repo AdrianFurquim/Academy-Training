@@ -94,3 +94,16 @@ function confereTreino(index) {
         trs[index].style.background = "transparent";
     }
 }
+
+// Criar Treino
+let dias = document.querySelector(".escolha_dia");
+let membros = document.querySelector(".escolha_membro");
+
+function diaEscolhido() {
+    dias.style.display = "none";
+    membros.style.display = "block";
+}
+
+function membroEscolhido() {
+    membros.style.display = "none";
+}
