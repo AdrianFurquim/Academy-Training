@@ -88,10 +88,10 @@ function sabado(){
 }
 
 function confereTreino(index) {
-    if (trs[index].style.background === "transparent" || trs[index].style.background === "") {
+    if (trs[index].style.background === "") {
         trs[index].style.background = "rgb(10, 230, 10, 0.5)";
-    } else{
-        trs[index].style.background = "transparent";
+    } else if(trs[index].style.background = "rgb(10, 230, 10, 0.5)"){
+        trs[index].style.background = "";
     }
 }
 
@@ -104,6 +104,40 @@ function diaEscolhido() {
     membros.style.display = "block";
 }
 
-function membroEscolhido() {
+function membroEscolhido(membro) {
     membros.style.display = "none";
+    switch (membro) {
+        case "peito":
+            document.querySelector(".form_peito").style.display = "block";
+            break;
+
+        case "triceps":
+            document.querySelector(".form_triceps").style.display = "block";
+            break;
+
+        case "abdomen":
+            document.querySelector(".form_abdomen").style.display = "block";
+            break;
+
+        case "costas":
+            document.querySelector(".form_costa").style.display = "block";
+            break;
+
+        case "biceps":
+            document.querySelector(".form_biceps").style.display = "block";
+            break;
+
+        case "ombro":
+            document.querySelector(".form_ombro").style.display = "block";
+            break;
+
+        case "mem_inferiores":
+            document.querySelector(".form_mem_inferiores").style.display = "block";
+            break;
+    
+        default:
+            alert("Não tem esse");
+            break;
+    }
 }
+

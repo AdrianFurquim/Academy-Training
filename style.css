@@ -225,7 +225,28 @@ th, td {
     cursor: pointer;
     justify-content: center;
     border: none;
+}
 
+.form_peito, .form_triceps, .form_abdomen, .form_costa, .form_biceps, .form_ombro, .form_mem_inferiores{
+    background-color: rgb(0, 0, 0, 0.5);
+    width: 75%;
+    margin: auto;
+    margin-top: 2em;
+    border-radius: 15px;
+    justify-content: space-between;
+    display: none;
+}
+
+.form_peito{
+    display: block;
+}
+
+.montando_treino select{
+    background-color: rgb(255, 255, 223);
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
 }
 
 /* Login ============================================================================================================================================================== */

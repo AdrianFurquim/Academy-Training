@@ -41,14 +41,87 @@
     
         <div class="escolha_membro">
             <h1>Escolha o membro desejado:</h1>
-            <button>Peito</button>
-            <button>Tríceps</button>
-            <button>Abdomen</button>
-            <button>Costa</button>
-            <button>Bíceps</button>
-            <button>Ombro</button>
-            <button>Membros inferiores</button>
+            <button onclick="membroEscolhido('peito')">Peito</button>
+            <button onclick="membroEscolhido('triceps')">Tríceps</button>
+            <button onclick="membroEscolhido('abdomen')">Abdomen</button>
+            <button onclick="membroEscolhido('costas')">Costa</button>
+            <button onclick="membroEscolhido('biceps')">Bíceps</button>
+            <button onclick="membroEscolhido('ombro')">Ombro</button>
+            <button onclick="membroEscolhido('mem_inferiores')">Membros inferiores</button>
         </div>
+
+        <div class="form_peito">
+            <h1>Peito</h1>
+            <form action="">
+                <select name="peito" id="peito">
+                    <option value="">--</option>
+                    <option value="Supino Reto Barra">Supino Reto Barra</option>
+                    <option value="Supino Reto Halter">Supino Reto Halter</option>
+                    <option value="Supino Reto Pórtico">Supino Reto Pórtico</option>
+
+                    <option value="Supino Inclinado Barra">Supino Inclinado Barra</option>
+                    <option value="Supino Inclinado Halter">Supino Inclinado Halter</option>
+                    <option value="Supino Inclinado Pórtico">Supino Inclinado Pórtico</option>
+
+                    <option value="Supino Declinado Barra">Supino Declinado Barra</option>
+                    <option value="Supino Declinado Halter">Supino Declinado Halter</option>
+                    <option value="Supino Declinado Pórtico">Supino Declinado Pórtico</option>
+
+                    <option value="Supino Articulado">Supino Articulado</option>
+
+                    <option value="Crucifixo Halter">Crucifixo Halter</option>
+                    <option value="Crucifixo Aparelho">Crucifixo Aparelho</option>
+
+                    <option value="Pullover">Pullover</option>
+
+                    <option value="Cross Over">Cross Over</option>
+
+                    <option value="Peck Deck">Peck Deck</option>
+                    <option value="Dropset">Dropset</option>
+                </select>
+                <select name="serie" id="serie">
+                    <option value="--">--</option>
+                    <option value="3 x 10">3 x 10</option>
+                    <option value="3 x 12">3 x 12</option>
+                    <option value="4 x 10">4 x 10</option>
+                    <option value="4 x 12">4 x 12</option>
+                    <option value="Desejado">Desejado</option>
+                </select>
+                <h1>Pra nada</h1>
+            </form>
+
+        </div>
+
+        <div class="form_triceps">
+            <h1>Tríceps</h1>
+
+        </div>
+
+        <div class="form_abdomen">
+            <h1>Abdomen</h1>
+
+        </div>
+
+        <div class="form_costa">
+            <h1>Costa</h1>
+
+        </div>
+
+        <div class="form_biceps">
+            <h1>Bíceps</h1>
+
+        </div>
+
+        <div class="form_ombro">
+            <h1>Ombro</h1>
+
+        </div>
+
+        <div class="form_mem_inferiores">
+            <h1>Mebros Inferiores</h1>
+
+        </div>
+
     </section>
 
     <script src="script.js"></script>
