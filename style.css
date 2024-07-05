@@ -115,10 +115,9 @@ button{
 .conteiner_dia_treino button{
     background-color: rgb(255, 255, 46);
     border: none;
-    padding: 15px;
+    padding: 20px;
     width: 80%;
-    border-radius: 10px;
-    font-size: 17px;
+    font-size: 20px;
     cursor: pointer;
     margin: auto;
     margin-top: 1em;
@@ -163,6 +162,7 @@ th, td {
     display: flex;
     justify-content: center;
 }
+
 
 /* Adicionar Treino ==================================================================================================================== */
 
@@ -237,7 +237,7 @@ th, td {
     display: none;
 }
 
-.form_peito{
+.form_peito, .form_triceps{
     display: block;
 }
 
