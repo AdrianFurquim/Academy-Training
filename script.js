@@ -9,81 +9,55 @@ let button_voltar = document.querySelector(".button_voltar");
 
 let trs = document.getElementsByTagName("tr");
 
-function voltar(){
+function sumirBottoes() {
     table_segunda.style.display = "none";
     table_terca.style.display = "none";
     table_quarta.style.display = "none";
     table_quinta.style.display = "none";
     table_sexta.style.display = "none";
     table_sabado.style.display = "none";
-    buttons_dias.style.display = "block";
+    buttons_dias.style.display = "none";
     button_voltar.style.display = "none";
 }
 
+function voltar(){
+    sumirBottoes();
+    buttons_dias.style.display = "block";
+}
+
 function segunda(){
+    sumirBottoes();
     table_segunda.style.display = "block";
-    table_terca.style.display = "none";
-    table_quarta.style.display = "none";
-    table_quinta.style.display = "none";
-    table_sexta.style.display = "none";
-    table_sabado.style.display = "none";
-    buttons_dias.style.display = "none";
     button_voltar.style.display = "block";
-    // trs[1].style.background = "black";
 }
 
 function terca(){
-    table_segunda.style.display = "none";
+    sumirBottoes();
     table_terca.style.display = "block";
-    table_quarta.style.display = "none";
-    table_quinta.style.display = "none";
-    table_sexta.style.display = "none";
-    table_sabado.style.display = "none";
-    buttons_dias.style.display = "none";
     button_voltar.style.display = "block";
 }
 
 function quarta(){
-    table_segunda.style.display = "none";
-    table_terca.style.display = "none";
+    sumirBottoes();
     table_quarta.style.display = "block";
-    table_quinta.style.display = "none";
-    table_sexta.style.display = "none";
-    table_sabado.style.display = "none";
-    buttons_dias.style.display = "none";
     button_voltar.style.display = "block";
 }
 
 function quinta(){
-    table_segunda.style.display = "none";
-    table_terca.style.display = "none";
-    table_quarta.style.display = "none";
+    sumirBottoes();
     table_quinta.style.display = "block";
-    table_sexta.style.display = "none";
-    table_sabado.style.display = "none";
-    buttons_dias.style.display = "none";
     button_voltar.style.display = "block";
 }
 
 function sexta(){
-    table_segunda.style.display = "none";
-    table_terca.style.display = "none";
-    table_quarta.style.display = "none";
-    table_quinta.style.display = "none";
+    sumirBottoes();
     table_sexta.style.display = "block";
-    table_sabado.style.display = "none";
-    buttons_dias.style.display = "none";
     button_voltar.style.display = "block";
 }
 
 function sabado(){
-    table_segunda.style.display = "none";
-    table_terca.style.display = "none";
-    table_quarta.style.display = "none";
-    table_quinta.style.display = "none";
-    table_sexta.style.display = "none";
+    sumirBottoes();
     table_sabado.style.display = "block";
-    buttons_dias.style.display = "none";
     button_voltar.style.display = "block";
 }
 
@@ -102,6 +76,18 @@ let membros = document.querySelector(".escolha_membro");
 function diaEscolhido() {
     dias.style.display = "none";
     membros.style.display = "block";
+}
+
+function diaVoltar(){
+    dias.style.display = "block";
+    membros.style.display = "none";
+    document.querySelector(".form_peito").style.display = "none";
+    document.querySelector(".form_triceps").style.display = "none";
+    document.querySelector(".form_abdomen").style.display = "none";
+    document.querySelector(".form_costa").style.display = "none";
+    document.querySelector(".form_biceps").style.display = "none";
+    document.querySelector(".form_ombro").style.display = "none";
+    document.querySelector(".form_mem_inferiores").style.display = "none";
 }
 
 function membroEscolhido(membro) {
@@ -140,4 +126,123 @@ function membroEscolhido(membro) {
             break;
     }
 }
+// PEITO ARRAY ======================================================================================================================
+let peito = [
+    
+]
 
+// TRICEPS ARRAY ======================================================================================================================
+let triceps = [
+    
+]
+
+// ABDOMEN ARRAY ======================================================================================================================
+let abdomen = [
+    
+]
+
+const btnSalvarExercicioPeito = document.getElementById("btnSalvarExercicioPeito");
+const btnSalvarExercicioTriceps = document.getElementById("btnSalvarExercicioTriceps");
+const btnSalvarExercicioAbdomen = document.getElementById("btnSalvarExercicioAbdomen");
+
+// PEITO BUTTON ======================================================================================================================
+btnSalvarExercicioPeito.addEventListener("click", function(e) {
+    let exercicioPeito = document.querySelector("#peito").value;
+    let seriePeito = document.querySelector("#seriePeito").value;
+
+    // If para caso algum dos item esteja faltando preencher.
+    if (exercicioPeito == '' || seriePeito == '') {
+        e.preventDefault();
+        return;
+    }    
+    // Cria o produto e salva no array de produtos.
+    const novoExercicioPeito = { exercicio: exercicioPeito, serie: seriePeito };
+    peito.push(novoExercicioPeito);
+    peito.sort((a, b) => a.valor - b.valor);
+
+    // Atualiza a tabela com os novos produtos.
+    atualizarTabelaPeito();
+    // Troca os componentes do formulário para a lista de produtos.
+});
+
+// TRICEPS ARRAY ======================================================================================================================
+btnSalvarExercicioTriceps.addEventListener("click", function(e) {
+    let exercicioTriceps = document.querySelector("#triceps").value;
+    let serieTriceps = document.querySelector("#serieTriceps").value;
+
+    // If para caso algum dos item esteja faltando preencher.
+    if (exercicioTriceps == '' || serieTriceps == '') {
+        e.preventDefault();
+        return;
+    }    
+    // Cria o produto e salva no array de produtos.
+    const novoExercicioTriceps = { exercicio: exercicioTriceps, serie: serieTriceps };
+    triceps.push(novoExercicioTriceps);
+    triceps.sort((a, b) => a.valor - b.valor);
+
+    // Atualiza a tabela com os novos produtos.
+    atualizarTabelaTriceps();
+    // Troca os componentes do formulário para a lista de produtos.
+});
+
+// ABDOMEN ARRAY ======================================================================================================================
+btnSalvarExercicioAbdomen.addEventListener("click", function(e) {
+    let exercicioAbdomen = document.querySelector("#abdomen").value;
+    let serieAbdomen = document.querySelector("#serieAbdomen").value;
+
+    // If para caso algum dos item esteja faltando preencher.
+    if (exercicioAbdomen == '' || serieAbdomen == '') {
+        e.preventDefault();
+        return;
+    }    
+    // Cria o produto e salva no array de produtos.
+    const novoExercicioAbdomen = { exercicio: exercicioAbdomen, serie: serieAbdomen };
+    abdomen.push(novoExercicioAbdomen);
+    abdomen.sort((a, b) => a.valor - b.valor);
+
+    // Atualiza a tabela com os novos produtos.
+    atualizarTabelaAbdomen();
+    // Troca os componentes do formulário para a lista de produtos.
+});
+
+// TABELA PEITO =============================================================================================================================
+const corpoTabelaPeito = document.getElementById("corpoTabelaPeito");
+// Função para atualizar os produtos da tabela.
+function atualizarTabelaPeito() {
+    // Apaga os item que existiam antes.
+    corpoTabelaPeito.innerHTML = "<tr><th scope='row' colspan='3'>Peitoral</th></tr>"
+    // Looping para encrever todos os produtos na tabela.
+    peito.forEach(peito => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<th scope="col">A escolha</th><th scope="col">${peito.exercicio}</th><th scope="col">${peito.serie}</th>`;
+        corpoTabelaPeito.appendChild(row);
+    });
+}
+
+// TABELA TRICEPS =============================================================================================================================
+const corpoTabelaTriceps = document.getElementById("corpoTabelaTriceps");
+// Função para atualizar os produtos da tabela.
+function atualizarTabelaTriceps() {
+    // Apaga os item que existiam antes.
+    corpoTabelaTriceps.innerHTML = "<tr><th scope='row' colspan='3'>Tríceps</th></tr>"
+    // Looping para encrever todos os produtos na tabela.
+    triceps.forEach(triceps => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<th scope="col">A escolha</th><th scope="col">${triceps.exercicio}</th><th scope="col">${triceps.serie}</th>`;
+        corpoTabelaTriceps.appendChild(row);
+    });
+}
+
+// ABDOMEN TRICEPS =============================================================================================================================
+const corpoTabelaAbdomen = document.getElementById("corpoTabelaAbdomen");
+// Função para atualizar os produtos da tabela.
+function atualizarTabelaAbdomen() {
+    // Apaga os item que existiam antes.
+    corpoTabelaAbdomen.innerHTML = "<tr><th scope='row' colspan='3'>Abdominal</th></tr>"
+    // Looping para encrever todos os produtos na tabela.
+    abdomen.forEach(abdomen => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<th scope="col">A escolha</th><th scope="col">${abdomen.exercicio}</th><th scope="col">${abdomen.serie}</th>`;
+        corpoTabelaAbdomen.appendChild(row);
+    });
+}

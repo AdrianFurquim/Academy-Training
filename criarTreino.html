@@ -51,6 +51,7 @@
         </div>
 
         <div class="form_peito">
+            <button onclick="diaVoltar()">Voltar</button>
             <h1>Peito</h1>
             <form action="">
                 <select name="peito" id="peito">
@@ -79,7 +80,7 @@
                     <option value="Peck Deck">Peck Deck</option>
                     <option value="Dropset">Dropset</option>
                 </select>
-                <select name="serie" id="serie">
+                <select name="seriePeito" id="seriePeito">
                     <option value="--">--</option>
                     <option value="3 x 10">3 x 10</option>
                     <option value="3 x 12">3 x 12</option>
@@ -87,14 +88,32 @@
                     <option value="4 x 12">4 x 12</option>
                     <option value="Desejado">Desejado</option>
                 </select>
-                <h1>Lista de exercicios já existentes na planilha da pessoa.</h1>
+                <table id="table_exericios">
+                    <caption>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Ordem</th>
+                        <th scope="col">Exercicío</th>
+                        <th scope="col">Série</th>
+                    </tr>
+                    </thead>
+                    <tbody id="corpoTabelaPeito">
+                    <tr>
+                        <th scope="row" colspan="3">Peitoral</th>
+                    </tr>
+                    
+                    </tbody>
+                </table>
             </form>
+            <button id="btnSalvarExercicioPeito">Adicionar Exercicío</button><br>
         </div>
 
         <div class="form_triceps">
+            <button onclick="diaVoltar()">Voltar</button>
             <h1>Tríceps</h1>
             <form action="">
-                <select name="triceps" id="triceos">
+                <select name="triceps" id="triceps">
                     <option value="">--</option>
 
                     <option value="Tríceps Frânces Halter">Tríceps Frânces Halter</option> 
@@ -123,7 +142,7 @@
                     <option value="Tríceps Testa Cross">Tríceps Testa Cross</option>
                     <option value="Tríceps Testa Dropset">Tríceps Testa Dropset</option>
                 </select>
-                <select name="serie" id="serie">
+                <select name="serieTriceps" id="serieTriceps">
                     <option value="--">--</option>
                     <option value="3 x 10">3 x 10</option>
                     <option value="3 x 12">3 x 12</option>
@@ -131,31 +150,103 @@
                     <option value="4 x 12">4 x 12</option>
                     <option value="Desejado">Desejado</option>
                 </select>
-                <h1>Lista com exercicios do usuario</h1>
+                <table id="table_exericios">
+                    <caption>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Ordem</th>
+                        <th scope="col">Exercicío</th>
+                        <th scope="col">Série</th>
+                    </tr>
+                    </thead>
+                    <tbody id="corpoTabelaTriceps">
+                    <tr>
+                        <th scope="row" colspan="3">Peitoral</th>
+                    </tr>
+                   
+                    </tbody>
+                </table>
             </form>
+            <button id="btnSalvarExercicioTriceps">Adicionar Exercicío</button><br>
         </div>
 
         <div class="form_abdomen">
-            <h1>Abdomen</h1>
+            
+            <button onclick="diaVoltar()">Voltar</button>
+            <h1>Abdominal</h1>
+            <form action="">
+                <select name="abdomen" id="abdomen">
+                    <option value="">--</option>
 
+                    <option value="Supra Colchonete">Supra Colchonete</option>
+                    <option value="Supra Com Anilha">Supra Com Anilha</option>
+                    <option value="Supra Com Barra">Supra Com Barra</option>
+                    <option value="Supra Pórtico">Supra Pórtico</option>
+
+                    <option value="Remador">Remador</option>
+                    <option value="Remador Com Anilha e tornozeleira">Remador Com Anilha e tornozeleira</option>
+                    <option value="Remador Canivete">Remador Canivete</option>
+                    <option value="Remador Prancha">Remador Prancha</option>
+
+                    <option value="Inclinação Lateral Cross">Inclinação Lateral </option>
+                    <option value="Inclinação Lateral Anilha">Inclinação Lateral Anilha</option>
+                    <option value="Inclinação Lateral Colchonete">Inclinação Lateral Colchonete</option>
+                    <option value="Inclinação Lateral Aparelho Lombar">Inclinação Lateral Aparelho Lombar</option>
+
+                    <option value="Infra no Colchonete">Infra no Colchonete</option>
+                    <option value="Infra Paralelas">Infra Paralelas</option>
+                    <option value="Infra Boxeador">Infra Boxeador</option>
+                </select>
+                <select name="serieAbdomen" id="serieAbdomen">
+                    <option value="--">--</option>
+                    <option value="3 x 10">3 x 10</option>
+                    <option value="3 x 12">3 x 12</option>
+                    <option value="4 x 10">4 x 10</option>
+                    <option value="4 x 12">4 x 12</option>
+                    <option value="Desejado">Desejado</option>
+                </select>
+                <table id="table_exericios">
+                    <caption>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Ordem</th>
+                        <th scope="col">Exercicío</th>
+                        <th scope="col">Série</th>
+                    </tr>
+                    </thead>
+                    <tbody id="corpoTabelaAbdomen">
+                    <tr>
+                        <th scope="row" colspan="3">Amdominal</th>
+                    </tr>
+                   
+                    </tbody>
+                </table>
+            </form>
+            <button id="btnSalvarExercicioAbdomen">Adicionar Exercicío</button><br>
         </div>
 
         <div class="form_costa">
+            <button onclick="diaVoltar()">Voltar</button>
             <h1>Costa</h1>
 
         </div>
 
         <div class="form_biceps">
+            <button onclick="diaVoltar()">Voltar</button>
             <h1>Bíceps</h1>
 
         </div>
 
         <div class="form_ombro">
+            <button onclick="diaVoltar()">Voltar</button>
             <h1>Ombro</h1>
 
         </div>
 
         <div class="form_mem_inferiores">
+            <button onclick="diaVoltar()">Voltar</button>
             <h1>Mebros Inferiores</h1>
 
         </div>
