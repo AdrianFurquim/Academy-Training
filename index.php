@@ -1,3 +1,65 @@
+<?php
+    include("forms/conexao.php");
+
+    // Comando SQL para resgatar dados do treino de Terça-Feira ================================================================================
+    $treinoTerca = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
+    FROM usuario 
+        JOIN 
+            usuario_treino ON usuario.usu_id = usuario_treino.usu_id 
+        JOIN 
+            membro_treino ON usuario_treino.treino_dia = membro_treino.treino_dia 
+        JOIN 
+            membro_exercicio ON membro_treino.mem_nome = membro_exercicio.mem_nome 
+        JOIN 
+            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome 
+    WHERE usuario.usu_id = 1 AND usuario_treino.treino_dia = 2";
+
+    // Comando SQL para resgatar dados do treino de Quarta-Feira ================================================================================
+    $treinoQuarta = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
+    FROM usuario 
+        JOIN 
+            usuario_treino ON usuario.usu_id = usuario_treino.usu_id 
+        JOIN 
+            membro_treino ON usuario_treino.treino_dia = membro_treino.treino_dia 
+        JOIN 
+            membro_exercicio ON membro_treino.mem_nome = membro_exercicio.mem_nome 
+        JOIN 
+            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome 
+    WHERE usuario.usu_id = 1 AND usuario_treino.treino_dia = 3";
+
+    // Comando SQL para resgatar dados do treino de Quinta-Feira ================================================================================
+    $treinoQuinta = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
+    FROM usuario 
+        JOIN 
+            usuario_treino ON usuario.usu_id = usuario_treino.usu_id 
+        JOIN 
+            membro_treino ON usuario_treino.treino_dia = membro_treino.treino_dia 
+        JOIN 
+            membro_exercicio ON membro_treino.mem_nome = membro_exercicio.mem_nome 
+        JOIN 
+            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome 
+    WHERE usuario.usu_id = 1 AND usuario_treino.treino_dia = 4";
+
+    // Salvando resultados das consultas =========================================================================================================
+    $resultUM=$conexao->query($treinoTerca);
+    $resultDOIS=$conexao->query($treinoQuarta);
+    $resultTRES=$conexao->query($treinoQuinta);
+
+    // Incerindo Geral em um array para poder gerar varios elementos nas tabelas =================================================================
+    $user_data_array = [];
+    while($user_data = mysqli_fetch_assoc($resultUM)){
+        $user_data_array[] = $user_data;
+    }
+
+    $user_data_array_quarta = [];
+    while($user_data = mysqli_fetch_assoc($resultDOIS)){
+        $user_data_array_quarta[] = $user_data;
+    }
+
+    //Fechar conexão com o Banco de Dados ========================================================================================================
+    mysqli_close($conexao);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +77,7 @@
 
     <title>Academy Training</title>
     <link rel="icon" tipe="image/ico" href="./images/icons/icon-152x152.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 
@@ -41,7 +103,7 @@
             <a href="adicionarTreino.html">
                 <div class="criar_treino">+</div>
             </a>
-            <a href="index.html" class="meus_treinos_link">
+            <a href="index.php" class="meus_treinos_link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                 </svg>
@@ -69,9 +131,6 @@
     <section class="table_treinos">
         <!-- Treino de Segunda =========================================================================================================================================== -->
         <table id="table_segunda">
-            
-            <caption>
-            </caption>
             <thead>
             <tr>
                 <th scope="col">Ordem</th>
@@ -88,8 +147,6 @@
 
         <!-- Treino de terça =========================================================================================================================================== -->
         <table id="table_terca">
-            <caption>
-            </caption>
             <thead>
             <tr>
                 <th scope="col">Ordem</th>
@@ -98,62 +155,50 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row" colspan="3">Peitoral</th>
-            </tr>
-            <tr onclick="confereTreino(4)">
-                <td>1</td>
-                <td>Peck Deck</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(5)">
-                <td>2</td>
-                <td>Supino Articulado</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(6)">
-                <td>3</td>
-                <td>Crucifixo Hater</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr>
-                <th scope="row" colspan="3">Tríceps</th>
-            </tr>
-            <tr onclick="confereTreino(8)">
-                <td>1</td>
-                <td>Tríceps Corda</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(9)">
-                <td>2</td>
-                <td>Tríceps Roldana</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(10)">
-                <td>3</td>
-                <td>Tríceps Pegada Invertida</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr>
-                <th scope="row" colspan="3">Abdômen</th>
-            </tr>
-            <tr onclick="confereTreino(12)">
-                <td>1</td>
-                <td>Prancha Unilateral Frontal</td>
-                <td>3 x 30s - 40s</td>
-            </tr>
-            <tr onclick="confereTreino(13)">
-                <td>2</td>
-                <td>Prancha Lateral</td>
-                <td>3 x 30s - 40s</td>
-            </tr>
+            <?php
+            echo "<tr>";
+                echo "<th scope='row' colspan='3'>Peitoral</th>";
+            echo "</tr>";
+                foreach($user_data_array as $user_data){
+                    echo "<tr>";
+                    if($user_data['mem_nome'] == "Peito"){
+                        echo "<td>".$user_data['exe_ordem']."</td>";
+                        echo "<td>".$user_data['exe_nome']."</td>";
+                        echo "<td>".$user_data['exe_serie']."</td>";
+                    }
+                    echo "</tr>";
+                 }
+            echo "<tr>";
+                echo "<th scope='row' colspan='3'>Tríceps</th>";
+            echo "</tr>";
+
+                foreach($user_data_array as $user_data){
+                    echo "<tr>";
+                    if($user_data['mem_nome'] == "Tríceps"){
+                        echo "<td>".$user_data['exe_ordem']."</td>";
+                        echo "<td>".$user_data['exe_nome']."</td>";
+                        echo "<td>".$user_data['exe_serie']."</td>";
+                    }
+                    echo "</tr>";
+                 }
+            echo "<tr>";
+                echo "<th scope='row' colspan='3'>Abdômen</th>";
+            echo "</tr>";
+                foreach($user_data_array as $user_data){
+                    echo "<tr>";
+                    if($user_data['mem_nome'] == "Abdominal"){
+                        echo "<td>".$user_data['exe_ordem']."</td>";
+                        echo "<td>".$user_data['exe_nome']."</td>";
+                        echo "<td>".$user_data['exe_serie']."</td>";
+                    }
+                    echo "</tr>";
+                 }
+            ?>
             </tbody>
         </table>
 
         <!-- Treino de quarta =========================================================================================================================================== -->
         <table id="table_quarta">
-            <caption>
-            </caption>
             <thead>
             <tr>
                 <th scope="col">Ordem</th>
@@ -162,54 +207,38 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row" colspan="3">Costa</th>
-            </tr>
-            <tr onclick="confereTreino(16)">
-                <td>1</td>
-                <td>Remada Articulada Aberta</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(17)">
-                <td>2</td>
-                <td>Remada Articulada Fechada</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(18)">
-                <td>3</td>
-                <td>Remada Baixa Triangulo</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(19)">
-                <td>4</td>
-                <td>Pulley Frente</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr>
-                <th scope="row" colspan="3">Bíceps</th>
-            </tr>
-            <tr onclick="confereTreino(21)">
-                <td>1</td>
-                <td>Rosca Direta Roldana</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(22)">
-                <td>2</td>
-                <td>Rosca Simultanea</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(23)">
-                <td>3</td>
-                <td>Rosca Martelo</td>
-                <td>3 x 10</td>
-            </tr>
+            <?php
+            echo "<tr>";
+                echo "<th scope='row' colspan='3'>Costas</th>";
+            echo "</tr>";
+                foreach($user_data_array_quarta as $user_data){
+                    echo "<tr>";
+                    if($user_data['mem_nome'] == "Costa"){
+                        echo "<td>".$user_data['exe_ordem']."</td>";
+                        echo "<td>".$user_data['exe_nome']."</td>";
+                        echo "<td>".$user_data['exe_serie']."</td>";
+                    }
+                    echo "</tr>";
+                 }
+            echo "<tr>";
+                echo "<th scope='row' colspan='3'>Bíceps</th>";
+            echo "</tr>";
+
+                foreach($user_data_array_quarta as $user_data){
+                    echo "<tr>";
+                    if($user_data['mem_nome'] == "Bíceps"){
+                        echo "<td>".$user_data['exe_ordem']."</td>";
+                        echo "<td>".$user_data['exe_nome']."</td>";
+                        echo "<td>".$user_data['exe_serie']."</td>";
+                    }
+                    echo "</tr>";
+                 }
+            ?>
             </tbody>
         </table>
 
         <!-- Treino de Quinta =========================================================================================================================================== -->
         <table id="table_quinta">
-            <caption>
-            </caption>
             <thead>
             <tr>
                 <th scope="col">Ordem</th>
@@ -269,8 +298,6 @@
 
         <!-- Treino de Sexta =========================================================================================================================================== -->
         <table id="table_sexta">
-            <caption>
-            </caption>
             <thead>
             <tr>
                 <th scope="col">Ordem</th>
@@ -287,8 +314,6 @@
 
         <!-- Treino de Sabado =========================================================================================================================================== -->
         <table id="table_sabado">
-            <caption>
-            </caption>
             <thead>
             <tr>
                 <th scope="col">Ordem</th>
@@ -304,6 +329,6 @@
         </table>
     </section>
 
-    <script src="script.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>

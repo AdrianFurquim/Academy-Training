@@ -1,3 +1,51 @@
+<?php
+    include("forms/conexao.php");
+
+    // Comando SQL para resgatar dados do treino de Peito ================================================================================
+    $comandoPeito = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
+    FROM usuario 
+        JOIN 
+            usuario_treino ON usuario.usu_id = usuario_treino.usu_id 
+        JOIN 
+            membro_treino ON usuario_treino.treino_dia = membro_treino.treino_dia 
+        JOIN 
+            membro_exercicio ON membro_treino.mem_nome = membro_exercicio.mem_nome 
+        JOIN 
+            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome 
+    WHERE membro_treino.mem_nome = 'Peito'";
+
+    // Comando SQL para resgatar dados do treino de Peito ================================================================================
+    $comandoTriceps = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
+    FROM usuario 
+        JOIN 
+            usuario_treino ON usuario.usu_id = usuario_treino.usu_id 
+        JOIN 
+            membro_treino ON usuario_treino.treino_dia = membro_treino.treino_dia 
+        JOIN 
+            membro_exercicio ON membro_treino.mem_nome = membro_exercicio.mem_nome 
+        JOIN 
+            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome 
+    WHERE membro_treino.mem_nome = 'Tríceps'";
+
+    // Salvando resultados das consultas =========================================================================================================
+    $treinoPeito=$conexao->query($comandoPeito);
+    $treinoTriceps=$conexao->query($comandoTriceps);
+
+    // Incerindo Geral em um array para poder gerar varios elementos nas tabelas =================================================================
+    $user_data_array_treino_peito = [];
+    while($user_data = mysqli_fetch_assoc($treinoPeito)){
+        $user_data_array_treino_peito[] = $user_data;
+    }
+
+    $user_data_array_treino_triceps = [];
+    while($user_data = mysqli_fetch_assoc($treinoTriceps)){
+        $user_data_array_treino_triceps[] = $user_data;
+    }
+
+    // Fechando conexão com o Banco de dados ====================================================================================================
+    mysqli_close($conexao);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +54,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Criar Treino - Academy Training</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 
@@ -15,7 +63,7 @@
             <a href="adicionarTreino.html">
                 <div class="criar_treino">+</div>
             </a>
-            <a href="index.html" class="meus_treinos_link">
+            <a href="index.php" class="meus_treinos_link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                 </svg>
@@ -53,7 +101,7 @@
         <div class="form_peito">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Peito</h1>
-            <form action="">
+            <form action="forms/adicionarTreinoPeito.php" method="POST" id="adicionarTreinoPeito">
                 <select name="peito" id="peito">
                     <option value="">--</option>
                     <option value="Supino Reto Barra">Supino Reto Barra</option>
@@ -102,17 +150,30 @@
                     <tr>
                         <th scope="row" colspan="3">Peitoral</th>
                     </tr>
-                    
+                    <?php
+                        foreach($user_data_array_treino_peito as $user_data){
+                            echo "<tr>";
+                            if($user_data['mem_nome'] == "Peito"){
+                                echo "<td>".$user_data['exe_ordem']."</td>";
+                                echo "<td>".$user_data['exe_nome']."</td>";
+                                echo "<td>".$user_data['exe_serie']."</td>";
+                                echo "<td>
+                                <a href='forms/removerExercicio.php?exercicio=$user_data[exe_nome]'>Excluir</a>  
+                                </td>";
+                            }
+                            echo "</tr>";
+                         }
+                    ?>
                     </tbody>
                 </table>
+                <button id="btnSalvarExercicioPeito" type="submit">Adicionar Exercicío</button><br>
             </form>
-            <button id="btnSalvarExercicioPeito">Adicionar Exercicío</button><br>
         </div>
 
         <div class="form_triceps">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Tríceps</h1>
-            <form action="">
+            <form action="forms/adicionarTreinoTriceps.php" method="POST" id="adicionarTreinoTriceps">
                 <select name="triceps" id="triceps">
                     <option value="">--</option>
 
@@ -162,13 +223,24 @@
                     </thead>
                     <tbody id="corpoTabelaTriceps">
                     <tr>
-                        <th scope="row" colspan="3">Peitoral</th>
+                        <th scope="row" colspan="3">Tríceps</th>
                     </tr>
-                   
+                    <?php
+                        foreach($user_data_array_treino_triceps as $user_data){
+                            echo "<tr>";
+                            if($user_data['mem_nome'] == "Tríceps"){
+                                echo "<td>".$user_data['exe_ordem']."</td>";
+                                echo "<td>".$user_data['exe_nome']."</td>";
+                                echo "<td>".$user_data['exe_serie']."</td>";
+                                echo "<td>Excluir</td>";
+                            }
+                            echo "</tr>";
+                         }
+                    ?>
                     </tbody>
                 </table>
+                <button id="btnSalvarExercicioTriceps" type="submit">Adicionar Exercicío</button><br>
             </form>
-            <button id="btnSalvarExercicioTriceps">Adicionar Exercicío</button><br>
         </div>
 
         <div class="form_abdomen">
@@ -255,6 +327,6 @@
 
     <br><br><br><br><br><br><br><br><br><br><br>
 
-    <script src="script.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
