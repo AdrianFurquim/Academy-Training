@@ -2,63 +2,31 @@
     include("forms/conexao.php");
 
     // Comando SQL para resgatar dados do treino de Terça-Feira ================================================================================
-    $treinoTerca = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
-    FROM usuario 
-        JOIN 
-            usuario_treino ON usuario.usu_id = usuario_treino.usu_id 
-        JOIN 
-            membro_treino ON usuario_treino.treino_dia = membro_treino.treino_dia 
-        JOIN 
-            membro_exercicio ON membro_treino.mem_nome = membro_exercicio.mem_nome 
-        JOIN 
-            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome 
-    WHERE usuario.usu_id = 1 AND usuario_treino.treino_dia = 2";
-
-    // Comando SQL para resgatar dados do treino de Quarta-Feira ================================================================================
-    $treinoQuarta = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
-    FROM usuario 
-        JOIN 
-            usuario_treino ON usuario.usu_id = usuario_treino.usu_id 
-        JOIN 
-            membro_treino ON usuario_treino.treino_dia = membro_treino.treino_dia 
-        JOIN 
-            membro_exercicio ON membro_treino.mem_nome = membro_exercicio.mem_nome 
-        JOIN 
-            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome 
-    WHERE usuario.usu_id = 1 AND usuario_treino.treino_dia = 3";
-
-    // Comando SQL para resgatar dados do treino de Quinta-Feira ================================================================================
-    $treinoQuinta = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
-    FROM usuario 
-        JOIN 
-            usuario_treino ON usuario.usu_id = usuario_treino.usu_id 
-        JOIN 
-            membro_treino ON usuario_treino.treino_dia = membro_treino.treino_dia 
-        JOIN 
-            membro_exercicio ON membro_treino.mem_nome = membro_exercicio.mem_nome 
-        JOIN 
-            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome 
-    WHERE usuario.usu_id = 1 AND usuario_treino.treino_dia = 4";
+    $treino = "SELECT 
+    ut.treino_dia,
+    mt.mem_nome,
+    se.exe_nome,
+    se.ser_serie,
+    se.ser_ordem
+    FROM 
+        usuario u
+    JOIN 
+        usuario_treino ut ON u.usu_id = ut.usu_id
+    JOIN 
+        membro_treino mt ON ut.treino_dia = mt.treino_dia
+    JOIN 
+        series_exercicios se ON mt.mem_nome = se.mem_nome
+    WHERE 
+        u.usu_id = 1
+";
 
     // Salvando resultados das consultas =========================================================================================================
-    $resultUM=$conexao->query($treinoTerca);
-    $resultDOIS=$conexao->query($treinoQuarta);
-    $resultTRES=$conexao->query($treinoQuinta);
+    $result=$conexao->query($treino);
 
     // Incerindo Geral em um array para poder gerar varios elementos nas tabelas =================================================================
     $user_data_array = [];
-    while($user_data = mysqli_fetch_assoc($resultUM)){
+    while($user_data = mysqli_fetch_assoc($result)){
         $user_data_array[] = $user_data;
-    }
-
-    $user_data_array_quarta = [];
-    while($user_data = mysqli_fetch_assoc($resultDOIS)){
-        $user_data_array_quarta[] = $user_data;
-    }
-
-    $user_data_array_quinta = [];
-    while($user_data = mysqli_fetch_assoc($resultTRES)){
-        $user_data_array_quinta[] = $user_data;
     }
 
     //Fechar conexão com o Banco de Dados ========================================================================================================
@@ -167,10 +135,9 @@
                 foreach($user_data_array as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Peito"){
-                        // echo "<td><input type='checkbox'></td>";
-                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
+                        echo "<td><input type='checkbox'>".$user_data['ser_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
-                        echo "<td>".$user_data['exe_serie']."</td>";
+                        echo "<td>".$user_data['ser_serie']."</td>";
                     }
                     echo "</tr>";
                  }
@@ -181,9 +148,9 @@
                 foreach($user_data_array as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Tríceps"){
-                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
+                        echo "<td><input type='checkbox'>".$user_data['ser_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
-                        echo "<td>".$user_data['exe_serie']."</td>";
+                        echo "<td>".$user_data['ser_serie']."</td>";
                     }
                     echo "</tr>";
                  }
@@ -193,9 +160,9 @@
                 foreach($user_data_array as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Abdominal"){
-                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
+                        echo "<td><input type='checkbox'>".$user_data['ser_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
-                        echo "<td>".$user_data['exe_serie']."</td>";
+                        echo "<td>".$user_data['ser_serie']."</td>";
                     }
                     echo "</tr>";
                  }
@@ -217,12 +184,12 @@
             echo "<tr>";
                 echo "<th scope='row' colspan='3'>Costas</th>";
             echo "</tr>";
-                foreach($user_data_array_quarta as $user_data){
+                foreach($user_data_array as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Costa"){
-                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
+                        echo "<td><input type='checkbox'>".$user_data['ser_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
-                        echo "<td>".$user_data['exe_serie']."</td>";
+                        echo "<td>".$user_data['ser_serie']."</td>";
                     }
                     echo "</tr>";
                  }
@@ -230,12 +197,12 @@
                 echo "<th scope='row' colspan='3'>Bíceps</th>";
             echo "</tr>";
 
-                foreach($user_data_array_quarta as $user_data){
+                foreach($user_data_array as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Bíceps"){
-                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
+                        echo "<td><input type='checkbox'>".$user_data['ser_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
-                        echo "<td>".$user_data['exe_serie']."</td>";
+                        echo "<td>".$user_data['ser_serie']."</td>";
                     }
                     echo "</tr>";
                  }
@@ -257,12 +224,12 @@
             echo "<tr>";
                 echo "<th scope='row' colspan='3'>Ombro</th>";
             echo "</tr>";
-                foreach($user_data_array_quinta as $user_data){
+                foreach($user_data_array as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Ombro"){
-                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
+                        echo "<td><input type='checkbox'>".$user_data['ser_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
-                        echo "<td>".$user_data['exe_serie']."</td>";
+                        echo "<td>".$user_data['ser_serie']."</td>";
                     }
                     echo "</tr>";
                  }
@@ -270,12 +237,12 @@
                 echo "<th scope='row' colspan='3'>Membros Inferiores</th>";
             echo "</tr>";
 
-                foreach($user_data_array_quinta as $user_data){
+                foreach($user_data_array as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Membros Inferiores"){
-                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
+                        echo "<td><input type='checkbox'>".$user_data['ser_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
-                        echo "<td>".$user_data['exe_serie']."</td>";
+                        echo "<td>".$user_data['ser_serie']."</td>";
                     }
                     echo "</tr>";
                  }

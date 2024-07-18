@@ -2,16 +2,22 @@
     include("forms/conexao.php");
 
     // Comando SQL para resgatar dados do treino de Peito ================================================================================
-    $comandoTreino = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
-    FROM usuario 
-        JOIN 
-            usuario_treino ON usuario.usu_id = usuario_treino.usu_id 
-        JOIN 
-            membro_treino ON usuario_treino.treino_dia = membro_treino.treino_dia 
-        JOIN 
-            membro_exercicio ON membro_treino.mem_nome = membro_exercicio.mem_nome 
-        JOIN 
-            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome";
+    $comandoTreino = "SELECT 
+    ut.treino_dia,
+    mt.mem_nome,
+    se.exe_nome,
+    se.ser_serie,
+    se.ser_ordem
+    FROM 
+        usuario u
+    JOIN 
+        usuario_treino ut ON u.usu_id = ut.usu_id
+    JOIN 
+        membro_treino mt ON ut.treino_dia = mt.treino_dia
+    JOIN 
+        series_exercicios se ON mt.mem_nome = se.mem_nome
+    WHERE 
+        u.usu_id = 1";
 
     // Salvando resultados das consultas =========================================================================================================
     $treino=$conexao->query($comandoTreino);
@@ -134,9 +140,9 @@
                         foreach($user_data_array as $user_data){
                             echo "<tr>";
                             if($user_data['mem_nome'] == "Peito"){
-                                echo "<td>".$user_data['exe_ordem']."</td>";
+                                echo "<td>".$user_data['ser_ordem']."</td>";
                                 echo "<td>".$user_data['exe_nome']."</td>";
-                                echo "<td>".$user_data['exe_serie']."</td>";
+                                echo "<td>".$user_data['ser_serie']."</td>";
                                 echo "<td>
                                 <a href='forms/removerExercicio.php?exercicio=$user_data[exe_nome]'>Excluir</a>  
                                 </td>";
@@ -209,9 +215,9 @@
                         foreach($user_data_array as $user_data){
                             echo "<tr>";
                             if($user_data['mem_nome'] == "Tríceps"){
-                                echo "<td>".$user_data['exe_ordem']."</td>";
+                                echo "<td>".$user_data['ser_ordem']."</td>";
                                 echo "<td>".$user_data['exe_nome']."</td>";
-                                echo "<td>".$user_data['exe_serie']."</td>";
+                                echo "<td>".$user_data['ser_serie']."</td>";
                                 echo "<td>Excluir</td>";
                             }
                             echo "</tr>";

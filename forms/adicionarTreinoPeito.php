@@ -3,18 +3,15 @@
     include("conexao.php");
 
     // Variaveis vindas do criarTreino.php.
-    $exe_ordem='Desejavel';
+    $ser_ordem='Desejavel';
     $exe_nome=$_POST['peito'];
-    $exe_serie=$_POST['seriePeito'];
-
-    // Comando para inserir o exercicio no banco de dados.
-    $sql = "INSERT INTO exercicio(exe_ordem, exe_nome, exe_serie) VALUES ('$exe_ordem','$exe_nome','$exe_serie')";
+    $ser_serie=$_POST['seriePeito'];
 
     // Comando para conectar o exercicio ao seu membro.
-    $sqlDois = "INSERT INTO membro_exercicio(mem_nome, exe_nome) VALUES ('Peito','$exe_nome')";
+    $sql = "INSERT INTO series_exercicios(ser_serie, ser_ordem, exe_nome, mem_nome) VALUES ('$ser_serie','$ser_ordem','$exe_nome','Peito')";
 
     // Execultando script no banco, e ferificando a ocorrencia de erros.
-    if(mysqli_query($conexao, $sql) && mysqli_query($conexao, $sqlDois)){
+    if(mysqli_query($conexao, $sql)){
 
     }else{
         echo "Erro".mysqli_connect_error($conexao);

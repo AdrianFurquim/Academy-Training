@@ -8,7 +8,7 @@
         $exercicio = $_GET['exercicio'];
 
         // Comando para verificar se tal exercicio existe no banco de dados.
-        $sqlSelect = "SELECT *  FROM exercicio WHERE exe_nome='$exercicio'";
+        $sqlSelect = "SELECT * FROM series_exercicios WHERE exe_nome='$exercicio'";
 
         // Realizando o script no banco e armazenando o resultado.
         $result = $conexao->query($sqlSelect);
@@ -16,11 +16,8 @@
         // Caso exista este exercicio.
         if($result->num_rows > 0){
             // Script para excluir o ligamento com o usuário.
-            $sqlDeleteSegundaryTable = "DELETE FROM membro_exercicio WHERE exe_nome = '$exercicio';";
-            // Script para excluir o exercício.
-            $sqlDelete = "DELETE FROM exercicio WHERE exe_nome='$exercicio'";
+            $sqlDelete = "DELETE FROM series_exercicios WHERE exe_nome = '$exercicio';";
             // Realizando os comandos no Banco de Dados.
-            $resultDeleteSegundaryTable = $conexao->query($sqlDeleteSegundaryTable);
             $resultDelete = $conexao->query($sqlDelete);
         }
         // Fechando a conexão com o banco de dados.
