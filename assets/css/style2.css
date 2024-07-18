@@ -154,6 +154,37 @@ th, td {
     padding: 8px 10px;
 }
 
+input[type=checkbox] {
+    position: relative;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #838383;
+    border: none;
+    box-sizing: border-box;
+    margin-right: 0.2em;
+    border-radius: 100%;
+  }
+  
+  input[type=checkbox]:checked:before {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 10px;
+    border: solid rgb(117, 218, 117);
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: 4px;
+    left: 9px;
+  }
+  
+
 #table_segunda, #table_terca, #table_quarta, #table_quinta, #table_sexta, #table_sabado{
     display: none;
 }

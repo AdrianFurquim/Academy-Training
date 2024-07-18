@@ -2,7 +2,7 @@
     include("forms/conexao.php");
 
     // Comando SQL para resgatar dados do treino de Peito ================================================================================
-    $comandoPeito = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
+    $comandoTreino = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
     FROM usuario 
         JOIN 
             usuario_treino ON usuario.usu_id = usuario_treino.usu_id 
@@ -11,35 +11,15 @@
         JOIN 
             membro_exercicio ON membro_treino.mem_nome = membro_exercicio.mem_nome 
         JOIN 
-            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome 
-    WHERE membro_treino.mem_nome = 'Peito'";
-
-    // Comando SQL para resgatar dados do treino de Peito ================================================================================
-    $comandoTriceps = "SELECT exercicio.exe_ordem, exercicio.exe_nome, exercicio.exe_serie, membro_treino.mem_nome
-    FROM usuario 
-        JOIN 
-            usuario_treino ON usuario.usu_id = usuario_treino.usu_id 
-        JOIN 
-            membro_treino ON usuario_treino.treino_dia = membro_treino.treino_dia 
-        JOIN 
-            membro_exercicio ON membro_treino.mem_nome = membro_exercicio.mem_nome 
-        JOIN 
-            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome 
-    WHERE membro_treino.mem_nome = 'Tríceps'";
+            exercicio ON membro_exercicio.exe_nome = exercicio.exe_nome";
 
     // Salvando resultados das consultas =========================================================================================================
-    $treinoPeito=$conexao->query($comandoPeito);
-    $treinoTriceps=$conexao->query($comandoTriceps);
+    $treino=$conexao->query($comandoTreino);
 
     // Incerindo Geral em um array para poder gerar varios elementos nas tabelas =================================================================
-    $user_data_array_treino_peito = [];
-    while($user_data = mysqli_fetch_assoc($treinoPeito)){
-        $user_data_array_treino_peito[] = $user_data;
-    }
-
-    $user_data_array_treino_triceps = [];
-    while($user_data = mysqli_fetch_assoc($treinoTriceps)){
-        $user_data_array_treino_triceps[] = $user_data;
+    $user_data_array = [];
+    while($user_data = mysqli_fetch_assoc($treino)){
+        $user_data_array[] = $user_data;
     }
 
     // Fechando conexão com o Banco de dados ====================================================================================================
@@ -54,7 +34,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Criar Treino - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style2.css">
 </head>
 <body>
 
@@ -151,7 +131,7 @@
                         <th scope="row" colspan="3">Peitoral</th>
                     </tr>
                     <?php
-                        foreach($user_data_array_treino_peito as $user_data){
+                        foreach($user_data_array as $user_data){
                             echo "<tr>";
                             if($user_data['mem_nome'] == "Peito"){
                                 echo "<td>".$user_data['exe_ordem']."</td>";
@@ -226,7 +206,7 @@
                         <th scope="row" colspan="3">Tríceps</th>
                     </tr>
                     <?php
-                        foreach($user_data_array_treino_triceps as $user_data){
+                        foreach($user_data_array as $user_data){
                             echo "<tr>";
                             if($user_data['mem_nome'] == "Tríceps"){
                                 echo "<td>".$user_data['exe_ordem']."</td>";

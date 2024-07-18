@@ -56,6 +56,11 @@
         $user_data_array_quarta[] = $user_data;
     }
 
+    $user_data_array_quinta = [];
+    while($user_data = mysqli_fetch_assoc($resultTRES)){
+        $user_data_array_quinta[] = $user_data;
+    }
+
     //Fechar conexão com o Banco de Dados ========================================================================================================
     mysqli_close($conexao);
 ?>
@@ -77,7 +82,7 @@
 
     <title>Academy Training</title>
     <link rel="icon" tipe="image/ico" href="./images/icons/icon-152x152.png">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style2.css">
 </head>
 <body>
 
@@ -162,7 +167,8 @@
                 foreach($user_data_array as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Peito"){
-                        echo "<td>".$user_data['exe_ordem']."</td>";
+                        // echo "<td><input type='checkbox'></td>";
+                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
                         echo "<td>".$user_data['exe_serie']."</td>";
                     }
@@ -175,7 +181,7 @@
                 foreach($user_data_array as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Tríceps"){
-                        echo "<td>".$user_data['exe_ordem']."</td>";
+                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
                         echo "<td>".$user_data['exe_serie']."</td>";
                     }
@@ -187,7 +193,7 @@
                 foreach($user_data_array as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Abdominal"){
-                        echo "<td>".$user_data['exe_ordem']."</td>";
+                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
                         echo "<td>".$user_data['exe_serie']."</td>";
                     }
@@ -214,7 +220,7 @@
                 foreach($user_data_array_quarta as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Costa"){
-                        echo "<td>".$user_data['exe_ordem']."</td>";
+                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
                         echo "<td>".$user_data['exe_serie']."</td>";
                     }
@@ -227,7 +233,7 @@
                 foreach($user_data_array_quarta as $user_data){
                     echo "<tr>";
                     if($user_data['mem_nome'] == "Bíceps"){
-                        echo "<td>".$user_data['exe_ordem']."</td>";
+                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
                         echo "<td>".$user_data['exe_nome']."</td>";
                         echo "<td>".$user_data['exe_serie']."</td>";
                     }
@@ -247,52 +253,34 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row" colspan="3">Ombro</th>
-            </tr>
-            <tr onclick="confereTreino(26)">
-                <td>1</td>
-                <td>Desenvolvimento no Aparelho</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(27)">
-                <td>2</td>
-                <td>Elevação Lateral Halter</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(28)">
-                <td>3</td>
-                <td>Elevação Frontal Halter</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr>
-                <th scope="row" colspan="3">Membros Inferiores</th>
-            </tr>
-            <tr onclick="confereTreino(30)">
-                <td>1</td>
-                <td>Cadeira Extensora</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(31)">
-                <td>2</td>
-                <td>Cadeira Extensora Unilateral</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(32)">
-                <td>3</td>
-                <td>Cadeira Adutora</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(33)">
-                <td>4</td>
-                <td>Abdução Quadril Aparelho</td>
-                <td>3 x 10</td>
-            </tr>
-            <tr onclick="confereTreino(34)">
-                <td>3</td>
-                <td>Panturrilhas Livre</td>
-                <td>3 x 10</td>
-            </tr>
+            <?php
+            echo "<tr>";
+                echo "<th scope='row' colspan='3'>Ombro</th>";
+            echo "</tr>";
+                foreach($user_data_array_quinta as $user_data){
+                    echo "<tr>";
+                    if($user_data['mem_nome'] == "Ombro"){
+                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
+                        echo "<td>".$user_data['exe_nome']."</td>";
+                        echo "<td>".$user_data['exe_serie']."</td>";
+                    }
+                    echo "</tr>";
+                 }
+            echo "<tr>";
+                echo "<th scope='row' colspan='3'>Membros Inferiores</th>";
+            echo "</tr>";
+
+                foreach($user_data_array_quinta as $user_data){
+                    echo "<tr>";
+                    if($user_data['mem_nome'] == "Membros Inferiores"){
+                        echo "<td><input type='checkbox'>".$user_data['exe_ordem']."</td>";
+                        echo "<td>".$user_data['exe_nome']."</td>";
+                        echo "<td>".$user_data['exe_serie']."</td>";
+                    }
+                    echo "</tr>";
+                 }
+            ?>
+            
             </tbody>
         </table>
 
