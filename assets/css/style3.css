@@ -287,6 +287,16 @@ form{
     padding: 15px;
 }
 
+.remove_exercicio{
+    background-color: rgb(255, 62, 62);
+    min-height: 25px;
+    min-width: 25px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
 /* Login ============================================================================================================================================================== */
 
 .conteiner_login{

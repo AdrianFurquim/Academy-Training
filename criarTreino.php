@@ -3,11 +3,11 @@
 
     // Comando SQL para resgatar dados do treino de Peito ================================================================================
     $comandoTreino = "SELECT 
-    ut.treino_dia,
-    mt.mem_nome,
-    se.exe_nome,
-    se.ser_serie,
-    se.ser_ordem
+        ut.treino_dia,
+        mt.mem_nome,
+        se.exe_nome,
+        se.ser_serie,
+        se.ser_ordem
     FROM 
         usuario u
     JOIN 
@@ -19,13 +19,35 @@
     WHERE 
         u.usu_id = 1";
 
+    $comandoExercicios = "SELECT exe_nome, mem_nome FROM exercicio";
     // Salvando resultados das consultas =========================================================================================================
     $treino=$conexao->query($comandoTreino);
+    $exercicios=$conexao->query($comandoExercicios);
 
     // Incerindo Geral em um array para poder gerar varios elementos nas tabelas =================================================================
     $user_data_array = [];
     while($user_data = mysqli_fetch_assoc($treino)){
         $user_data_array[] = $user_data;
+    }
+
+    $user_data_array_exercicios = [];
+    while($user_data = mysqli_fetch_assoc($exercicios)){
+        $user_data_array_exercicios[] = $user_data;
+    }
+
+    function gerarTabela($user_data_array, $membro){
+        foreach($user_data_array as $user_data){
+            echo "<tr>";
+            if($user_data['mem_nome'] == $membro){
+                echo "<td>".$user_data['ser_ordem']."</td>";
+                echo "<td>".$user_data['exe_nome']."</td>";
+                echo "<td>".$user_data['ser_serie']."</td>";
+                echo "<td>
+                <a href='forms/removerExercicio.php?exercicio=$user_data[exe_nome]' class='remove_exercicio'>Excluir</a>  
+                </td>";
+            }
+            echo "</tr>";
+         }
     }
 
     // Fechando conexão com o Banco de dados ====================================================================================================
@@ -40,7 +62,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Criar Treino - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style2.css">
+    <link rel="stylesheet" href="./assets/css/style3.css">
 </head>
 <body>
 
@@ -90,29 +112,13 @@
             <form action="forms/adicionarTreinoPeito.php" method="POST" id="adicionarTreinoPeito">
                 <select name="peito" id="peito">
                     <option value="">--</option>
-                    <option value="Supino Reto Barra">Supino Reto Barra</option>
-                    <option value="Supino Reto Halter">Supino Reto Halter</option>
-                    <option value="Supino Reto Pórtico">Supino Reto Pórtico</option>
-
-                    <option value="Supino Inclinado Barra">Supino Inclinado Barra</option>
-                    <option value="Supino Inclinado Halter">Supino Inclinado Halter</option>
-                    <option value="Supino Inclinado Pórtico">Supino Inclinado Pórtico</option>
-
-                    <option value="Supino Declinado Barra">Supino Declinado Barra</option>
-                    <option value="Supino Declinado Halter">Supino Declinado Halter</option>
-                    <option value="Supino Declinado Pórtico">Supino Declinado Pórtico</option>
-
-                    <option value="Supino Articulado">Supino Articulado</option>
-
-                    <option value="Crucifixo Halter">Crucifixo Halter</option>
-                    <option value="Crucifixo Aparelho">Crucifixo Aparelho</option>
-
-                    <option value="Pullover">Pullover</option>
-
-                    <option value="Cross Over">Cross Over</option>
-
-                    <option value="Peck Deck">Peck Deck</option>
-                    <option value="Dropset">Dropset</option>
+                    <?php
+                        foreach($user_data_array_exercicios as $user_data) {
+                            if($user_data['mem_nome'] == "Peito"){
+                                echo "<option value='{$user_data['exe_nome']}'>{$user_data['exe_nome']}</option>";
+                            }
+                        }
+                    ?>              
                 </select>
                 <select name="seriePeito" id="seriePeito">
                     <option value="--">--</option>
@@ -130,25 +136,15 @@
                         <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody id="corpoTabelaPeito">
                     <tr>
-                        <th scope="row" colspan="3">Peitoral</th>
+                        <th scope="row" colspan="4">Peitoral</th>
                     </tr>
-                    <?php
-                        foreach($user_data_array as $user_data){
-                            echo "<tr>";
-                            if($user_data['mem_nome'] == "Peito"){
-                                echo "<td>".$user_data['ser_ordem']."</td>";
-                                echo "<td>".$user_data['exe_nome']."</td>";
-                                echo "<td>".$user_data['ser_serie']."</td>";
-                                echo "<td>
-                                <a href='forms/removerExercicio.php?exercicio=$user_data[exe_nome]'>Excluir</a>  
-                                </td>";
-                            }
-                            echo "</tr>";
-                         }
+                    <?php                        
+                        echo gerarTabela($user_data_array, "Peito");
                     ?>
                     </tbody>
                 </table>
@@ -212,16 +208,7 @@
                         <th scope="row" colspan="3">Tríceps</th>
                     </tr>
                     <?php
-                        foreach($user_data_array as $user_data){
-                            echo "<tr>";
-                            if($user_data['mem_nome'] == "Tríceps"){
-                                echo "<td>".$user_data['ser_ordem']."</td>";
-                                echo "<td>".$user_data['exe_nome']."</td>";
-                                echo "<td>".$user_data['ser_serie']."</td>";
-                                echo "<td>Excluir</td>";
-                            }
-                            echo "</tr>";
-                         }
+                        echo gerarTabela($user_data_array, "Tríceps");
                     ?>
                     </tbody>
                 </table>
@@ -278,7 +265,9 @@
                     <tr>
                         <th scope="row" colspan="3">Amdominal</th>
                     </tr>
-                   
+                    <?php
+                        echo gerarTabela($user_data_array, "Abdominal");
+                    ?>
                     </tbody>
                 </table>
             </form>
