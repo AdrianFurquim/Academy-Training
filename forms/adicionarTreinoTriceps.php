@@ -8,13 +8,10 @@
     $exe_serie=$_POST['serieTriceps'];
 
     // Comando para inserir o exercicio no banco de dados.
-    $sql = "INSERT INTO exercicio(exe_ordem, exe_nome, exe_serie) VALUES ('$exe_ordem','$exe_nome','$exe_serie')";
-
-    // Comando para conectar o exercicio ao seu membro.
-    $sqlDois = "INSERT INTO membro_exercicio(mem_nome, exe_nome) VALUES ('Tríceps','$exe_nome')";
+    $sql = "INSERT INTO series_exercicios(ser_serie, ser_ordem, exe_nome, mem_nome) VALUES ('$ser_serie','$ser_ordem','$exe_nome','Tríceps')";
 
     // Execultando script no banco, e ferificando a ocorrencia de erros.
-    if(mysqli_query($conexao, $sql) && mysqli_query($conexao, $sqlDois)){
+    if(mysqli_query($conexao, $sql)){
 
     }else{
         echo "Erro".mysqli_connect_error($conexao);
