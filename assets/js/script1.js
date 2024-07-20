@@ -74,15 +74,14 @@ let dias = document.querySelector(".escolha_dia");
 let membros = document.querySelector(".escolha_membro");
 
 function diaVoltar(){
-    dias.style.display = "block";
-    membros.style.display = "none";
-    document.querySelector(".form_peito").style.display = "block";
-    document.querySelector(".form_triceps").style.display = "block";
-    document.querySelector(".form_abdomen").style.display = "block";
-    document.querySelector(".form_costa").style.display = "block";
-    document.querySelector(".form_biceps").style.display = "block";
-    document.querySelector(".form_ombro").style.display = "block";
-    document.querySelector(".form_mem_inferiores").style.display = "block";
+    membros.style.display = "block";
+    document.querySelector(".form_peito").style.display = "none";
+    document.querySelector(".form_triceps").style.display = "none";
+    document.querySelector(".form_abdomen").style.display = "none";
+    document.querySelector(".form_costa").style.display = "none";
+    document.querySelector(".form_biceps").style.display = "none";
+    document.querySelector(".form_ombro").style.display = "none";
+    document.querySelector(".form_mem_inferiores").style.display = "none";
 }
 
 function membroEscolhido(membro) {

@@ -1,7 +1,7 @@
 <?php
     include("forms/conexao.php");
 
-    // Comando SQL para resgatar dados do treino de Peito. ================================================================================
+    // Comando SQL para resgatar dados do treino de Peito ================================================================================
     $comandoTreino = "SELECT 
         ut.treino_dia,
         mt.mem_nome,
@@ -19,7 +19,7 @@
     WHERE 
         u.usu_id = 1";
 
-    // Comando SQL para resgatar todos os exercicios que o usuário não possui. ================================================================================
+    // Comando SQL para resgatar todos os exercicios ================================================================================
     $comandoExercicios = "SELECT * FROM exercicio WHERE exe_nome NOT IN (SELECT exe_nome FROM series_exercicios)";
 
     // Salvando resultados das consultas =========================================================================================================
@@ -55,15 +55,15 @@
     }
 
     // =======================================================================================================================================
-    function gerarSections($user_data_array_exercicios, $user_data_array, $membro){
-        // Foreach para todos os exercicios.
+    function gerarSections($user_data_array_exercicios, $membro){
+        // Foreach para todos os exercicios que o usuário não selecionou.
         foreach($user_data_array_exercicios as $user_data) {
+            // Ferificação para se o exercício corresponde ao membro selecionado.
             if($user_data['mem_nome'] == $membro){
                 echo "<option value='{$user_data['exe_nome']}'>{$user_data['exe_nome']}</option>";
             }
         }
     }
-
     // Fechando conexão com o Banco de dados ====================================================================================================
     mysqli_close($conexao);
 ?>
@@ -76,7 +76,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Criar Treino - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style4.css">
+    <link rel="stylesheet" href="./assets/css/style5.css">
 </head>
 <body>
 
@@ -118,7 +118,7 @@
                 <select name="peito" id="peito">
                     <option value="">--</option>
                     <?php
-                        gerarSections($user_data_array_exercicios, 'Peito');
+                        echo gerarSections($user_data_array_exercicios, 'Peito');
                     ?>
                 </select>
                 <select name="seriePeito" id="seriePeito">
@@ -160,6 +160,7 @@
                 <select name="triceps" id="triceps">
                     <option value="">--</option>
                     <?php
+                        echo gerarSections($user_data_array_exercicios, 'Tríceps');
                     ?>
 <!-- 
                     <option value="Tríceps Frânces Halter">Tríceps Frânces Halter</option> 
@@ -305,6 +306,6 @@
 
     <br><br><br><br><br><br><br><br><br><br><br>
 
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script1.js"></script>
 </body>
 </html>
