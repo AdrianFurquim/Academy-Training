@@ -1,7 +1,7 @@
 <?php
     include("forms/conexao.php");
 
-    // Comando SQL para resgatar dados do treino de Peito ================================================================================
+    // Comando SQL para resgatar dados do treino de Peito. ================================================================================
     $comandoTreino = "SELECT 
         ut.treino_dia,
         mt.mem_nome,
@@ -19,7 +19,9 @@
     WHERE 
         u.usu_id = 1";
 
-    $comandoExercicios = "SELECT exe_nome, mem_nome FROM exercicio";
+    // Comando SQL para resgatar todos os exercicios que o usuário não possui. ================================================================================
+    $comandoExercicios = "SELECT * FROM exercicio WHERE exe_nome NOT IN (SELECT exe_nome FROM series_exercicios)";
+
     // Salvando resultados das consultas =========================================================================================================
     $treino=$conexao->query($comandoTreino);
     $exercicios=$conexao->query($comandoExercicios);
@@ -35,19 +37,31 @@
         $user_data_array_exercicios[] = $user_data;
     }
 
+    // Função de gerar tabela dos exercicios que o usuário já possui. ======================================================================
     function gerarTabela($user_data_array, $membro){
+        // Foreach para criar todo o array de exercicios.
         foreach($user_data_array as $user_data){
             echo "<tr>";
+            // IF - ferificação para selecionar apenas os exercícios do membro escolhido.
             if($user_data['mem_nome'] == $membro){
                 echo "<td>".$user_data['ser_ordem']."</td>";
                 echo "<td>".$user_data['exe_nome']."</td>";
                 echo "<td>".$user_data['ser_serie']."</td>";
                 echo "<td>
-                <a href='forms/removerExercicio.php?exercicio=$user_data[exe_nome]' class='remove_exercicio'>Excluir</a>  
-                </td>";
+                <a href='forms/removerExercicio.php?exercicio=$user_data[exe_nome]' class='remove_exercicio'>Excluir</a></td>";
             }
             echo "</tr>";
          }
+    }
+
+    // =======================================================================================================================================
+    function gerarSections($user_data_array_exercicios, $user_data_array, $membro){
+        // Foreach para todos os exercicios.
+        foreach($user_data_array_exercicios as $user_data) {
+            if($user_data['mem_nome'] == $membro){
+                echo "<option value='{$user_data['exe_nome']}'>{$user_data['exe_nome']}</option>";
+            }
+        }
     }
 
     // Fechando conexão com o Banco de dados ====================================================================================================
@@ -62,7 +76,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Criar Treino - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style3.css">
+    <link rel="stylesheet" href="./assets/css/style4.css">
 </head>
 <body>
 
@@ -85,15 +99,6 @@
     </header>
 
     <section class="montando_treino">
-        <div class="escolha_dia">
-            <h1>Criando Treino:</h1>
-            <button onclick="diaEscolhido()">Segunda-Feira</button>
-            <button onclick="diaEscolhido()">Terça-Feira</button>
-            <button onclick="diaEscolhido()">Quarta-Feira</button>
-            <button onclick="diaEscolhido()">Quinta-Feira</button>
-            <button onclick="diaEscolhido()">Sexta-Feira</button>
-            <button onclick="diaEscolhido()">Sábado</button>
-        </div>
     
         <div class="escolha_membro">
             <h1>Escolha o membro desejado:</h1>
@@ -113,12 +118,8 @@
                 <select name="peito" id="peito">
                     <option value="">--</option>
                     <?php
-                        foreach($user_data_array_exercicios as $user_data) {
-                            if($user_data['mem_nome'] == "Peito"){
-                                echo "<option value='{$user_data['exe_nome']}'>{$user_data['exe_nome']}</option>";
-                            }
-                        }
-                    ?>              
+                        gerarSections($user_data_array_exercicios, 'Peito');
+                    ?>
                 </select>
                 <select name="seriePeito" id="seriePeito">
                     <option value="--">--</option>
@@ -158,7 +159,9 @@
             <form action="forms/adicionarTreinoTriceps.php" method="POST" id="adicionarTreinoTriceps">
                 <select name="triceps" id="triceps">
                     <option value="">--</option>
-
+                    <?php
+                    ?>
+<!-- 
                     <option value="Tríceps Frânces Halter">Tríceps Frânces Halter</option> 
                     <option value="Tríceps Frânces Unilateral">Tríceps Frânces Unilateral</option>
                     <option value="Tríceps Frânces Cross">Tríceps Frânces Cross</option>
@@ -183,7 +186,7 @@
                     <option value="Tríceps Testa Barra">Tríceps Testa Barra</option>
                     <option value="Tríceps Testa Halter">Tríceps Testa Halter</option>
                     <option value="Tríceps Testa Cross">Tríceps Testa Cross</option>
-                    <option value="Tríceps Testa Dropset">Tríceps Testa Dropset</option>
+                    <option value="Tríceps Testa Dropset">Tríceps Testa Dropset</option> -->
                 </select>
                 <select name="serieTriceps" id="serieTriceps">
                     <option value="--">--</option>

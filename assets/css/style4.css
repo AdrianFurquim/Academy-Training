@@ -241,10 +241,6 @@ input[type=checkbox] {
     flex-direction: column;
 }
 
-.escolha_membro{
-    display: none;
-}
-
 .montando_treino button{
     background-color: yellow;
     width: 75%;
