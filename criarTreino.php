@@ -162,32 +162,6 @@
                     <?php
                         echo gerarSections($user_data_array_exercicios, 'Tríceps');
                     ?>
-<!-- 
-                    <option value="Tríceps Frânces Halter">Tríceps Frânces Halter</option> 
-                    <option value="Tríceps Frânces Unilateral">Tríceps Frânces Unilateral</option>
-                    <option value="Tríceps Frânces Cross">Tríceps Frânces Cross</option>
-
-                    <option value="Tríceps Coice Halter">Tríceps Coice Halter</option>
-                    <option value="Tríceps Coice Cross">Tríceps Coice Cross</option>
-
-                    <option value="Tríceps Corda">Tríceps Corda</option>
-                    <option value="Dropset">Dropset</option>
-
-                    <option value="Tríceps Mergulho Banco">Tríceps Mergulho Banco</option>
-                    <option value="Tríceps Mergulho Paralelas">Tríceps Mergulho Paralelas</option>
-
-                    <option value="Tríceps Roldana">Tríceps Roldana</option>
-                    <option value="Pegada Invertida">Pegada Invertida</option>
-                    <option value="Dropset">Dropset</option>
-                    <option value="Unilateral">Unilateral</option>
-
-                    <option value="Tríceps Barra">Tríceps Barra</option>
-                    <option value="Tríceps Pórtico">Tríceps Pórtico</option>
-
-                    <option value="Tríceps Testa Barra">Tríceps Testa Barra</option>
-                    <option value="Tríceps Testa Halter">Tríceps Testa Halter</option>
-                    <option value="Tríceps Testa Cross">Tríceps Testa Cross</option>
-                    <option value="Tríceps Testa Dropset">Tríceps Testa Dropset</option> -->
                 </select>
                 <select name="serieTriceps" id="serieTriceps">
                     <option value="--">--</option>
@@ -221,38 +195,24 @@
         </div>
 
         <div class="form_abdomen">
-            
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Abdominal</h1>
-            <form action="">
+            <form action="forms/adicionarTreinoAbdominal.php" method="POST" id="adicionarTreinoAbdominal">
                 <select name="abdomen" id="abdomen">
                     <option value="">--</option>
 
-                    <option value="Supra Colchonete">Supra Colchonete</option>
-                    <option value="Supra Com Anilha">Supra Com Anilha</option>
-                    <option value="Supra Com Barra">Supra Com Barra</option>
-                    <option value="Supra Pórtico">Supra Pórtico</option>
-
-                    <option value="Remador">Remador</option>
-                    <option value="Remador Com Anilha e tornozeleira">Remador Com Anilha e tornozeleira</option>
-                    <option value="Remador Canivete">Remador Canivete</option>
-                    <option value="Remador Prancha">Remador Prancha</option>
-
-                    <option value="Inclinação Lateral Cross">Inclinação Lateral </option>
-                    <option value="Inclinação Lateral Anilha">Inclinação Lateral Anilha</option>
-                    <option value="Inclinação Lateral Colchonete">Inclinação Lateral Colchonete</option>
-                    <option value="Inclinação Lateral Aparelho Lombar">Inclinação Lateral Aparelho Lombar</option>
-
-                    <option value="Infra no Colchonete">Infra no Colchonete</option>
-                    <option value="Infra Paralelas">Infra Paralelas</option>
-                    <option value="Infra Boxeador">Infra Boxeador</option>
+                    <?php
+                        echo gerarSections($user_data_array_exercicios, 'Abdominal');
+                    ?>
                 </select>
                 <select name="serieAbdomen" id="serieAbdomen">
                     <option value="--">--</option>
-                    <option value="3 x 10">3 x 10</option>
-                    <option value="3 x 12">3 x 12</option>
-                    <option value="4 x 10">4 x 10</option>
-                    <option value="4 x 12">4 x 12</option>
+                    <option value="3 x 30s - 40s">3 x 30s - 40s</option>
+                    <option value="3 x 40s - 60s">3 x 40s - 60s</option>
+                    <option value="3 x +60s">3 x +60s</option>
+                    <option value="4 x 30s - 40s">4 x 30s - 40s</option>
+                    <option value="4 x 40s - 60s">4 x 40s - 60s</option>
+                    <option value="4 x +60s">4 x +60s</option>
                     <option value="Desejado">Desejado</option>
                 </select>
                 <table id="table_exericios">
@@ -274,26 +234,131 @@
                     ?>
                     </tbody>
                 </table>
+                <button id="btnSalvarExercicioAbdomen" type="submit">Adicionar Exercicío</button><br>
             </form>
-            <button id="btnSalvarExercicioAbdomen">Adicionar Exercicío</button><br>
         </div>
 
         <div class="form_costa">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Costa</h1>
-
+            <form action="forms/adicionarTreinoCosta.php" method="POST" id="adicionarTreinoCosta">
+                <select name="costa" id="costa">
+                    <option value="">--</option>
+                    <?php
+                        echo gerarSections($user_data_array_exercicios, 'Costa');
+                    ?>
+                </select>
+                <select name="serieCosta" id="serieCosta">
+                    <option value="--">--</option>
+                    <option value="3 x 10">3 x 10</option>
+                    <option value="3 x 12">3 x 12</option>
+                    <option value="4 x 10">4 x 10</option>
+                    <option value="4 x 12">4 x 12</option>
+                    <option value="Desejado">Desejado</option>
+                </select>
+                <table id="table_exericios">
+                    <caption>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Ordem</th>
+                        <th scope="col">Exercicío</th>
+                        <th scope="col">Série</th>
+                    </tr>
+                    </thead>
+                    <tbody id="corpoTabelaCosta">
+                    <tr>
+                        <th scope="row" colspan="3">Costa</th>
+                    </tr>
+                    <?php
+                        echo gerarTabela($user_data_array, "Costa");
+                    ?>
+                    </tbody>
+                </table>
+                <button id="btnSalvarExercicioAbdomen" type="submit">Adicionar Exercicío</button><br>
+            </form>
         </div>
 
         <div class="form_biceps">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Bíceps</h1>
-
+            <form action="forms/adicionarTreinoBiceps.php" method="POST" id="adicionarTreinoBiceps">
+                <select name="biceps" id="biceps">
+                    <option value="">--</option>
+                    <?php
+                        echo gerarSections($user_data_array_exercicios, 'Bíceps');
+                    ?>
+                </select>
+                <select name="serieBiceps" id="serieBiceps">
+                    <option value="--">--</option>
+                    <option value="3 x 10">3 x 10</option>
+                    <option value="3 x 12">3 x 12</option>
+                    <option value="4 x 10">4 x 10</option>
+                    <option value="4 x 12">4 x 12</option>
+                    <option value="Desejado">Desejado</option>
+                </select>
+                <table id="table_exericios">
+                    <caption>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Ordem</th>
+                        <th scope="col">Exercicío</th>
+                        <th scope="col">Série</th>
+                    </tr>
+                    </thead>
+                    <tbody id="corpoTabelaBiceps">
+                    <tr>
+                        <th scope="row" colspan="3">Bíceps</th>
+                    </tr>
+                    <?php
+                        echo gerarTabela($user_data_array, "Bíceps");
+                    ?>
+                    </tbody>
+                </table>
+                <button id="btnSalvarExercicioBiceps" type="submit">Adicionar Exercicío</button><br>
+            </form>
         </div>
 
         <div class="form_ombro">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Ombro</h1>
-
+            <form action="forms/adicionarTreinoOmbro.php" method="POST" id="adicionarTreinoOmbro">
+                <select name="ombro" id="ombro">
+                    <option value="">--</option>
+                    <?php
+                        echo gerarSections($user_data_array_exercicios, 'Ombro');
+                    ?>
+                </select>
+                <select name="serieOmbro" id="serieOmbro">
+                    <option value="--">--</option>
+                    <option value="3 x 10">3 x 10</option>
+                    <option value="3 x 12">3 x 12</option>
+                    <option value="4 x 10">4 x 10</option>
+                    <option value="4 x 12">4 x 12</option>
+                    <option value="Desejado">Desejado</option>
+                </select>
+                <table id="table_exericios">
+                    <caption>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Ordem</th>
+                        <th scope="col">Exercicío</th>
+                        <th scope="col">Série</th>
+                    </tr>
+                    </thead>
+                    <tbody id="corpoTabelaOmbro">
+                    <tr>
+                        <th scope="row" colspan="3">Ombro</th>
+                    </tr>
+                    <?php
+                        echo gerarTabela($user_data_array, "Ombro");
+                    ?>
+                    </tbody>
+                </table>
+                <button id="btnSalvarExercicioOmbro" type="submit">Adicionar Exercicío</button><br>
+            </form>
         </div>
 
         <div class="form_mem_inferiores">

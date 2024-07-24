@@ -3,9 +3,30 @@
     include("conexao.php");
 
     // Variaveis vindas do criarTreino.php.
-    $ser_ordem='Desejavel';
     $exe_nome=$_POST['peito'];
     $ser_serie=$_POST['seriePeito'];
+
+    // Comando para verificar qual a ultima ordem de treinamento.
+    $sql_consulta_ordem = "SELECT
+        MAX(se.ser_ordem) AS max_ser_ordem
+    FROM 
+        usuario u
+    JOIN 
+        usuario_treino ut ON u.usu_id = ut.usu_id
+    JOIN 
+        membro_treino mt ON ut.treino_dia = mt.treino_dia
+    JOIN 
+        series_exercicios se ON mt.mem_nome = se.mem_nome
+    WHERE 
+        u.usu_id = 1 AND mt.mem_nome = 'Peito'";
+
+    // Armazenando resultado do comando.
+    $result_ordem = $conexao->query($sql_consulta_ordem);
+
+    // Procurando para verificar se existe tal ordem e adicionando + 1.
+    $row = $result_ordem->fetch_assoc();
+    $max_ser_ordem = $row['max_ser_ordem'];
+    $ser_ordem = $max_ser_ordem + 1;
 
     // Comando para conectar o exercicio ao seu membro.
     $sql = "INSERT INTO series_exercicios(ser_serie, ser_ordem, exe_nome, mem_nome) VALUES ('$ser_serie','$ser_ordem','$exe_nome','Peito')";

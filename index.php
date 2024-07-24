@@ -104,6 +104,7 @@
                 $existTraining = true;
             }
         }
+        // Caso o não exista nenhum treino para aquele dia.
         if($existTraining == false) {
             echo "<tr>";
                 echo "<th scope='row' colspan='3'>Sem treino</th>";
