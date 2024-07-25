@@ -48,7 +48,7 @@
                 echo "<td>".$user_data['exe_nome']."</td>";
                 echo "<td>".$user_data['ser_serie']."</td>";
                 echo "<td>
-                <a href='forms/removerExercicio.php?exercicio=$user_data[exe_nome]' class='remove_exercicio'>Excluir</a></td>";
+                <a href='forms/removerExercicio.php?exercicio=$user_data[exe_nome]&membro=$user_data[mem_nome]' class='remove_exercicio'>Excluir</a></td>";
             }
             echo "</tr>";
          }
@@ -77,12 +77,58 @@
     <meta name="theme-color" content="#FFFF00">
     <title>Criar Treino - Academy Training</title>
     <link rel="stylesheet" href="./assets/css/style5.css">
+
+    <style>
+        <?php
+            // Verificação se existe algum valor na URL.
+            if (isset($_GET['membro'])) {
+                $membro = $_GET['membro'];
+                
+                // Switch case para cada membro da URL.
+                switch ($membro) {
+                    case 'Peito':
+                        echo ".escolha_membro { display: none; }";
+                        echo ".form_peito { display: block; }";
+                        break;
+                    case 'Tríceps':
+                        echo ".escolha_membro { display: none; }";
+                        echo ".form_triceps { display: block; }";
+                        break;
+                    case 'Abdominal':
+                        echo ".escolha_membro { display: none; }";
+                        echo ".form_abdomen { display: block; }";
+                        break;
+                    case 'Costa':
+                        echo ".escolha_membro { display: none; }";
+                        echo ".form_costa { display: block; }";
+                        break;
+                    case 'Bíceps':
+                        echo ".escolha_membro { display: none; }";
+                        echo ".form_biceps { display: block; }";
+                        break;
+                    case 'Ombro':
+                        echo ".escolha_membro { display: none; }";
+                        echo ".form_ombro { display: block; }";
+                        break;
+                    case 'Membros Inferiores':
+                        echo ".escolha_membro { display: none; }";
+                        echo ".form_mem_inferiores { display: block; }";
+                        break;
+                    default:
+                        
+                        break;
+                }
+
+            }
+
+        ?>
+    </style>
 </head>
 <body>
 
     <header>
         <nav>
-            <a href="adicionarTreino.html">
+            <a href="criarTreino.php">
                 <div class="criar_treino">+</div>
             </a>
             <a href="index.php" class="meus_treinos_link">
@@ -362,9 +408,44 @@
         </div>
 
         <div class="form_mem_inferiores">
-            <button onclick="diaVoltar()">Voltar</button>
-            <h1>Mebros Inferiores</h1>
-
+        <button onclick="diaVoltar()">Voltar</button>
+            <h1>Membros Inferiores</h1>
+            <form action="forms/adicionarTreinoMembrosInferiores.php" method="POST" id="adicionarTreinoMembrosInferiores">
+                <select name="membrosInferiores" id="membrosInferiores">
+                    <option value="">--</option>
+                    <?php
+                        echo gerarSections($user_data_array_exercicios, 'Membros Inferiores');
+                    ?>
+                </select>
+                <select name="serieMembrosInferiores" id="serieMembrosInferiores">
+                    <option value="--">--</option>
+                    <option value="3 x 10">3 x 10</option>
+                    <option value="3 x 12">3 x 12</option>
+                    <option value="4 x 10">4 x 10</option>
+                    <option value="4 x 12">4 x 12</option>
+                    <option value="Desejado">Desejado</option>
+                </select>
+                <table id="table_exericios">
+                    <caption>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Ordem</th>
+                        <th scope="col">Exercicío</th>
+                        <th scope="col">Série</th>
+                    </tr>
+                    </thead>
+                    <tbody id="corpoTabelaOmbro">
+                    <tr>
+                        <th scope="row" colspan="3">Ombro</th>
+                    </tr>
+                    <?php
+                        echo gerarTabela($user_data_array, "Membros Inferiores");
+                    ?>
+                    </tbody>
+                </table>
+                <button id="btnSalvarExercicioMembrosInferiores" type="submit">Adicionar Exercicío</button><br>
+            </form>
         </div>
 
     </section>

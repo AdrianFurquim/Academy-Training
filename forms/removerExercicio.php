@@ -1,11 +1,12 @@
 <?php
-    // Verificação caso não exista nenhum exercicio.
-    if(!empty($_GET['exercicio'])){
+    // Verificação caso não exista nenhum exercicio ou membro.
+    if(isset($_GET['exercicio']) && isset($_GET['membro'])){
         // Conexão com o banco de dados.
         include_once('conexao.php');
 
-        // Pegando através da URL qual exercicio deseja der excluido.
+        // Pegando através da URL qual exercício deseja der excluido, e qual o membro do exercício.
         $exercicio = $_GET['exercicio'];
+        $membro = $_GET['membro'];
 
         // Comando para verificar se tal exercicio existe no banco de dados.
         $sqlSelect = "SELECT * FROM series_exercicios WHERE exe_nome='$exercicio'";
@@ -25,5 +26,5 @@
     }
 
     // Location para direcionamento do usuário.
-    header('Location: ../criarTreino.php');
+    header("location: ../criarTreino.php?membro=$membro");
 ?>

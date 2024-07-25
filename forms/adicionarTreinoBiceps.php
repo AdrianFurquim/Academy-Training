@@ -41,5 +41,5 @@
     mysqli_close($conexao);
 
     // Location para direcionamento do usuário.
-    header("location: ../criarTreino.php");
+    header("location: ../criarTreino.php?membro=Bíceps");
 ?>

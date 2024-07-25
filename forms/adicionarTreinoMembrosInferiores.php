@@ -3,9 +3,9 @@
     include("conexao.php");
 
     // Variaveis vindas do criarTreino.php.
-    $exe_nome=$_POST['triceps'];
-    $exe_serie=$_POST['serieTriceps'];    
-    
+    $exe_nome=$_POST['membrosInferiores'];
+    $ser_serie=$_POST['serieMembrosInferiores'];
+
     // Comando para verificar qual a ultima ordem de treinamento.
     $sql_consulta_ordem = "SELECT
         MAX(se.ser_ordem) AS max_ser_ordem
@@ -18,7 +18,7 @@
     JOIN 
         series_exercicios se ON mt.mem_nome = se.mem_nome
     WHERE 
-        u.usu_id = 1 AND mt.mem_nome = 'Tríceps'";
+        u.usu_id = 1 AND mt.mem_nome = 'Membros Inferiores'";
 
     // Armazenando resultado do comando.
     $result_ordem = $conexao->query($sql_consulta_ordem);
@@ -28,8 +28,8 @@
     $max_ser_ordem = $row['max_ser_ordem'];
     $ser_ordem = $max_ser_ordem + 1;
 
-    // Comando para inserir o exercicio no banco de dados.
-    $sql = "INSERT INTO series_exercicios(ser_serie, ser_ordem, exe_nome, mem_nome) VALUES ('$exe_serie','$ser_ordem','$exe_nome','Tríceps')";
+    // Comando para conectar o exercicio ao seu membro.
+    $sql = "INSERT INTO series_exercicios(ser_serie, ser_ordem, exe_nome, mem_nome) VALUES ('$ser_serie','$ser_ordem','$exe_nome','Membros Inferiores')";
 
     // Execultando script no banco, e ferificando a ocorrencia de erros.
     if(mysqli_query($conexao, $sql)){
@@ -41,5 +41,5 @@
     mysqli_close($conexao);
 
     // Location para direcionamento do usuário.
-    header("location: ../criarTreino.php?membro=Tríceps");
+    header("location: ../criarTreino.php?membro=Membros Inferiores");
 ?>

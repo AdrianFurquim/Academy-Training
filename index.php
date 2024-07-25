@@ -69,28 +69,34 @@
     }
 
     // Função para gerar tabelas.
-    function gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, $dia_treino, $membro_treino) {
+    function gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, $dia_treino) {
         // Verificação caso não exista nada na tabela.
         $existTraining = false;
 
         // Foreach para rodas os dias de treino que foram selecionados.
         foreach($user_data_array_dia_treinamento as $user_data) {
             
-            // Verificação para se o dia de treinamento esteja no lugar correto.
-            if($user_data['treino_dia'] ==  $dia_treino) {
-                // Foreach para pegar os valores de todos os treinos e seus respectivos membros.
-                foreach($user_data_array_treino_membro as $user_data_membro) {
-                    // Verificação para se os dados batem com o que foi pedido.
-                    if($user_data_membro['mem_nome'] == $membro_treino && $user_data_membro['treino_dia'] ==  $dia_treino) {
+            // Foreach para pegar os valores de todos os treinos e seus respectivos membros.
+            foreach($user_data_array_treino_membro as $user_data_membro) {
+
+                // Verificação para se os dados batem com o que foi pedido.
+                if($user_data_membro['treino_dia'] ==  $dia_treino) {
+
+                    // Verificação para se o dia de treinamento esteja no lugar correto.
+                    if($user_data['treino_dia'] ==  $dia_treino) {
+
+                        // Escrevendo os dados na tela do PHP.
                         echo "<tr>";
                             echo "<th scope='row' colspan='3'>".$user_data_membro['mem_nome']."</th>";
                         echo "</tr>";
 
                         // Foreach para escrever os dados que contem no dia selecionado.
                         foreach($user_data_array as $user_data_exercicio) {
-                            
-                            // Verificação de Membro.
-                            if($user_data_exercicio['mem_nome'] == $membro_treino) {                                    
+
+                            // Verificação para se o membro do exercício bate com o membro do dia.
+                            if ($user_data_membro['mem_nome'] == $user_data_exercicio['mem_nome']) {
+
+                                // Escrevendo os dados na tela do PHP.
                                 echo "<tr>";
                                     echo "<td><input type='checkbox'>".$user_data_exercicio['ser_ordem']."</td>";
                                     echo "<td>".$user_data_exercicio['exe_nome']."</td>";
@@ -106,6 +112,7 @@
         }
         // Caso o não exista nenhum treino para aquele dia.
         if($existTraining == false) {
+
             echo "<tr>";
                 echo "<th scope='row' colspan='3'>Sem treino</th>";
             echo "</tr>";
@@ -157,7 +164,7 @@
 
     <header>
         <nav>
-            <a href="adicionarTreino.html">
+            <a href="criarTreino.php">
                 <div class="criar_treino">+</div>
             </a>
             <a href="index.php" class="meus_treinos_link">
@@ -197,13 +204,7 @@
             </thead>
             <tbody>
             <?php
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Segunda-Feira", "Peito");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Segunda-Feira", "Tríceps");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Segunda-Feira", "Abdominal");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Segunda-Feira", "Costa");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Segunda-Feira", "Bíceps");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Segunda-Feira", "Ombro");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Segunda-Feira", "Membros Inferiores");
+                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Segunda-Feira");
             ?>
             </tbody>
         </table>
@@ -220,14 +221,7 @@
             </thead>
             <tbody>
             <?php
-            echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Terça-Feira", "Peito");
-            echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Terça-Feira", "Tríceps");
-            echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Terça-Feira", "Abdominal");
-            echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Terça-Feira", "Costa");
-            echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Terça-Feira", "Bíceps");
-            echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Terça-Feira", "Ombro");
-            echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Terça-Feira", "Membros Inferiores");
-
+                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Terça-Feira");
             ?>
             </tbody>
         </table>
@@ -243,13 +237,7 @@
             </thead>
             <tbody>
             <?php
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quarta-Feira", "Peito");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quarta-Feira", "Tríceps");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quarta-Feira", "Abdominal");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quarta-Feira", "Costa");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quarta-Feira", "Bíceps");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quarta-Feira", "Ombro");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quarta-Feira", "Membros Inferiores");
+                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quarta-Feira");
             ?>
             </tbody>
         </table>
@@ -265,13 +253,7 @@
             </thead>
             <tbody>
             <?php
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quinta-Feira", "Peito");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quinta-Feira", "Tríceps");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quinta-Feira", "Abdominal");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quinta-Feira", "Costa");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quinta-Feira", "Bíceps");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quinta-Feira", "Ombro");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quinta-Feira", "Membros Inferiores");
+                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quinta-Feira");
             ?>
             
             </tbody>
@@ -291,13 +273,7 @@
                 <th scope="row" colspan="3">Sem treino</th>
             </tr>
             <?php
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sexta-Feira", "Peito");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sexta-Feira", "Tríceps");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sexta-Feira", "Abdominal");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sexta-Feira", "Costa");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sexta-Feira", "Bíceps");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sexta-Feira", "Ombro");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sexta-Feira", "Membros Inferiores");
+                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sexta-Feira");
             ?>
             </tbody>
         </table>
@@ -316,13 +292,7 @@
                 <th scope="row" colspan="3">Sem treino</th>
             </tr>
             <?php
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sábado", "Peito");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sábado", "Tríceps");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sábado", "Abdominal");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sábado", "Costa");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sábado", "Bíceps");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sábado", "Ombro");
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sábado", "Membros Inferiores");
+                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sábado");
             ?>
             </tbody>
         </table>
