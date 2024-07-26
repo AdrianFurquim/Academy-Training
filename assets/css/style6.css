@@ -293,6 +293,10 @@ form{
     padding: 5px;
 }
 
+.mensagem_peito, .mensagem_triceps, .mensagem_abdomen, .mensagem_costa, .mensagem_biceps, .mensagem_ombro , .mensagem_mem_inferiores{
+    display: none;
+}
+
 /* Login ============================================================================================================================================================== */
 
 .conteiner_login{

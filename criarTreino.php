@@ -76,46 +76,108 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Criar Treino - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style5.css">
+    <link rel="stylesheet" href="./assets/css/style6.css">
 
     <style>
         <?php
             // Verificação se existe algum valor na URL.
             if (isset($_GET['membro'])) {
                 $membro = $_GET['membro'];
-                
+                $situacao= $_GET['situacao'];
                 // Switch case para cada membro da URL.
                 switch ($membro) {
                     case 'Peito':
                         echo ".escolha_membro { display: none; }";
                         echo ".form_peito { display: block; }";
+                        // IF para verificação se o usuário escolheu o exercicio e a série - Peito.
+                        if ($situacao == "faltando") {
+                            echo ".mensagem_peito { display: block; }";
+                            echo ".escolha_membro { display: none; }";
+                        }else{
+                            echo ".mensagem_peito { display: none; }";
+                            echo ".escolha_membro { display: none; }";
+                        }
                         break;
+
                     case 'Tríceps':
                         echo ".escolha_membro { display: none; }";
                         echo ".form_triceps { display: block; }";
+                        // IF para verificação se o usuário escolheu o exercicio e a série - Tríceps.
+                        if ($situacao == "faltando") {
+                            echo ".mensagem_triceps { display: block; }";
+                            echo ".escolha_membro { display: none; }";
+                        }else{
+                            echo ".mensagem_triceps { display: none; }";
+                            echo ".escolha_membro { display: none; }";
+                        }
                         break;
+
                     case 'Abdominal':
                         echo ".escolha_membro { display: none; }";
                         echo ".form_abdomen { display: block; }";
+                        // IF para verificação se o usuário escolheu o exercicio e a série - Abdominal.
+                        if ($situacao == "faltando") {
+                            echo ".mensagem_abdomen { display: block; }";
+                            echo ".escolha_membro { display: none; }";
+                        }else{
+                            echo ".mensagem_abdomen { display: none; }";
+                            echo ".escolha_membro { display: none; }";
+                        }
                         break;
+
                     case 'Costa':
                         echo ".escolha_membro { display: none; }";
                         echo ".form_costa { display: block; }";
+                        // IF para verificação se o usuário escolheu o exercicio e a série - Costa.
+                        if ($situacao == "faltando") {
+                            echo ".mensagem_costa { display: block; }";
+                            echo ".escolha_membro { display: none; }";
+                        }else{
+                            echo ".mensagem_costa { display: none; }";
+                            echo ".escolha_membro { display: none; }";
+                        }
                         break;
+
                     case 'Bíceps':
                         echo ".escolha_membro { display: none; }";
                         echo ".form_biceps { display: block; }";
+                        // IF para verificação se o usuário escolheu o exercicio e a série - Bíceps.
+                        if ($situacao == "faltando") {
+                            echo ".mensagem_biceps { display: block; }";
+                            echo ".escolha_membro { display: none; }";
+                        }else{
+                            echo ".mensagem_biceps { display: none; }";
+                            echo ".escolha_membro { display: none; }";
+                        }
                         break;
+
                     case 'Ombro':
                         echo ".escolha_membro { display: none; }";
                         echo ".form_ombro { display: block; }";
+                        // IF para verificação se o usuário escolheu o exercicio e a série - Ombro.
+                        if ($situacao == "faltando") {
+                            echo ".mensagem_ombro { display: block; }";
+                            echo ".escolha_membro { display: none; }";
+                        }else{
+                            echo ".mensagem_ombro { display: none; }";
+                            echo ".escolha_membro { display: none; }";
+                        }
                         break;
+
                     case 'Membros Inferiores':
                         echo ".escolha_membro { display: none; }";
                         echo ".form_mem_inferiores { display: block; }";
+                        // IF para verificação se o usuário escolheu o exercicio e a série - Membros Inferiores.
+                        if ($situacao == "faltando") {
+                            echo ".mensagem_mem_inferiores { display: block; }";
+                            echo ".escolha_membro { display: none; }";
+                        }else{
+                            echo ".mensagem_mem_inferiores { display: none; }";
+                            echo ".escolha_membro { display: none; }";
+                        }
                         break;
+
                     default:
-                        
                         break;
                 }
 
@@ -136,7 +198,7 @@
                     <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                 </svg>
             </a>
-            <a href="login.html" class="login_link">
+            <a href="login.php" class="login_link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                 </svg>
@@ -147,7 +209,7 @@
     <section class="montando_treino">
     
         <div class="escolha_membro">
-            <h1>Escolha o membro desejado:</h1>
+            <h1 class="mensagem_membro">Escolha o membro desejado:</h1>
             <button onclick="membroEscolhido('peito')">Peito</button>
             <button onclick="membroEscolhido('triceps')">Tríceps</button>
             <button onclick="membroEscolhido('abdomen')">Abdomen</button>
@@ -161,14 +223,17 @@
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Peito</h1>
             <form action="forms/adicionarTreinoPeito.php" method="POST" id="adicionarTreinoPeito">
+                <p class="mensagem_peito">Porfavor, selecione o exercício e a série.</p>
+                <label for="peito">Exercício: </label>
                 <select name="peito" id="peito">
                     <option value="">--</option>
                     <?php
                         echo gerarSections($user_data_array_exercicios, 'Peito');
                     ?>
-                </select>
+                </select><br>
+                <label for="seriePeito">Série: </label>
                 <select name="seriePeito" id="seriePeito">
-                    <option value="--">--</option>
+                    <option value="">--</option>
                     <option value="3 x 10">3 x 10</option>
                     <option value="3 x 12">3 x 12</option>
                     <option value="4 x 10">4 x 10</option>
@@ -203,14 +268,17 @@
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Tríceps</h1>
             <form action="forms/adicionarTreinoTriceps.php" method="POST" id="adicionarTreinoTriceps">
+                <p class="mensagem_triceps">Porfavor, selecione o exercício e a série.</p>
+                <label for="triceps">Exercício: </label>
                 <select name="triceps" id="triceps">
                     <option value="">--</option>
                     <?php
                         echo gerarSections($user_data_array_exercicios, 'Tríceps');
                     ?>
-                </select>
+                </select><br>
+                <label for="serieTriceps">Série: </label>
                 <select name="serieTriceps" id="serieTriceps">
-                    <option value="--">--</option>
+                    <option value="">--</option>
                     <option value="3 x 10">3 x 10</option>
                     <option value="3 x 12">3 x 12</option>
                     <option value="4 x 10">4 x 10</option>
@@ -244,15 +312,18 @@
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Abdominal</h1>
             <form action="forms/adicionarTreinoAbdominal.php" method="POST" id="adicionarTreinoAbdominal">
+                <p class="mensagem_abdomen">Porfavor, selecione o exercício e a série.</p>
+                <label for="abdomen">Exercício: </label>
                 <select name="abdomen" id="abdomen">
                     <option value="">--</option>
 
                     <?php
                         echo gerarSections($user_data_array_exercicios, 'Abdominal');
                     ?>
-                </select>
+                </select><br>
+                <label for="serieAbdomen">Série: </label>
                 <select name="serieAbdomen" id="serieAbdomen">
-                    <option value="--">--</option>
+                    <option value="">--</option>
                     <option value="3 x 30s - 40s">3 x 30s - 40s</option>
                     <option value="3 x 40s - 60s">3 x 40s - 60s</option>
                     <option value="3 x +60s">3 x +60s</option>
@@ -288,14 +359,17 @@
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Costa</h1>
             <form action="forms/adicionarTreinoCosta.php" method="POST" id="adicionarTreinoCosta">
+                <p class="mensagem_costa">Porfavor, selecione o exercício e a série.</p>
+                <label for="costa">Exercício: </label>
                 <select name="costa" id="costa">
                     <option value="">--</option>
                     <?php
                         echo gerarSections($user_data_array_exercicios, 'Costa');
                     ?>
-                </select>
+                </select><br>
+                <label for="seroeCosta">Série</label>
                 <select name="serieCosta" id="serieCosta">
-                    <option value="--">--</option>
+                    <option value="">--</option>
                     <option value="3 x 10">3 x 10</option>
                     <option value="3 x 12">3 x 12</option>
                     <option value="4 x 10">4 x 10</option>
@@ -329,14 +403,17 @@
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Bíceps</h1>
             <form action="forms/adicionarTreinoBiceps.php" method="POST" id="adicionarTreinoBiceps">
+                <p class="mensagem_biceps">Porfavor, selecione o exercício e a série.</p>
+                <label for="biceps">Exercício: </label>
                 <select name="biceps" id="biceps">
                     <option value="">--</option>
                     <?php
                         echo gerarSections($user_data_array_exercicios, 'Bíceps');
                     ?>
-                </select>
+                </select><br>
+                <label for="serieBiceps">Série: </label>
                 <select name="serieBiceps" id="serieBiceps">
-                    <option value="--">--</option>
+                    <option value="">--</option>
                     <option value="3 x 10">3 x 10</option>
                     <option value="3 x 12">3 x 12</option>
                     <option value="4 x 10">4 x 10</option>
@@ -370,14 +447,17 @@
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Ombro</h1>
             <form action="forms/adicionarTreinoOmbro.php" method="POST" id="adicionarTreinoOmbro">
+                <p class="mensagem_ombro">Porfavor, selecione o exercício e a série.</p>
+                <label for="ombro">Exercício: </label>
                 <select name="ombro" id="ombro">
                     <option value="">--</option>
                     <?php
                         echo gerarSections($user_data_array_exercicios, 'Ombro');
                     ?>
-                </select>
+                </select><br>
+                <label for="serieOmbro">Série: </label>
                 <select name="serieOmbro" id="serieOmbro">
-                    <option value="--">--</option>
+                    <option value="">--</option>
                     <option value="3 x 10">3 x 10</option>
                     <option value="3 x 12">3 x 12</option>
                     <option value="4 x 10">4 x 10</option>
@@ -411,14 +491,17 @@
         <button onclick="diaVoltar()">Voltar</button>
             <h1>Membros Inferiores</h1>
             <form action="forms/adicionarTreinoMembrosInferiores.php" method="POST" id="adicionarTreinoMembrosInferiores">
+                <p class="mensagem_mem_inferiores">Porfavor, selecione o exercício e a série.</p>
+                <label for="membrosInferiores">Exercício: </label>
                 <select name="membrosInferiores" id="membrosInferiores">
                     <option value="">--</option>
                     <?php
                         echo gerarSections($user_data_array_exercicios, 'Membros Inferiores');
                     ?>
-                </select>
+                </select><br>
+                <label for="serieMembrosInferiores">Série: </label>
                 <select name="serieMembrosInferiores" id="serieMembrosInferiores">
-                    <option value="--">--</option>
+                    <option value="">--</option>
                     <option value="3 x 10">3 x 10</option>
                     <option value="3 x 12">3 x 12</option>
                     <option value="4 x 10">4 x 10</option>
@@ -435,9 +518,9 @@
                         <th scope="col">Série</th>
                     </tr>
                     </thead>
-                    <tbody id="corpoTabelaOmbro">
+                    <tbody id="corpoTabelaMembrosInferiores">
                     <tr>
-                        <th scope="row" colspan="3">Ombro</th>
+                        <th scope="row" colspan="3">Membros Inferiores</th>
                     </tr>
                     <?php
                         echo gerarTabela($user_data_array, "Membros Inferiores");
