@@ -18,6 +18,17 @@
         series_exercicios se ON mt.mem_nome = se.mem_nome
     WHERE 
         u.usu_id = 1
+    ORDER BY 
+        CASE mt.mem_nome
+            WHEN 'Peito' THEN 1
+            WHEN 'Tríceps' THEN 2
+            WHEN 'Abdominal' THEN 3
+            WHEN 'Costa' THEN 4
+            WHEN 'Bíceps' THEN 5
+            WHEN 'Ombro' THEN 6
+            WHEN 'Membros Inferiores' THEN 7
+            ELSE 8
+        END
     ";
 
     // Comando SQL para resgatar dados do treino de membros que o usuário possui ================================================================================

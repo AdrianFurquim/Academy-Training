@@ -217,6 +217,9 @@
             <button onclick="membroEscolhido('biceps')">Bíceps</button>
             <button onclick="membroEscolhido('ombro')">Ombro</button>
             <button onclick="membroEscolhido('mem_inferiores')">Membros inferiores</button>
+            <a href="OrganizarDiasMembros.php">
+                <button class="organizar_dias_membros">Organizar Dias e Membros</button>
+            </a>
         </div>
 
         <div class="form_peito">
@@ -530,6 +533,7 @@
                 <button id="btnSalvarExercicioMembrosInferiores" type="submit">Adicionar Exercicío</button><br>
             </form>
         </div>
+
 
     </section>
 
