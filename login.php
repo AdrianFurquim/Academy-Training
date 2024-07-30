@@ -17,7 +17,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Usuario - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style6.css">
+    <link rel="stylesheet" href="./assets/css/style7.css">
 </head>
 <body>
 
