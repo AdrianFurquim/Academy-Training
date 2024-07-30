@@ -1,41 +1,37 @@
-<h1 align="center"> Academy Training - PWA </h1>
+# Academy Training - PWA
 
-Bem-vindo ao Academy Training!
-Abaixo estão detalhes sobre a estrutura do projeto, ideias e como iniciar a aplicação.
+<h1 align="center">Academy Training - PWA</h1>
 
-<ul>
-  <li>Técnologias utilizadas: 
-    <ul>
-      <li>HTML5</li>
-      <li>CSS3</li>
-      <li>JavaScript</li>
-      <li>PHP</li>
-      <li>MySQL</li>
-      <li>PWA</li>
-    </ul>
-  </li>
-</ul>
+Bem-vindo ao Academy Training! Abaixo você encontrará detalhes sobre a estrutura do projeto, ideias e como iniciar a aplicação.
 
-<h4 align="center"> 
-    🚧  Projeto em andamento  🚧
-</h4>
-Sistema ainda sendo criado através de interfaces básicas no momento.
+## Tecnologias Utilizadas
+- **HTML5**
+- **CSS3**
+- **JavaScript**
+- **PHP**
+- **MySQL**
+- **PWA**
 
-Site para visualização do Projeto Academy Training - PWA: [Academy Training Visualização](https://academytreining.netlify.app/).
+<h4 align="center">🚧 Projeto em Andamento 🚧</h4>
+<p align="center">Sistema ainda em desenvolvimento</p>
 
-<h4 align="center"> 
-    O que é Academy Training?
-</h4>
-A ideia do projeto é auxiliar na programação de treinamentos de pessoas que frequentam uma academia, podendo criar seu treino, monitorar alguns fatores, mostrar evoluções e facilitar a vida das pessoas. O sistema utiliza por meio de uma PWA para poder servir 
-de aplicativo em qualquer celular, justamente por não ocupar espaço como um aplicativo, mas ainda, sim, fazendo seu papel para ajudar as pessoas em sua academia.
+## Visite o Projeto
+Para visualizar o projeto Academy Training - PWA, clique no link abaixo:
+[Academy Training Visualização](https://academytreining.netlify.app/)
 
-<h4 align="center"> 
-    📁 - Iniciando o Projeto - Futuramente
-</h4>
-Iniciar a aplicação: O projeto foi feito com o uso de um servidor local (localhost), logo é preciso ter um programa que consiga simular um servidor local em sua maquina, após ligar, é preciso colocar a pasta Connect-Dengue dentro de uma pasta expecifica, 
-caso faça o uso do Xampp, coloque dentro da pasta htdocs. Abra seu sistema de banco de dados, exporte o modelo do banco deixado junto ao projeto. Após isso, coloque na barra de pesquisa: localhost/academytrining.
+## O que é Academy Training?
+A ideia do projeto é auxiliar na programação de treinamentos para frequentadores de academias, permitindo criar treinos personalizados, monitorar diversos fatores, mostrar a evolução dos usuários e facilitar a rotina de treinos. O sistema é desenvolvido como uma PWA (Progressive Web App), permitindo que funcione como um aplicativo em qualquer celular, sem ocupar espaço significativo, mas ainda assim oferecendo todas as funcionalidades necessárias para ajudar as pessoas em sua jornada de fitness.
 
-<h4> 
-    Equipe composta por:
-</h4>
-Adrian Eduardo Furquim de Souza
+## Iniciando o Projeto
+**Nota:** O projeto foi desenvolvido para ser executado em um servidor local (localhost).
+
+### Passos para Iniciar:
+1. **Configurar o Servidor Local:** Utilize um programa como XAMPP para simular um servidor local em sua máquina.
+2. **Adicionar Arquivos ao Servidor:** Coloque a pasta `Academy Training` dentro da pasta específica do seu servidor local. Se estiver usando XAMPP, coloque-a dentro da pasta `htdocs`.
+3. **Configurar o Banco de Dados:**
+   - Abra seu sistema de gerenciamento de banco de dados (por exemplo, phpMyAdmin).
+   - Importe o modelo do banco de dados fornecido junto com o projeto.
+4. **Iniciar a Aplicação:** Na barra de pesquisa do navegador, digite: `localhost/academytraining`.
+
+## Equipe
+- **Adrian Eduardo Furquim de Souza**
