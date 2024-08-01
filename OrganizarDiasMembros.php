@@ -9,7 +9,7 @@
     JOIN 
         membro_treino mt ON ut.treino_dia = mt.treino_dia
     WHERE 
-        ut.usu_id = 1";
+        ut.usu_id = 2";
 
     $result=$conexao->query($comando_dias_membros);
 
@@ -56,7 +56,7 @@
     <section class="organizando_dias_treinos">
         <div class="conteiner_total_opcoes">
             <div class="conteiner_selects">
-                <form action="">
+                <form action="forms/adicionarDiaMembro.php" method="POST">
                     <label for="dia">Dia: </label>
                     <select name="dia" id="dia">
                         <option value="">--</option>
@@ -79,6 +79,7 @@
                         <option value="Ombro">Ombro</option>
                         <option value="Membros Inferiores">Membros Inferiores</option>
                     </select>
+                    <button class="btnSalvarConfigTreino" type="submit">Confirmar</button>
                 </form>
             </div>
             <div class="conteiner_tabela_dias_treinos">
@@ -102,6 +103,7 @@
                     ?>
                     </tbody>
                 </table>
+                
             </div>
         </div>
 
