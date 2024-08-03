@@ -2,7 +2,7 @@
     $servidor="localhost";
     $usuario="root";
     $senha="";
-    $bdname="teste academy";
+    $bdname="academy_treining";
 
     $conexao=mysqli_connect($servidor, $usuario, $senha, $bdname);
 

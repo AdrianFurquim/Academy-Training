@@ -2,68 +2,99 @@
     include("forms/conexao.php");
 
     // Comando SQL para resgatar dados do treino de Terça-Feira ================================================================================
+    // $treino = "SELECT 
+    //     ut.treino_dia,
+    //     mt.mem_nome,
+    //     se.exe_nome,
+    //     se.ser_serie,
+    //     se.ser_ordem
+    // FROM 
+    //     usuario u
+    // JOIN 
+    //     usuario_treino ut ON u.usu_id = ut.usu_id
+    // JOIN 
+    //     membro_treino mt ON ut.treino_dia = mt.treino_dia
+    // JOIN 
+    //     series_exercicios se ON mt.mem_nome = se.mem_nome
+    // WHERE 
+    //     u.usu_id = 1
+    // ORDER BY 
+    //     CASE mt.mem_nome
+    //         WHEN 'Peito' THEN 1
+    //         WHEN 'Tríceps' THEN 2
+    //         WHEN 'Abdominal' THEN 3
+    //         WHEN 'Costa' THEN 4
+    //         WHEN 'Bíceps' THEN 5
+    //         WHEN 'Ombro' THEN 6
+    //         WHEN 'Membros Inferiores' THEN 7
+    //         ELSE 8
+    //     END
+    // ";
+
     $treino = "SELECT 
-        ut.treino_dia,
-        mt.mem_nome,
-        se.exe_nome,
-        se.ser_serie,
-        se.ser_ordem
+        u.usu_nome AS Usuario,
+        t.dia_nome AS Dia,
+        t.membro_nome AS Membro,
+        e.exe_nome AS Exercício,
+        so.ser_serie AS Serie
     FROM 
         usuario u
     JOIN 
-        usuario_treino ut ON u.usu_id = ut.usu_id
+        treino_exercicios te ON u.usu_id = te.usuario_id
     JOIN 
-        membro_treino mt ON ut.treino_dia = mt.treino_dia
+        treinos t ON te.treino_id = t.tre_id
     JOIN 
-        series_exercicios se ON mt.mem_nome = se.mem_nome
+        exercicio_serieordem eso ON te.exercicio_serie_id = eso.exe_ser_id
+    JOIN 
+        exercicio e ON eso.exercicio_id = e.exe_id
+    JOIN 
+        serie_ordem so ON eso.serie_id = so.ser_id
     WHERE 
-        u.usu_id = 1
-    ORDER BY 
-        CASE mt.mem_nome
-            WHEN 'Peito' THEN 1
-            WHEN 'Tríceps' THEN 2
-            WHEN 'Abdominal' THEN 3
-            WHEN 'Costa' THEN 4
-            WHEN 'Bíceps' THEN 5
-            WHEN 'Ombro' THEN 6
-            WHEN 'Membros Inferiores' THEN 7
-            ELSE 8
-        END
-    ";
+        u.usu_id = 1;";
 
-    // Comando SQL para resgatar dados do treino de membros que o usuário possui ================================================================================
-    $dia_treinamento = "SELECT 
-        ut.treino_dia
-    FROM 
-        usuario_treino ut
-    JOIN 
-        membro_treino mt ON ut.treino_dia = mt.treino_dia
-    WHERE 
-        ut.usu_id = 1
-    GROUP BY 
-        ut.treino_dia
-    ORDER BY 
-        ut.treino_dia;";
+    // // Comando SQL para resgatar dados do treino de membros que o usuário possui ================================================================================
+    // $dia_treinamento = "SELECT 
+    //     ut.treino_dia
+    // FROM 
+    //     usuario_treino ut
+    // JOIN 
+    //     membro_treino mt ON ut.treino_dia = mt.treino_dia
+    // WHERE 
+    //     ut.usu_id = 1
+    // GROUP BY 
+    //     ut.treino_dia
+    // ORDER BY 
+    //     ut.treino_dia;";
 
-    // Comando SQL para resgatar dados do treino de membros seus respectivos dias ================================================================================
-    $sql_treino_membro = "SELECT 
-        ut.treino_dia,
-        mt.mem_nome
-    FROM 
-        usuario_treino ut
-    JOIN 
-        membro_treino mt ON ut.treino_dia = mt.treino_dia
-    WHERE 
-        ut.usu_id = 1
-    ORDER BY 
-        ut.treino_dia, mt.mem_nome;";
+    $dia_treinamento = "SELECT DISTINCT t.dia_nome
+        FROM treinos t
+        JOIN treino_exercicios te ON t.tre_id = te.treino_id
+        WHERE te.usuario_id = 1;";
 
-    // Salvando resultados das consultas =========================================================================================================
+    // // Comando SQL para resgatar dados do treino de membros seus respectivos dias ================================================================================
+    // $sql_treino_membro = "SELECT 
+    //     ut.treino_dia,
+    //     mt.mem_nome
+    // FROM 
+    //     usuario_treino ut
+    // JOIN 
+    //     membro_treino mt ON ut.treino_dia = mt.treino_dia
+    // WHERE 
+    //     ut.usu_id = 1
+    // ORDER BY 
+    //     ut.treino_dia, mt.mem_nome;";
+
+    $sql_treino_membro = "SELECT DISTINCT t.dia_nome, t.membro_nome
+        FROM treinos t
+        JOIN treino_exercicios te ON t.tre_id = te.treino_id
+        WHERE te.usuario_id = 1;";
+
+    // // Salvando resultados das consultas =========================================================================================================
     $result=$conexao->query($treino);
     $resultDiaTreino=$conexao->query($dia_treinamento);
     $resultTreinoMembro=$conexao->query($sql_treino_membro);
 
-    // Incerindo Geral em um array para poder gerar varios elementos nas tabelas =================================================================
+    // // Incerindo Geral em um array para poder gerar varios elementos nas tabelas =================================================================
     $user_data_array = [];
     while($user_data = mysqli_fetch_assoc($result)){
         $user_data_array[] = $user_data;
@@ -91,27 +122,27 @@
             foreach($user_data_array_treino_membro as $user_data_membro) {
 
                 // Verificação para se os dados batem com o que foi pedido.
-                if($user_data_membro['treino_dia'] ==  $dia_treino) {
+                if($user_data_membro['dia_nome'] ==  $dia_treino) {
 
                     // Verificação para se o dia de treinamento esteja no lugar correto.
-                    if($user_data['treino_dia'] ==  $dia_treino) {
+                    if($user_data['dia_nome'] ==  $dia_treino) {
 
                         // Escrevendo os dados na tela do PHP.
                         echo "<tr>";
-                            echo "<th scope='row' colspan='3'>".$user_data_membro['mem_nome']."</th>";
+                            echo "<th scope='row' colspan='3'>".$user_data_membro['membro_nome']."</th>";
                         echo "</tr>";
 
                         // Foreach para escrever os dados que contem no dia selecionado.
                         foreach($user_data_array as $user_data_exercicio) {
 
                             // Verificação para se o membro do exercício bate com o membro do dia.
-                            if ($user_data_membro['mem_nome'] == $user_data_exercicio['mem_nome']) {
+                            if ($user_data_membro['membro_nome'] == $user_data_exercicio['Membro']) {
 
                                 // Escrevendo os dados na tela do PHP.
                                 echo "<tr>";
-                                    echo "<td><input type='checkbox'>".$user_data_exercicio['ser_ordem']."</td>";
-                                    echo "<td>".$user_data_exercicio['exe_nome']."</td>";
-                                    echo "<td>".$user_data_exercicio['ser_serie']."</td>";                        
+                                    echo "<td><input type='checkbox'>Escolha</td>";
+                                    echo "<td>".$user_data_exercicio['Exercício']."</td>";
+                                    echo "<td>".$user_data_exercicio['Serie']."</td>";                        
                                 echo "</tr>";
                             }
                         }

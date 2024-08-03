@@ -4,6 +4,8 @@
         // Conexão com o banco de dados.
         include_once('conexao.php');
 
+        // A partir deste momento do novo banco de dados, você tem que realizar mais 2 delete no banco de dados em treino_exercicio, e exercicio_serie_ordem
+
         // Pegando através da URL qual exercício deseja der excluido, e qual o membro do exercício.
         $exercicio = $_GET['exercicio'];
         $membro = $_GET['membro'];

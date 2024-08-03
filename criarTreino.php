@@ -2,25 +2,48 @@
     include("forms/conexao.php");
 
     // Comando SQL para resgatar dados do treino de Peito ================================================================================
+    // $comandoTreino = "SELECT 
+    //     ut.treino_dia,
+    //     mt.mem_nome,
+    //     se.exe_nome,
+    //     se.ser_serie,
+    //     se.ser_ordem
+    // FROM 
+    //     usuario u
+    // JOIN 
+    //     usuario_treino ut ON u.usu_id = ut.usu_id
+    // JOIN 
+    //     membro_treino mt ON ut.treino_dia = mt.treino_dia
+    // JOIN 
+    //     series_exercicios se ON mt.mem_nome = se.mem_nome
+    // WHERE 
+    //     u.usu_id = 1";
+
     $comandoTreino = "SELECT 
-        ut.treino_dia,
-        mt.mem_nome,
-        se.exe_nome,
-        se.ser_serie,
-        se.ser_ordem
+        u.usu_nome AS Usuario,
+        t.dia_nome AS Dia,
+        t.membro_nome AS Membro,
+        e.exe_nome AS Exercício,
+        so.ser_serie AS Serie, 
+        te.tre_exe_id AS IdTreinoExercicio
     FROM 
         usuario u
     JOIN 
-        usuario_treino ut ON u.usu_id = ut.usu_id
+        treino_exercicios te ON u.usu_id = te.usuario_id
     JOIN 
-        membro_treino mt ON ut.treino_dia = mt.treino_dia
+        treinos t ON te.treino_id = t.tre_id
     JOIN 
-        series_exercicios se ON mt.mem_nome = se.mem_nome
+        exercicio_serieordem eso ON te.exercicio_serie_id = eso.exe_ser_id
+    JOIN 
+        exercicio e ON eso.exercicio_id = e.exe_id
+    JOIN 
+        serie_ordem so ON eso.serie_id = so.ser_id
     WHERE 
-        u.usu_id = 1";
+        u.usu_id = 1;";
+
 
     // Comando SQL para resgatar todos os exercicios ================================================================================
-    $comandoExercicios = "SELECT * FROM exercicio WHERE exe_nome NOT IN (SELECT exe_nome FROM series_exercicios)";
+    $comandoExercicios = "SELECT * FROM dados_exercicio";
 
     // Salvando resultados das consultas =========================================================================================================
     $treino=$conexao->query($comandoTreino);
@@ -43,12 +66,12 @@
         foreach($user_data_array as $user_data){
             echo "<tr>";
             // IF - ferificação para selecionar apenas os exercícios do membro escolhido.
-            if($user_data['mem_nome'] == $membro){
-                echo "<td>".$user_data['ser_ordem']."</td>";
-                echo "<td>".$user_data['exe_nome']."</td>";
-                echo "<td>".$user_data['ser_serie']."</td>";
+            if($user_data['Membro'] == $membro){
+                echo "<td>Des</td>";
+                echo "<td>".$user_data['Exercício']."</td>";
+                echo "<td>".$user_data['Serie']."</td>";
                 echo "<td>
-                <a href='forms/removerExercicio.php?exercicio=$user_data[exe_nome]&membro=$user_data[mem_nome]' class='remove_exercicio'>Excluir</a></td>";
+                <a href='forms/removerExercicio.php?exercicio=$user_data[Exercício]&membro=$user_data[Membro]' class='remove_exercicio'>Excluir</a></td>";
             }
             echo "</tr>";
          }
@@ -59,8 +82,8 @@
         // Foreach para todos os exercicios que o usuário não selecionou.
         foreach($user_data_array_exercicios as $user_data) {
             // Ferificação para se o exercício corresponde ao membro selecionado.
-            if($user_data['mem_nome'] == $membro){
-                echo "<option value='{$user_data['exe_nome']}'>{$user_data['exe_nome']}</option>";
+            if($user_data['vis_mem_nome'] == $membro){
+                echo "<option value='{$user_data['vis_exe_nome']}'>{$user_data['vis_exe_nome']}</option>";
             }
         }
     }
