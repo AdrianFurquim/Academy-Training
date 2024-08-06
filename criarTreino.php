@@ -25,7 +25,8 @@
         t.membro_nome AS Membro,
         e.exe_nome AS Exercício,
         so.ser_serie AS Serie, 
-        te.tre_exe_id AS IdTreinoExercicio
+        te.tre_exe_id AS IdTreinoExercicio, 
+        eso.exe_ser_id AS IdExercicio
     FROM 
         usuario u
     JOIN 
@@ -71,7 +72,7 @@
                 echo "<td>".$user_data['Exercício']."</td>";
                 echo "<td>".$user_data['Serie']."</td>";
                 echo "<td>
-                <a href='forms/removerExercicio.php?exercicio=$user_data[Exercício]&membro=$user_data[Membro]' class='remove_exercicio'>Excluir</a></td>";
+                <a href='forms/removerExercicio.php?treinoId=$user_data[IdTreinoExercicio]&exercicioId=$user_data[IdExercicio]&membro=$user_data[Membro]' class='remove_exercicio'>Excluir</a></td>";
             }
             echo "</tr>";
          }
@@ -351,10 +352,8 @@
                 <select name="serieAbdomen" id="serieAbdomen">
                     <option value="">--</option>
                     <option value="3 x 30s - 40s">3 x 30s - 40s</option>
-                    <option value="3 x 40s - 60s">3 x 40s - 60s</option>
                     <option value="3 x +60s">3 x +60s</option>
                     <option value="4 x 30s - 40s">4 x 30s - 40s</option>
-                    <option value="4 x 40s - 60s">4 x 40s - 60s</option>
                     <option value="4 x +60s">4 x +60s</option>
                     <option value="Desejado">Desejado</option>
                 </select>

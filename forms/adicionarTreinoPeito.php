@@ -10,16 +10,23 @@
     if ($exe_nome == "" || $ser_serie == "") {
         header("location: ../criarTreino.php?membro=Peito&situacao=faltando");
     } else {
+        // Select em todos os exercicios existentes.
         $exercicios_banco = "SELECT * FROM exercicio";
         $result_exercicios_banco = $conexao->query($exercicios_banco);
 
+        // Select em todos os tipos de series e ordens existentes.
         $series_banco = "SELECT * FROM serie_ordem";
         $result_series_banco = $conexao->query($series_banco);
 
+        // Rodando todos os exercícios do banco.
         foreach ($result_exercicios_banco as $array_banco_exercicio) {
+            // Verificando se existe o exercício selecionado existem.
             if ($array_banco_exercicio['exe_nome'] == $exe_nome) {
+                // Rodando todas as séries e ordens do banco.
                 foreach ($result_series_banco as $array_banco_serie) {
+                    // Verificando se existe a série e ordem selecionados existem.
                     if ($array_banco_serie['ser_serie'] == $ser_serie) {
+                        // Comando para inserir o exercicio no exercicio_serieoredem.
                         $insert_exercicio_serie = "INSERT INTO exercicio_serieordem (`exercicio_id`, `serie_id`) VALUES ('$array_banco_exercicio[exe_id]', '$array_banco_serie[ser_id]')";
 
                         if (mysqli_query($conexao, $insert_exercicio_serie)) {

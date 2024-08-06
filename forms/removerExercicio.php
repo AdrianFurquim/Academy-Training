@@ -1,32 +1,34 @@
 <?php
     // Verificação caso não exista nenhum exercicio ou membro.
-    if(isset($_GET['exercicio']) && isset($_GET['membro'])){
+    if (isset($_GET['treinoId']) && isset($_GET['exercicioId']) && isset($_GET['membro'])) {
         // Conexão com o banco de dados.
         include_once('conexao.php');
-
-        // A partir deste momento do novo banco de dados, você tem que realizar mais 2 delete no banco de dados em treino_exercicio, e exercicio_serie_ordem
-
-        // Pegando através da URL qual exercício deseja der excluido, e qual o membro do exercício.
-        $exercicio = $_GET['exercicio'];
-        $membro = $_GET['membro'];
-
-        // Comando para verificar se tal exercicio existe no banco de dados.
-        $sqlSelect = "SELECT * FROM series_exercicios WHERE exe_nome='$exercicio'";
-
-        // Realizando o script no banco e armazenando o resultado.
-        $result = $conexao->query($sqlSelect);
-
-        // Caso exista este exercicio.
-        if($result->num_rows > 0){
-            // Script para excluir o ligamento com o usuário.
-            $sqlDelete = "DELETE FROM series_exercicios WHERE exe_nome = '$exercicio';";
-            // Realizando os comandos no Banco de Dados.
-            $resultDelete = $conexao->query($sqlDelete);
+    
+        // Sanitização dos dados recebidos via GET
+        $id_treino = intval($_GET['treinoId']);
+        $id_exercicio = intval($_GET['exercicioId']);
+        $membro = htmlspecialchars($_GET['membro']);
+    
+        // Deletando dados da tabela treino_exercicios.
+        $delete_treino = "DELETE FROM treino_exercicios WHERE tre_exe_id = $id_treino";
+        if ($conexao->query($delete_treino) === TRUE) {
+            echo "Exercício excluído com sucesso da tabela treino_exercicios.";
+        } else {
+            echo "Erro ao excluir exercício da tabela treino_exercicios: " . $conexao->error;
         }
+        
+        // Deletando exercicio da tabela exercicio_serieordem.
+        $delete_exercicio = "DELETE FROM exercicio_serieordem WHERE exe_ser_id = $id_exercicio";
+        if ($conexao->query($delete_exercicio) === TRUE) {
+            echo "Exercício excluído com sucesso da tabela exercicio_serieordem.";
+        } else {
+            echo "Erro ao excluir exercício da tabela exercicio_serieordem: " . $conexao->error;
+        }
+
         // Fechando a conexão com o banco de dados.
         mysqli_close($conexao);
     }
-
+    
     // Location para direcionamento do usuário.
     header("location: ../criarTreino.php?membro=$membro");
 ?>
