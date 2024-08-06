@@ -13,6 +13,7 @@ Bem-vindo ao Academy Training! Abaixo você encontrará detalhes sobre a estrutu
 - **PWA**
 
 <h4 align="center">🚧 Projeto em Andamento 🚧</h4>
+<h4 align="center">🚧 Caso alguma função não esteja funcionando, se trata de um projeto ainda sendo implementado 🚧</h4>
 <p align="center">Sistema ainda em desenvolvimento</p>
 
 ## Visite o Projeto
@@ -35,3 +36,4 @@ A ideia do projeto é auxiliar na programação de treinamentos para frequentado
 
 ## Equipe
 - **Adrian Eduardo Furquim de Souza**
+
