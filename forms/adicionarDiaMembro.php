@@ -10,11 +10,11 @@
         header("location: ../organizarDiasMembros.php?situacao=caiunoinicio");
     } else {
         // Consulta de verificação.
-        $select_verificacao = "SELECT mt.treino_dia, mt.mem_nome
-                            FROM usuario u
-                            JOIN usuario_treino ut ON u.usu_id = ut.usu_id
-                            JOIN membro_treino mt ON ut.treino_dia = mt.treino_dia
-                            WHERE u.usu_id = 1";
+        // $select_verificacao = "SELECT mt.treino_dia, mt.mem_nome
+        //                     FROM usuario u
+        //                     JOIN usuario_treino ut ON u.usu_id = ut.usu_id
+        //                     JOIN membro_treino mt ON ut.treino_dia = mt.treino_dia
+        //                     WHERE u.usu_id = 1";
         
         $insert_comando = "INSERT INTO membro_treino(treino_dia, mem_nome) VALUES ('$dia','$membro')";
 

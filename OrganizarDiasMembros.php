@@ -2,8 +2,8 @@
     include("forms/conexao.php");
 
     $comando_dias_membros = "SELECT 
-        ut.treino_dia, 
-        mt.mem_nome
+        DISTINCT ut.treino_dia, 
+        DISTINCT mt.mem_nome
     FROM 
         usuario_treino ut
     JOIN 
@@ -11,13 +11,25 @@
     WHERE 
         ut.usu_id = 2";
 
-    $result=$conexao->query($comando_dias_membros);
+
+    $select_dia_membros = "SELECT 
+        DISTINCT t.dia_nome AS Dia,
+        t.membro_nome AS Membro
+    FROM 
+        usuario u
+    JOIN 
+        treino_exercicios te ON u.usu_id = te.usuario_id
+    JOIN 
+        treinos t ON te.treino_id = t.tre_id
+    WHERE 
+        u.usu_id = 1;";
+
+    $result=$conexao->query($select_dia_membros);
 
     $result_data_array = [];
     while($user_data = mysqli_fetch_assoc($result)){
         $result_data_array[] = $user_data;
     }
-
     // Fechando conexão com o Banco de dados ====================================================================================================
     mysqli_close($conexao);
 ?>
@@ -96,8 +108,8 @@
                     <?php
                         foreach($result_data_array as $user_data){
                             echo "<tr>";
-                                echo "<td>".$user_data['treino_dia']."</td>";
-                                echo "<td>".$user_data['mem_nome']."</td>";
+                                echo "<td>".$user_data['Dia']."</td>";
+                                echo "<td>".$user_data['Membro']."</td>";
                             echo "</tr>";
                         }
                     ?>

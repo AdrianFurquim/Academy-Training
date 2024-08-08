@@ -62,7 +62,7 @@
                         }
                         $stmt->close();
                     } else {
-                        echo "Nenhum treino encontrado para o membro 'Peito'.";
+                        echo "Nenhum treino encontrado para o membro 'Abdominal'.";
                     }
                 } else {
                     echo "Erro ao inserir em exercicio_serieordem: " . $stmt->error;

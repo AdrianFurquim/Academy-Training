@@ -2,35 +2,6 @@
     include("forms/conexao.php");
 
     // Comando SQL para resgatar dados do treino de Terça-Feira ================================================================================
-    // $treino = "SELECT 
-    //     ut.treino_dia,
-    //     mt.mem_nome,
-    //     se.exe_nome,
-    //     se.ser_serie,
-    //     se.ser_ordem
-    // FROM 
-    //     usuario u
-    // JOIN 
-    //     usuario_treino ut ON u.usu_id = ut.usu_id
-    // JOIN 
-    //     membro_treino mt ON ut.treino_dia = mt.treino_dia
-    // JOIN 
-    //     series_exercicios se ON mt.mem_nome = se.mem_nome
-    // WHERE 
-    //     u.usu_id = 1
-    // ORDER BY 
-    //     CASE mt.mem_nome
-    //         WHEN 'Peito' THEN 1
-    //         WHEN 'Tríceps' THEN 2
-    //         WHEN 'Abdominal' THEN 3
-    //         WHEN 'Costa' THEN 4
-    //         WHEN 'Bíceps' THEN 5
-    //         WHEN 'Ombro' THEN 6
-    //         WHEN 'Membros Inferiores' THEN 7
-    //         ELSE 8
-    //     END
-    // ";
-
     $treino = "SELECT 
         u.usu_nome AS Usuario,
         t.dia_nome AS Dia,
@@ -52,38 +23,13 @@
     WHERE 
         u.usu_id = 1;";
 
-    // // Comando SQL para resgatar dados do treino de membros que o usuário possui ================================================================================
-    // $dia_treinamento = "SELECT 
-    //     ut.treino_dia
-    // FROM 
-    //     usuario_treino ut
-    // JOIN 
-    //     membro_treino mt ON ut.treino_dia = mt.treino_dia
-    // WHERE 
-    //     ut.usu_id = 1
-    // GROUP BY 
-    //     ut.treino_dia
-    // ORDER BY 
-    //     ut.treino_dia;";
-
+    // Comando SQL para resgatar dados do treino de membros que o usuário possui ================================================================================
     $dia_treinamento = "SELECT DISTINCT t.dia_nome
         FROM treinos t
         JOIN treino_exercicios te ON t.tre_id = te.treino_id
         WHERE te.usuario_id = 1;";
 
-    // // Comando SQL para resgatar dados do treino de membros seus respectivos dias ================================================================================
-    // $sql_treino_membro = "SELECT 
-    //     ut.treino_dia,
-    //     mt.mem_nome
-    // FROM 
-    //     usuario_treino ut
-    // JOIN 
-    //     membro_treino mt ON ut.treino_dia = mt.treino_dia
-    // WHERE 
-    //     ut.usu_id = 1
-    // ORDER BY 
-    //     ut.treino_dia, mt.mem_nome;";
-
+    // Comando SQL para resgatar dados do treino de membros seus respectivos dias ================================================================================
     $sql_treino_membro = "SELECT DISTINCT t.dia_nome, t.membro_nome
         FROM treinos t
         JOIN treino_exercicios te ON t.tre_id = te.treino_id

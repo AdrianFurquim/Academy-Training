@@ -5,6 +5,26 @@
     $comando_usuário = "SELECT * FROM `usuario` WHERE usuario.usu_id = 1";
     $result=$conexao->query($comando_usuário);
 
+    function gerarFormLogin(){
+
+    }
+    
+    function gerarDadosLogin($result){
+        echo "<div class='imagem_login'>";
+            echo "<img src='./assets/img/person-circle.svg' class='foto_login' alt='Foto de perfil'>";
+        echo "</div>";
+        echo "<div class='dados_login'>";
+            foreach($result as $user_data) {
+                if($user_data['usu_id'] == 1){
+                    echo "<h2>".$user_data['usu_nome']."</h2>";
+                    echo "<p>Altura:".$user_data['usu_altura']."m</p>";
+                    echo "<p>Peso: ".$user_data['usu_peso']."kg</p>";
+                    echo "<p>dias treinados: ".$user_data['usu_tempo_treinando']." dias</p>";
+                    echo "<p>Meta: ".$user_data['usu_meta']."</p>";
+                }
+            }
+        echo "</div>";
+    }
     //Fechar conexão com o Banco de Dados ========================================================================================================
     mysqli_close($conexao);
 ?>
@@ -39,24 +59,23 @@
         </nav>
     </header>
 
+    <section class="conteiner_realiza_login">
+        <form action="forms/confirmaLogin.php" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email"> <br>
+
+            <label for="senha">Senha:</label>
+            <input type="password" name="senha" id="senha">
+
+            <button type="submit">Entrar</button>
+        </form>
+
+    </section>
+
     <section class="conteiner_login">
-        <div class="imagem_login">
-            <img src="./assets/img/person-circle.svg" class="foto_login" alt="Foto de perfil">
-        </div>
-        <div class="dados_login">
-            <?php
-                foreach($result as $user_data) {
-                    if($user_data['usu_id'] == 1){
-                        echo "<h2>".$user_data['usu_nome']."</h2>";
-                        echo "<p>Altura:".$user_data['usu_altura']."m</p>";
-                        echo "<p>Peso: ".$user_data['usu_peso']."kg</p>";
-                        echo "<p>dias treinados: ".$user_data['usu_dias_treinados']." dias</p>";
-                        echo "<p>Tempo de treinamento: ".$user_data['usu_temp_treinamento']."</p>";
-                        echo "<p>Meta: ".$user_data['usu_meta']."</p>";
-                    }
-                }
-            ?>
-        </div>
+        <?php
+            gerarDadosLogin($result);
+        ?>
         
     </section>
 
