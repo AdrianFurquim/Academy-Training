@@ -305,6 +305,7 @@ form{
     height: 90%;
     margin: auto;
     margin-top: 1.2em;
+    display: none;
 }
 
 .foto_login{
@@ -322,7 +323,46 @@ form{
     margin-left: 3em;
 }
 
-/* organizando_dias_treinos */
+.conteiner_realiza_login{
+    margin: auto;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 80%;
+    margin-top: 20%;
+}
+
+.conteiner_realiza_login h1{
+    text-align: center;
+}
+
+.forms_cad_login{
+    display: flex;
+    flex-direction:column;
+    gap: 1em;
+    margin: auto;
+}
+
+.forms_cad_login button{
+    background-color: yellow;
+    border: none;
+    border-radius: 15px;
+    height: 35px;
+    font-size: 1.1em;
+}
+
+.forms_cad_login input{
+    background-color: transparent;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 1.1em;
+    outline: none;
+}
+
+/* organizando_dias_treinos  ====================================================================================*/
 
 .organizando_dias_treinos{
     display: flex;
@@ -345,8 +385,4 @@ form{
     padding: 7px;
     border-radius: 10px;
     font-size: 17px;
-}
-
-.conteiner_tabela_dias_treinos{
-    
 }

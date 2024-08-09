@@ -21,7 +21,7 @@
         if ($result_usuario_existente->num_rows > 0) {
             // Buscar o usuário encontrado
             $usuario = $result_usuario_existente->fetch_assoc();
-            header("location: ../login.php?id=" . $usuario['usu_id']);
+            header("location: ../login.php?id=" . $usuario['usu_id'] . "&situacao=conectado");
         } else {
             // Se o usuário não for encontrado, redireciona para a página de login com erro
             header("location: ../login.php?situacao=invalido");

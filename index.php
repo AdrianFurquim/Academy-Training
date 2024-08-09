@@ -129,7 +129,7 @@
 
     <title>Academy Training</title>
     <link rel="icon" tipe="image/ico" href="./images/icons/icon-152x152.png">
-    <link rel="stylesheet" href="./assets/css/style7.css">
+    <link rel="stylesheet" href="./assets/css/style8.css">
 </head>
 <body>
 
