@@ -1,60 +1,48 @@
 <?php
     include("forms/conexao.php");
 
-    // Comando SQL para resgatar dados do treino de Peito ================================================================================
-    // $comandoTreino = "SELECT 
-    //     ut.treino_dia,
-    //     mt.mem_nome,
-    //     se.exe_nome,
-    //     se.ser_serie,
-    //     se.ser_ordem
-    // FROM 
-    //     usuario u
-    // JOIN 
-    //     usuario_treino ut ON u.usu_id = ut.usu_id
-    // JOIN 
-    //     membro_treino mt ON ut.treino_dia = mt.treino_dia
-    // JOIN 
-    //     series_exercicios se ON mt.mem_nome = se.mem_nome
-    // WHERE 
-    //     u.usu_id = 1";
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $usuario_id = $_GET['id'];
+        // Comando SQL para resgatar dados do treino ================================================================================
+        $comandoTreino = "SELECT 
+            u.usu_nome AS Usuario,
+            t.dia_nome AS Dia,
+            t.membro_nome AS Membro,
+            e.exe_nome AS Exercício,
+            so.ser_serie AS Serie, 
+            te.tre_exe_id AS IdTreinoExercicio, 
+            eso.exe_ser_id AS IdExercicio
+        FROM 
+            usuario u
+        JOIN 
+            treino_exercicios te ON u.usu_id = te.usuario_id
+        JOIN 
+            treinos t ON te.treino_id = t.tre_id
+        JOIN 
+            exercicio_serieordem eso ON te.exercicio_serie_id = eso.exe_ser_id
+        JOIN 
+            exercicio e ON eso.exercicio_id = e.exe_id
+        JOIN 
+            serie_ordem so ON eso.serie_id = so.ser_id
+        WHERE 
+            u.usu_id = $usuario_id;";
 
-    $comandoTreino = "SELECT 
-        u.usu_nome AS Usuario,
-        t.dia_nome AS Dia,
-        t.membro_nome AS Membro,
-        e.exe_nome AS Exercício,
-        so.ser_serie AS Serie, 
-        te.tre_exe_id AS IdTreinoExercicio, 
-        eso.exe_ser_id AS IdExercicio
-    FROM 
-        usuario u
-    JOIN 
-        treino_exercicios te ON u.usu_id = te.usuario_id
-    JOIN 
-        treinos t ON te.treino_id = t.tre_id
-    JOIN 
-        exercicio_serieordem eso ON te.exercicio_serie_id = eso.exe_ser_id
-    JOIN 
-        exercicio e ON eso.exercicio_id = e.exe_id
-    JOIN 
-        serie_ordem so ON eso.serie_id = so.ser_id
-    WHERE 
-        u.usu_id = 1;";
+        $treino=$conexao->query($comandoTreino);
+
+        $user_data_array = [];
+        while($user_data = mysqli_fetch_assoc($treino)){
+            $user_data_array[] = $user_data;
+        }
+}
 
 
-    // Comando SQL para resgatar todos os exercicios ================================================================================
+// Comando SQL para resgatar todos os exercicios ================================================================================
     $comandoExercicios = "SELECT * FROM dados_exercicio";
 
     // Salvando resultados das consultas =========================================================================================================
-    $treino=$conexao->query($comandoTreino);
     $exercicios=$conexao->query($comandoExercicios);
 
     // Incerindo Geral em um array para poder gerar varios elementos nas tabelas =================================================================
-    $user_data_array = [];
-    while($user_data = mysqli_fetch_assoc($treino)){
-        $user_data_array[] = $user_data;
-    }
 
     $user_data_array_exercicios = [];
     while($user_data = mysqli_fetch_assoc($exercicios)){
@@ -88,6 +76,73 @@
             }
         }
     }
+
+    // Carregando Id do usuário pela URL ========================================================================================================
+    // Function para gerar os links dos caminhos da barra nav.
+    function gerarLink($caminho){
+
+        // Switch para diferenciar o que o usuário quer.
+        switch ($caminho) {
+
+            // Criar Treino ===================================================================================
+            case 'criarTreino':
+                // If para verificar se situação existe.
+                if (isset($_GET['situacao'])) {
+                    $situacao = $_GET['situacao'];
+
+                    // If para ver se o usuário esta logado.
+                    if ($situacao == "conectado") {
+                        echo "<a href='criarTreino.php?situacao=conectado&id=". $_GET['id']."'>";
+                    }else{
+                        echo "<a href='criarTreino.php'>";
+                    }
+                }else{
+                    echo "<a href='criarTreino.php'>";
+                }
+                break;
+
+            // Index ==========================================================================================
+            case 'index':
+
+                // If para verificar se situação existe.
+                if (isset($_GET['situacao'])) {
+                    $situacao = $_GET['situacao'];
+
+                    // If para ver se o usuário esta logado.
+                    if ($situacao == "conectado") {
+                        echo "<a href='index.php?situacao=conectado&id=". $_GET['id']."' class='meus_treinos_link'>";
+                    }else{
+                        echo "<a href='index.php' class='meus_treinos_link'>";
+                    }
+                }else{
+                    echo "<a href='index.php' class='meus_treinos_link'>";
+                }
+                break;
+
+            // Login ==========================================================================================
+            case 'login':
+
+                // If para verificar se situação existe.
+                if (isset($_GET['situacao'])) {
+                    $situacao = $_GET['situacao'];
+                    
+                    // If para ver se o usuário esta logado.
+                    if ($situacao == "conectado") {
+                        echo "<a href='login.php?situacao=conectado&id=". $_GET['id']."' class='login_link'>";
+                    }else{
+                        echo "<a href='login.php' class='login_link'>";
+                    }
+                }else{
+                    echo "<a href='login.php' class='login_link'>";
+                }
+                break;
+                
+            // Caso não exista tal condição ====================================================================
+            default:
+                echo "inexistente";
+                break;
+        }
+    }
     // Fechando conexão com o Banco de dados ====================================================================================================
     mysqli_close($conexao);
 ?>
@@ -100,7 +155,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Criar Treino - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style8.css">
+    <link rel="stylesheet" href="./assets/css/style10.css">
 
     <style>
         <?php
@@ -214,15 +269,21 @@
 
     <header>
         <nav>
-            <a href="criarTreino.php">
+            <?php
+                gerarLink('criarTreino');
+            ?>
                 <div class="criar_treino">+</div>
             </a>
-            <a href="index.php" class="meus_treinos_link">
+            <?php
+                gerarLink('index');
+            ?>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                 </svg>
             </a>
-            <a href="login.php" class="login_link">
+            <?php
+                gerarLink('login');
+            ?>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                 </svg>
@@ -255,7 +316,9 @@
                 <select name="peito" id="peito">
                     <option value="">--</option>
                     <?php
-                        echo gerarSections($user_data_array_exercicios, 'Peito');
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarSections($user_data_array_exercicios, 'Peito');
+                        }
                     ?>
                 </select><br>
                 <label for="seriePeito">Série: </label>
@@ -282,8 +345,14 @@
                     <tr>
                         <th scope="row" colspan="4">Peitoral</th>
                     </tr>
-                    <?php                        
-                        echo gerarTabela($user_data_array, "Peito");
+                    <?php
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {                  
+                            echo gerarTabela($user_data_array, "Peito");
+                        }else{
+                            echo "<tr>";
+                                echo "<th scope='row' colspan='4'>Por favor, realize o Login</th>";
+                            echo "</tr>";
+                        }
                     ?>
                     </tbody>
                 </table>
@@ -300,7 +369,9 @@
                 <select name="triceps" id="triceps">
                     <option value="">--</option>
                     <?php
-                        echo gerarSections($user_data_array_exercicios, 'Tríceps');
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarSections($user_data_array_exercicios, 'Tríceps');
+                        }
                     ?>
                 </select><br>
                 <label for="serieTriceps">Série: </label>
@@ -327,7 +398,9 @@
                         <th scope="row" colspan="3">Tríceps</th>
                     </tr>
                     <?php
-                        echo gerarTabela($user_data_array, "Tríceps");
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarTabela($user_data_array, "Tríceps");
+                        }
                     ?>
                     </tbody>
                 </table>
@@ -343,9 +416,10 @@
                 <label for="abdomen">Exercício: </label>
                 <select name="abdomen" id="abdomen">
                     <option value="">--</option>
-
                     <?php
-                        echo gerarSections($user_data_array_exercicios, 'Abdominal');
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarSections($user_data_array_exercicios, 'Abdominal');
+                        }
                     ?>
                 </select><br>
                 <label for="serieAbdomen">Série: </label>
@@ -372,7 +446,9 @@
                         <th scope="row" colspan="3">Amdominal</th>
                     </tr>
                     <?php
-                        echo gerarTabela($user_data_array, "Abdominal");
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarTabela($user_data_array, "Abdominal");
+                        }
                     ?>
                     </tbody>
                 </table>
@@ -389,7 +465,9 @@
                 <select name="costa" id="costa">
                     <option value="">--</option>
                     <?php
-                        echo gerarSections($user_data_array_exercicios, 'Costa');
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarSections($user_data_array_exercicios, 'Costa');
+                        }
                     ?>
                 </select><br>
                 <label for="seroeCosta">Série</label>
@@ -416,7 +494,9 @@
                         <th scope="row" colspan="3">Costa</th>
                     </tr>
                     <?php
-                        echo gerarTabela($user_data_array, "Costa");
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarTabela($user_data_array, "Costa");
+                        }
                     ?>
                     </tbody>
                 </table>
@@ -433,7 +513,9 @@
                 <select name="biceps" id="biceps">
                     <option value="">--</option>
                     <?php
-                        echo gerarSections($user_data_array_exercicios, 'Bíceps');
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarSections($user_data_array_exercicios, 'Bíceps');
+                        }
                     ?>
                 </select><br>
                 <label for="serieBiceps">Série: </label>
@@ -460,7 +542,9 @@
                         <th scope="row" colspan="3">Bíceps</th>
                     </tr>
                     <?php
-                        echo gerarTabela($user_data_array, "Bíceps");
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarTabela($user_data_array, "Bíceps");
+                        }
                     ?>
                     </tbody>
                 </table>
@@ -477,7 +561,9 @@
                 <select name="ombro" id="ombro">
                     <option value="">--</option>
                     <?php
-                        echo gerarSections($user_data_array_exercicios, 'Ombro');
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarSections($user_data_array_exercicios, 'Ombro');
+                        }
                     ?>
                 </select><br>
                 <label for="serieOmbro">Série: </label>
@@ -504,7 +590,9 @@
                         <th scope="row" colspan="3">Ombro</th>
                     </tr>
                     <?php
-                        echo gerarTabela($user_data_array, "Ombro");
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarTabela($user_data_array, "Ombro");
+                        }
                     ?>
                     </tbody>
                 </table>
@@ -521,7 +609,9 @@
                 <select name="membrosInferiores" id="membrosInferiores">
                     <option value="">--</option>
                     <?php
-                        echo gerarSections($user_data_array_exercicios, 'Membros Inferiores');
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarSections($user_data_array_exercicios, 'Membros Inferiores');
+                        }
                     ?>
                 </select><br>
                 <label for="serieMembrosInferiores">Série: </label>
@@ -548,7 +638,9 @@
                         <th scope="row" colspan="3">Membros Inferiores</th>
                     </tr>
                     <?php
-                        echo gerarTabela($user_data_array, "Membros Inferiores");
+                        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                            echo gerarTabela($user_data_array, "Membros Inferiores");
+                        }
                     ?>
                     </tbody>
                 </table>

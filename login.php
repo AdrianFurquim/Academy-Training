@@ -26,6 +26,7 @@
         echo "</div>";
     }
 
+    // Carregando Id do usuário pela URL ========================================================================================================
     // Function para gerar os links dos caminhos da barra nav.
     function gerarLink($caminho){
 
@@ -40,7 +41,7 @@
 
                     // If para ver se o usuário esta logado.
                     if ($situacao == "conectado") {
-                        echo "<a href='criarTreino.php?id=". $_GET['id']."'>";
+                        echo "<a href='criarTreino.php?situacao=conectado&id=". $_GET['id']."'>";
                     }else{
                         echo "<a href='criarTreino.php'>";
                     }
@@ -58,7 +59,7 @@
 
                     // If para ver se o usuário esta logado.
                     if ($situacao == "conectado") {
-                        echo "<a href='index.php?id=". $_GET['id']."' class='meus_treinos_link'>";
+                        echo "<a href='index.php?situacao=conectado&id=". $_GET['id']."' class='meus_treinos_link'>";
                     }else{
                         echo "<a href='index.php' class='meus_treinos_link'>";
                     }
@@ -76,7 +77,7 @@
                     
                     // If para ver se o usuário esta logado.
                     if ($situacao == "conectado") {
-                        echo "<a href='login.php?id=". $_GET['id']."' class='login_link'>";
+                        echo "<a href='login.php?situacao=conectado&id=". $_GET['id']."' class='login_link'>";
                     }else{
                         echo "<a href='login.php' class='login_link'>";
                     }
@@ -104,7 +105,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Usuario - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style8.css">
+    <link rel="stylesheet" href="./assets/css/style10.css">
 
     <style>
         <?php

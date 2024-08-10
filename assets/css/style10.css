@@ -194,6 +194,31 @@ input[type=checkbox] {
     justify-content: center;
 }
 
+.conteiner_nao_logado{
+    display: flex;
+    margin-top: 5em;
+}
+
+.conteiner_nao_logado div{
+    margin: auto;
+    background-color: #313131;
+    width: 80%;
+    border: 2px solid white;
+    border-radius: 15px;
+    text-align: center;
+    padding: 15px;
+}
+
+.conteiner_nao_logado div a button{
+    background-color: yellow;
+    border: none;
+    border-radius: 15px;
+    height: 35px;
+    font-size: 1.1em;
+    width: 65%;
+    cursor: pointer;
+}
+
 
 /* Adicionar Treino ==================================================================================================================== */
 
@@ -330,6 +355,7 @@ form{
     border-radius: 15px;
     width: 80%;
     margin-top: 20%;
+    background-color: #313131;
 }
 
 .conteiner_realiza_login h1{
@@ -349,6 +375,7 @@ form{
     border-radius: 15px;
     height: 35px;
     font-size: 1.1em;
+    cursor: pointer;
 }
 
 .forms_cad_login input{

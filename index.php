@@ -1,110 +1,176 @@
 <?php
     include("forms/conexao.php");
 
-    // Comando SQL para resgatar dados do treino de Terça-Feira ================================================================================
-    $treino = "SELECT 
-        u.usu_nome AS Usuario,
-        t.dia_nome AS Dia,
-        t.membro_nome AS Membro,
-        e.exe_nome AS Exercício,
-        so.ser_serie AS Serie
-    FROM 
-        usuario u
-    JOIN 
-        treino_exercicios te ON u.usu_id = te.usuario_id
-    JOIN 
-        treinos t ON te.treino_id = t.tre_id
-    JOIN 
-        exercicio_serieordem eso ON te.exercicio_serie_id = eso.exe_ser_id
-    JOIN 
-        exercicio e ON eso.exercicio_id = e.exe_id
-    JOIN 
-        serie_ordem so ON eso.serie_id = so.ser_id
-    WHERE 
-        u.usu_id = 1;";
-
-    // Comando SQL para resgatar dados do treino de membros que o usuário possui ================================================================================
-    $dia_treinamento = "SELECT DISTINCT t.dia_nome
-        FROM treinos t
-        JOIN treino_exercicios te ON t.tre_id = te.treino_id
-        WHERE te.usuario_id = 1;";
-
-    // Comando SQL para resgatar dados do treino de membros seus respectivos dias ================================================================================
-    $sql_treino_membro = "SELECT DISTINCT t.dia_nome, t.membro_nome
-        FROM treinos t
-        JOIN treino_exercicios te ON t.tre_id = te.treino_id
-        WHERE te.usuario_id = 1;";
-
-    // // Salvando resultados das consultas =========================================================================================================
-    $result=$conexao->query($treino);
-    $resultDiaTreino=$conexao->query($dia_treinamento);
-    $resultTreinoMembro=$conexao->query($sql_treino_membro);
-
-    // // Incerindo Geral em um array para poder gerar varios elementos nas tabelas =================================================================
-    $user_data_array = [];
-    while($user_data = mysqli_fetch_assoc($result)){
-        $user_data_array[] = $user_data;
-    }
-
-    $user_data_array_dia_treinamento = [];
-    while($user_data = mysqli_fetch_assoc($resultDiaTreino)){
-        $user_data_array_dia_treinamento[] = $user_data;
-    }
-
-    $user_data_array_treino_membro = [];
-    while($user_data = mysqli_fetch_assoc($resultTreinoMembro)){
-        $user_data_array_treino_membro[] = $user_data;
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $usuario_id = $_GET['id'];
+        
+        // Comando SQL para resgatar dados do treino de Terça-Feira ================================================================================
+        $treino = "SELECT 
+            u.usu_nome AS Usuario,
+            t.dia_nome AS Dia,
+            t.membro_nome AS Membro,
+            e.exe_nome AS Exercício,
+            so.ser_serie AS Serie
+        FROM 
+            usuario u
+        JOIN 
+            treino_exercicios te ON u.usu_id = te.usuario_id
+        JOIN 
+            treinos t ON te.treino_id = t.tre_id
+        JOIN 
+            exercicio_serieordem eso ON te.exercicio_serie_id = eso.exe_ser_id
+        JOIN 
+            exercicio e ON eso.exercicio_id = e.exe_id
+        JOIN 
+            serie_ordem so ON eso.serie_id = so.ser_id
+        WHERE 
+            u.usu_id = $usuario_id;";
+    
+        // Comando SQL para resgatar dados do treino de membros que o usuário possui ================================================================================
+        $dia_treinamento = "SELECT DISTINCT t.dia_nome
+            FROM treinos t
+            JOIN treino_exercicios te ON t.tre_id = te.treino_id
+            WHERE te.usuario_id = $usuario_id;";
+    
+        // Comando SQL para resgatar dados do treino de membros seus respectivos dias ================================================================================
+        $sql_treino_membro = "SELECT DISTINCT t.dia_nome, t.membro_nome
+            FROM treinos t
+            JOIN treino_exercicios te ON t.tre_id = te.treino_id
+            WHERE te.usuario_id = $usuario_id;";
+    
+        // // Salvando resultados das consultas =========================================================================================================
+        $result=$conexao->query($treino);
+        $resultDiaTreino=$conexao->query($dia_treinamento);
+        $resultTreinoMembro=$conexao->query($sql_treino_membro);
+    
+        // // Incerindo Geral em um array para poder gerar varios elementos nas tabelas =================================================================
+        $user_data_array = [];
+        while($user_data = mysqli_fetch_assoc($result)){
+            $user_data_array[] = $user_data;
+        }
+    
+        $user_data_array_dia_treinamento = [];
+        while($user_data = mysqli_fetch_assoc($resultDiaTreino)){
+            $user_data_array_dia_treinamento[] = $user_data;
+        }
+    
+        $user_data_array_treino_membro = [];
+        while($user_data = mysqli_fetch_assoc($resultTreinoMembro)){
+            $user_data_array_treino_membro[] = $user_data;
+        }
     }
 
     // Função para gerar tabelas.
     function gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, $dia_treino) {
-        // Verificação caso não exista nada na tabela.
-        $existTraining = false;
 
-        // Foreach para rodas os dias de treino que foram selecionados.
-        foreach($user_data_array_dia_treinamento as $user_data) {
-            
-            // Foreach para pegar os valores de todos os treinos e seus respectivos membros.
-            foreach($user_data_array_treino_membro as $user_data_membro) {
-
-                // Verificação para se os dados batem com o que foi pedido.
-                if($user_data_membro['dia_nome'] ==  $dia_treino) {
-
-                    // Verificação para se o dia de treinamento esteja no lugar correto.
-                    if($user_data['dia_nome'] ==  $dia_treino) {
-
-                        // Escrevendo os dados na tela do PHP.
-                        echo "<tr>";
+        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+            $existTraining = false;
+    
+            // Foreach para rodar os dias de treino que foram selecionados.
+            foreach($user_data_array_dia_treinamento as $user_data) {
+                if($user_data['dia_nome'] ==  $dia_treino) {
+    
+                    // Foreach para pegar os valores de todos os treinos e seus respectivos membros.
+                    foreach($user_data_array_treino_membro as $user_data_membro) {
+                        if($user_data_membro['dia_nome'] ==  $dia_treino) {
+    
+                            // Verifica se há membros e exercícios para o dia específico.
+                            echo "<tr>";
                             echo "<th scope='row' colspan='3'>".$user_data_membro['membro_nome']."</th>";
-                        echo "</tr>";
-
-                        // Foreach para escrever os dados que contem no dia selecionado.
-                        foreach($user_data_array as $user_data_exercicio) {
-
-                            // Verificação para se o membro do exercício bate com o membro do dia.
-                            if ($user_data_membro['membro_nome'] == $user_data_exercicio['Membro']) {
-
-                                // Escrevendo os dados na tela do PHP.
-                                echo "<tr>";
+                            echo "</tr>";
+    
+                            foreach($user_data_array as $user_data_exercicio) {
+                                if ($user_data_membro['membro_nome'] == $user_data_exercicio['Membro']) {
+                                    echo "<tr>";
                                     echo "<td><input type='checkbox'>Escolha</td>";
                                     echo "<td>".$user_data_exercicio['Exercício']."</td>";
                                     echo "<td>".$user_data_exercicio['Serie']."</td>";                        
-                                echo "</tr>";
+                                    echo "</tr>";
+                                    $existTraining = true;
+                                }
                             }
                         }
                     }
                 }
-                // Mudança caso realmente não exista nada na tabela no final das contas.
-                $existTraining = true;
             }
-        }
-        // Caso o não exista nenhum treino para aquele dia.
-        if($existTraining == false) {
-
-            echo "<tr>";
+    
+            // Caso não exista nenhum treino para aquele dia.
+            if (!$existTraining) {
+                echo "<tr>";
                 echo "<th scope='row' colspan='3'>Sem treino</th>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr>";
+            echo "<th scope='row' colspan='3'>ID de usuário inválido</th>";
             echo "</tr>";
-            return;
+        }
+    }
+
+    // Carregando Id do usuário pela URL ========================================================================================================
+    // Function para gerar os links dos caminhos da barra nav.
+    function gerarLink($caminho){
+
+        // Switch para diferenciar o que o usuário quer.
+        switch ($caminho) {
+
+            // Criar Treino ===================================================================================
+            case 'criarTreino':
+                // If para verificar se situação existe.
+                if (isset($_GET['situacao'])) {
+                    $situacao = $_GET['situacao'];
+
+                    // If para ver se o usuário esta logado.
+                    if ($situacao == "conectado") {
+                        echo "<a href='criarTreino.php?situacao=conectado&id=". $_GET['id']."'>";
+                    }else{
+                        echo "<a href='criarTreino.php'>";
+                    }
+                }else{
+                    echo "<a href='criarTreino.php'>";
+                }
+                break;
+
+            // Index ==========================================================================================
+            case 'index':
+
+                // If para verificar se situação existe.
+                if (isset($_GET['situacao'])) {
+                    $situacao = $_GET['situacao'];
+
+                    // If para ver se o usuário esta logado.
+                    if ($situacao == "conectado") {
+                        echo "<a href='index.php?situacao=conectado&id=". $_GET['id']."' class='meus_treinos_link'>";
+                    }else{
+                        echo "<a href='index.php' class='meus_treinos_link'>";
+                    }
+                }else{
+                    echo "<a href='index.php' class='meus_treinos_link'>";
+                }
+                break;
+
+            // Login ==========================================================================================
+            case 'login':
+
+                // If para verificar se situação existe.
+                if (isset($_GET['situacao'])) {
+                    $situacao = $_GET['situacao'];
+                    
+                    // If para ver se o usuário esta logado.
+                    if ($situacao == "conectado") {
+                        echo "<a href='login.php?situacao=conectado&id=". $_GET['id']."' class='login_link'>";
+                    }else{
+                        echo "<a href='login.php' class='login_link'>";
+                    }
+                }else{
+                    echo "<a href='login.php' class='login_link'>";
+                }
+                break;
+                
+            // Caso não exista tal condição ====================================================================
+            default:
+                echo "inexistente";
+                break;
         }
     }
 
@@ -129,7 +195,28 @@
 
     <title>Academy Training</title>
     <link rel="icon" tipe="image/ico" href="./images/icons/icon-152x152.png">
-    <link rel="stylesheet" href="./assets/css/style8.css">
+    <link rel="stylesheet" href="./assets/css/style10.css">
+
+    <style>
+        <?php
+            if (isset($_GET['situacao'])) {
+                $situacao = $_GET['situacao'];
+
+                // If para ver se o usuário esta logado.
+                if ($situacao == "conectado") {
+                    echo ".conteiner_nao_logado { display: none; }";
+                    echo ".conteiner_dia_treino { display: block; }";
+                }else{
+                    echo ".conteiner_nao_logado { display: block; }";
+                    echo ".conteiner_dia_treino { display: none; }";
+                }
+            }else{
+                echo ".conteiner_nao_logado { display: block; }";
+                echo ".conteiner_dia_treino { display: none; }";
+            }
+        ?>
+    </style>
+
 </head>
 <body>
 
@@ -152,15 +239,21 @@
 
     <header>
         <nav>
-            <a href="criarTreino.php">
+            <?php
+                gerarLink('criarTreino');
+            ?>
                 <div class="criar_treino">+</div>
             </a>
-            <a href="index.php" class="meus_treinos_link">
+            <?php
+                gerarLink('index');
+            ?>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                 </svg>
             </a>
-            <a href="login.php" class="login_link">
+            <?php
+                gerarLink('login');
+            ?>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                 </svg>
@@ -192,7 +285,9 @@
             </thead>
             <tbody>
             <?php
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Segunda-Feira");
+                if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                    echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Segunda-Feira");
+                }
             ?>
             </tbody>
         </table>
@@ -209,7 +304,9 @@
             </thead>
             <tbody>
             <?php
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Terça-Feira");
+                if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                    echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Terça-Feira");
+                }
             ?>
             </tbody>
         </table>
@@ -225,7 +322,9 @@
             </thead>
             <tbody>
             <?php
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quarta-Feira");
+                if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                    echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quarta-Feira");
+                }
             ?>
             </tbody>
         </table>
@@ -241,7 +340,9 @@
             </thead>
             <tbody>
             <?php
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quinta-Feira");
+                if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                    echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Quinta-Feira");
+                }
             ?>
             
             </tbody>
@@ -261,7 +362,9 @@
                 <th scope="row" colspan="3">Sem treino</th>
             </tr>
             <?php
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sexta-Feira");
+                if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                    echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sexta-Feira");
+                }
             ?>
             </tbody>
         </table>
@@ -280,10 +383,21 @@
                 <th scope="row" colspan="3">Sem treino</th>
             </tr>
             <?php
-                echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sábado");
+                if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                    echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sábado");
+                }
             ?>
             </tbody>
         </table>
+    </section>
+
+    <section class="conteiner_nao_logado">
+        <div>
+            <h2>Para ver seu treino, faça o login</h2>
+            <a href="login.php">
+                <button>Login</button>    
+            </a>
+        </div>
     </section>
 
     <script src="./assets/js/script1.js"></script>

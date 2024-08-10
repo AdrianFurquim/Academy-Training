@@ -42,7 +42,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Organizar Dias e Membros - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style8.css">
+    <link rel="stylesheet" href="./assets/css/style10.css">
 
 </head>
 <body>
