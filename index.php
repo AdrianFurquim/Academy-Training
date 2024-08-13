@@ -273,6 +273,15 @@
         </div>
     </section>
 
+    <section class="conteiner_nao_logado">
+        <div>
+            <h2>Para ver seu treino, faça o login</h2>
+            <a href="login.php">
+                <button>Login</button>    
+            </a>
+        </div>
+    </section>
+    
     <section class="table_treinos">
         <!-- Treino de Segunda =========================================================================================================================================== -->
         <table id="table_segunda">
@@ -391,14 +400,7 @@
         </table>
     </section>
 
-    <section class="conteiner_nao_logado">
-        <div>
-            <h2>Para ver seu treino, faça o login</h2>
-            <a href="login.php">
-                <button>Login</button>    
-            </a>
-        </div>
-    </section>
+    
 
     <script src="./assets/js/script1.js"></script>
 </body>

@@ -60,7 +60,7 @@
                 echo "<td>".$user_data['Exercício']."</td>";
                 echo "<td>".$user_data['Serie']."</td>";
                 echo "<td>
-                <a href='forms/removerExercicio.php?treinoId=$user_data[IdTreinoExercicio]&exercicioId=$user_data[IdExercicio]&membro=$user_data[Membro]' class='remove_exercicio'>Excluir</a></td>";
+                <a href='forms/removerExercicio.php?treinoId=$user_data[IdTreinoExercicio]&exercicioId=$user_data[IdExercicio]&membro=$user_data[Membro]&situacao=conectado&id=". $_GET['id']."' class='remove_exercicio'>Excluir</a></td>";
             }
             echo "</tr>";
          }
@@ -162,14 +162,14 @@
             // Verificação se existe algum valor na URL.
             if (isset($_GET['membro'])) {
                 $membro = $_GET['membro'];
-                $situacao= $_GET['situacao'];
+                $situacaoMen= $_GET['situacaoMen'];
                 // Switch case para cada membro da URL.
                 switch ($membro) {
                     case 'Peito':
                         echo ".escolha_membro { display: none; }";
                         echo ".form_peito { display: block; }";
                         // IF para verificação se o usuário escolheu o exercicio e a série - Peito.
-                        if ($situacao == "faltando") {
+                        if ($situacaoMen == "faltando") {
                             echo ".mensagem_peito { display: block; }";
                             echo ".escolha_membro { display: none; }";
                         }else{
@@ -182,7 +182,7 @@
                         echo ".escolha_membro { display: none; }";
                         echo ".form_triceps { display: block; }";
                         // IF para verificação se o usuário escolheu o exercicio e a série - Tríceps.
-                        if ($situacao == "faltando") {
+                        if ($situacaoMen == "faltando") {
                             echo ".mensagem_triceps { display: block; }";
                             echo ".escolha_membro { display: none; }";
                         }else{
@@ -195,7 +195,7 @@
                         echo ".escolha_membro { display: none; }";
                         echo ".form_abdomen { display: block; }";
                         // IF para verificação se o usuário escolheu o exercicio e a série - Abdominal.
-                        if ($situacao == "faltando") {
+                        if ($situacaoMen == "faltando") {
                             echo ".mensagem_abdomen { display: block; }";
                             echo ".escolha_membro { display: none; }";
                         }else{
@@ -208,7 +208,7 @@
                         echo ".escolha_membro { display: none; }";
                         echo ".form_costa { display: block; }";
                         // IF para verificação se o usuário escolheu o exercicio e a série - Costa.
-                        if ($situacao == "faltando") {
+                        if ($situacaoMen == "faltando") {
                             echo ".mensagem_costa { display: block; }";
                             echo ".escolha_membro { display: none; }";
                         }else{
@@ -221,7 +221,7 @@
                         echo ".escolha_membro { display: none; }";
                         echo ".form_biceps { display: block; }";
                         // IF para verificação se o usuário escolheu o exercicio e a série - Bíceps.
-                        if ($situacao == "faltando") {
+                        if ($situacaoMen == "faltando") {
                             echo ".mensagem_biceps { display: block; }";
                             echo ".escolha_membro { display: none; }";
                         }else{
@@ -234,7 +234,7 @@
                         echo ".escolha_membro { display: none; }";
                         echo ".form_ombro { display: block; }";
                         // IF para verificação se o usuário escolheu o exercicio e a série - Ombro.
-                        if ($situacao == "faltando") {
+                        if ($situacaoMen == "faltando") {
                             echo ".mensagem_ombro { display: block; }";
                             echo ".escolha_membro { display: none; }";
                         }else{
@@ -247,7 +247,7 @@
                         echo ".escolha_membro { display: none; }";
                         echo ".form_mem_inferiores { display: block; }";
                         // IF para verificação se o usuário escolheu o exercicio e a série - Membros Inferiores.
-                        if ($situacao == "faltando") {
+                        if ($situacaoMen == "faltando") {
                             echo ".mensagem_mem_inferiores { display: block; }";
                             echo ".escolha_membro { display: none; }";
                         }else{
@@ -262,6 +262,21 @@
 
             }
 
+            if (isset($_GET['situacao'])) {
+                $situacao = $_GET['situacao'];
+
+                // If para ver se o usuário esta logado.
+                if ($situacao == "conectado") {
+                    echo ".conteiner_nao_logado { display: none; }";
+                    echo ".montando_treino { display: block; }";
+                }else{
+                    echo ".conteiner_nao_logado { display: block; }";
+                    echo ".montando_treino { display: none; }";
+                }
+            }else{
+                echo ".conteiner_nao_logado { display: block; }";
+                echo ".montando_treino { display: none; }";
+            }    
         ?>
     </style>
 </head>
@@ -291,6 +306,15 @@
         </nav>
     </header>
 
+    <section class="conteiner_nao_logado">
+        <div>
+            <h2>Para ver seu treino, faça o login</h2>
+            <a href="login.php">
+                <button>Login</button>    
+            </a>
+        </div>
+    </section>
+
     <section class="montando_treino">
     
         <div class="escolha_membro">
@@ -310,7 +334,8 @@
         <div class="form_peito">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Peito</h1>
-            <form action="forms/adicionarTreinoPeito.php" method="POST" id="adicionarTreinoPeito">
+            
+            <form action="forms/adicionarTreinoPeito.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoPeito">
                 <p class="mensagem_peito">Porfavor, selecione o exercício e a série.</p>
                 <label for="peito">Exercício: </label>
                 <select name="peito" id="peito">
@@ -363,7 +388,7 @@
         <div class="form_triceps">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Tríceps</h1>
-            <form action="forms/adicionarTreinoTriceps.php" method="POST" id="adicionarTreinoTriceps">
+            <form action="forms/adicionarTreinoTriceps.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoTriceps">
                 <p class="mensagem_triceps">Porfavor, selecione o exercício e a série.</p>
                 <label for="triceps">Exercício: </label>
                 <select name="triceps" id="triceps">
@@ -411,7 +436,7 @@
         <div class="form_abdomen">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Abdominal</h1>
-            <form action="forms/adicionarTreinoAbdominal.php" method="POST" id="adicionarTreinoAbdominal">
+            <form action="forms/adicionarTreinoAbdominal.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoAbdominal">
                 <p class="mensagem_abdomen">Porfavor, selecione o exercício e a série.</p>
                 <label for="abdomen">Exercício: </label>
                 <select name="abdomen" id="abdomen">
@@ -459,7 +484,7 @@
         <div class="form_costa">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Costa</h1>
-            <form action="forms/adicionarTreinoCosta.php" method="POST" id="adicionarTreinoCosta">
+            <form action="forms/adicionarTreinoCosta.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoCosta">
                 <p class="mensagem_costa">Porfavor, selecione o exercício e a série.</p>
                 <label for="costa">Exercício: </label>
                 <select name="costa" id="costa">
@@ -507,7 +532,7 @@
         <div class="form_biceps">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Bíceps</h1>
-            <form action="forms/adicionarTreinoBiceps.php" method="POST" id="adicionarTreinoBiceps">
+            <form action="forms/adicionarTreinoBiceps.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoBiceps">
                 <p class="mensagem_biceps">Porfavor, selecione o exercício e a série.</p>
                 <label for="biceps">Exercício: </label>
                 <select name="biceps" id="biceps">
@@ -555,7 +580,7 @@
         <div class="form_ombro">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Ombro</h1>
-            <form action="forms/adicionarTreinoOmbro.php" method="POST" id="adicionarTreinoOmbro">
+            <form action="forms/adicionarTreinoOmbro.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoOmbro">
                 <p class="mensagem_ombro">Porfavor, selecione o exercício e a série.</p>
                 <label for="ombro">Exercício: </label>
                 <select name="ombro" id="ombro">
@@ -603,7 +628,7 @@
         <div class="form_mem_inferiores">
         <button onclick="diaVoltar()">Voltar</button>
             <h1>Membros Inferiores</h1>
-            <form action="forms/adicionarTreinoMembrosInferiores.php" method="POST" id="adicionarTreinoMembrosInferiores">
+            <form action="forms/adicionarTreinoMembrosInferiores.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoMembrosInferiores">
                 <p class="mensagem_mem_inferiores">Porfavor, selecione o exercício e a série.</p>
                 <label for="membrosInferiores">Exercício: </label>
                 <select name="membrosInferiores" id="membrosInferiores">

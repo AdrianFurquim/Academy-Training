@@ -30,5 +30,5 @@
     }
     
     // Location para direcionamento do usuário.
-    header("location: ../criarTreino.php?membro=$membro");
+    header("location: ../criarTreino.php?membro=$membro&situacao=conectado&id=". $_GET['id']."");
 ?>
