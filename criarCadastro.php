@@ -1,12 +1,11 @@
 <?php
     include("forms/conexao.php");
 
-    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-        $usuario_id = $_GET['id'];
-        
-        // Comando momentâneo para pegar o usuário de testes.
-        $comando_usuário = "SELECT * FROM `usuario` WHERE usuario.usu_id = $_GET[id]";
-        $result=$conexao->query($comando_usuário);
+    // Comando momentâneo para pegar o usuário de testes.
+    $comando_usuário = "SELECT * FROM `usuario` WHERE usuario.usu_id = 1";
+    $result=$conexao->query($comando_usuário);
+
+    function gerarFormLogin(){
 
     }
     
@@ -16,7 +15,7 @@
         echo "</div>";
         echo "<div class='dados_login'>";
             foreach($result as $user_data) {
-                if($user_data['usu_id'] == $_GET['id']){
+                if($user_data['usu_id'] == 1){
                     echo "<h2>".$user_data['usu_nome']."</h2>";
                     echo "<p>Altura:".$user_data['usu_altura']."m</p>";
                     echo "<p>Peso: ".$user_data['usu_peso']."kg</p>";
@@ -105,25 +104,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="theme-color" content="#FFFF00">
-    <title>Usuario - Academy Training</title>
+    <title>Cadastro - Academy Training</title>
     <link rel="stylesheet" href="./assets/css/style10.css">
 
     <style>
+        
         <?php
             if (isset($_GET['situacao'])) {
                 $situacao = $_GET['situacao'];
-                if ($situacao == "conectado") {
-                    echo ".conteiner_realiza_login { display: none; }";
-                    echo ".conteiner_login { display: block; }";
+                if ($situacao == "falha") {
+                    echo ".alerta_dados_faltando { display: block; text-align: center;}";
                 }else{
-                    echo ".conteiner_realiza_login { display: block; }";
-                    echo ".conteiner_login { display: none; }";
+                    echo ".alerta_dados_faltando { display: none; }";
                 }
+            }else{
+                echo ".alerta_dados_faltando { display: none; }";
             }
         ?>
-        p, a{
-            color: white;
-        }
+
     </style>
 </head>
 <body>
@@ -154,17 +152,38 @@
 
     <section class="conteiner_realiza_login">
         <h1>Acadey Training</h1>
-        <form action="forms/confirmaLogin.php" method="POST" class="forms_cad_login">
-            <label for="email">Email:</label>
+        <p class="alerta_dados_faltando">Por favor, insira os dados com *</p>
+        <form action="forms/confirmaCadastro.php" method="POST" class="forms_cad_login">
+
+            <label for="nome">Nome: *</label>
+            <input type="text" name="nome" id="nome">
+
+            <label for="email">Email: *</label>
             <input type="email" name="email" id="email">
 
-            <label for="senha">Senha:</label>
-            <input type="password" name="senha" id="senha">
-            <p>Realizar <a href="criarCadastro.php">Cadastro</a></p>
-            <button type="submit">Entrar</button>
-        </form>
+            <label for="confEmail">Confirmar Email: *</label>
+            <input type="email" name="confEmail" id="confEmail">
 
+            <label for="senha">Senha: *</label>
+            <input type="password" name="senha" id="senha">
+
+            <label for="confSenha">Confirmar Senha: *</label>
+            <input type="password" name="confSenha" id="confSenha">
+
+            <label for="altura">Altura:</label>
+            <input type="text" name="altura" id="altura">
+
+            <label for="peso">Peso:</label>
+            <input type="text" name="peso" id="peso">
+
+            <label for="meta">Meta:</label>
+            <input type="text" name="meta" id="meta">
+            
+            <button type="submit">Cadastrar</button>
+        </form>
+        
     </section>
+    <br><br><br><br><br><br><br><br><br><br>
 
     <section class="conteiner_login">
         <?php
