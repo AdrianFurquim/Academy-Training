@@ -5,26 +5,22 @@
         $usuario_id = $_GET['id'];
         
         // Comando SQL para resgatar dados do treino de Terça-Feira ================================================================================
-        $treino = "SELECT 
-            u.usu_nome AS Usuario,
-            t.dia_nome AS Dia,
-            t.membro_nome AS Membro,
+        $treino2 = "SELECT 
+            u.usu_nome AS Usuário,
             e.exe_nome AS Exercício,
-            so.ser_serie AS Serie
-        FROM 
-            usuario u
-        JOIN 
-            treino_exercicios te ON u.usu_id = te.usuario_id
-        JOIN 
-            treinos t ON te.treino_id = t.tre_id
-        JOIN 
-            exercicio_serieordem eso ON te.exercicio_serie_id = eso.exe_ser_id
-        JOIN 
-            exercicio e ON eso.exercicio_id = e.exe_id
-        JOIN 
-            serie_ordem so ON eso.serie_id = so.ser_id
-        WHERE 
-            u.usu_id = $usuario_id;";
+            m.mem_nome AS Membro,
+            d.dia_nome AS Dia, 
+            se.ser_serie AS Serie
+        FROM treino_exercicios te
+        INNER JOIN lig_treino_exercicios lte ON te.tre_exe_id = lte.treino_exercicio_id
+        INNER JOIN exercicio_serieordem eso ON lte.exercicio_serie_id = eso.exe_ser_id
+        INNER JOIN exercicio e ON eso.exercicio_id = e.exe_id
+        INNER JOIN serie_ordem se ON eso.serie_id = se.ser_id
+        INNER JOIN treinos t ON te.treino_id = t.tre_id
+        INNER JOIN membros m ON t.membro_nome = m.mem_nome
+        INNER JOIN dias d ON t.dia_nome = d.dia_nome
+        INNER JOIN usuario u ON te.usuario_id = u.usu_id
+        WHERE u.usu_id = $usuario_id;";
     
         // Comando SQL para resgatar dados do treino de membros que o usuário possui ================================================================================
         $dia_treinamento = "SELECT DISTINCT t.dia_nome
@@ -39,7 +35,7 @@
             WHERE te.usuario_id = $usuario_id;";
     
         // // Salvando resultados das consultas =========================================================================================================
-        $result=$conexao->query($treino);
+        $result=$conexao->query($treino2);
         $resultDiaTreino=$conexao->query($dia_treinamento);
         $resultTreinoMembro=$conexao->query($sql_treino_membro);
     

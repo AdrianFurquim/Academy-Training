@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03-Ago-2024 às 02:47
+-- Tempo de geração: 15-Ago-2024 às 03:01
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -401,8 +401,38 @@ CREATE TABLE `exercicio_serieordem` (
 INSERT INTO `exercicio_serieordem` (`exe_ser_id`, `exercicio_id`, `serie_id`) VALUES
 (1, 83, 1),
 (2, 126, 1),
-(3, 127, 1),
-(4, 129, 1);
+(14, 40, 1),
+(19, 57, 5),
+(20, 58, 5),
+(21, 57, 5),
+(25, 25, 1),
+(26, 26, 1),
+(29, 17, 2),
+(30, 100, 1),
+(31, 18, 1),
+(32, 57, 5),
+(33, 57, 5),
+(34, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `lig_treino_exercicios`
+--
+
+CREATE TABLE `lig_treino_exercicios` (
+  `lig_id` int(11) NOT NULL,
+  `exercicio_serie_id` int(11) NOT NULL,
+  `treino_exercicio_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `lig_treino_exercicios`
+--
+
+INSERT INTO `lig_treino_exercicios` (`lig_id`, `exercicio_serie_id`, `treino_exercicio_id`) VALUES
+(1, 14, 27),
+(2, 19, 27);
 
 -- --------------------------------------------------------
 
@@ -449,8 +479,8 @@ INSERT INTO `serie_ordem` (`ser_serie`, `ser_id`) VALUES
 ('4 x 12', 4),
 ('3 x 30s - 40s', 5),
 ('3 x +60s', 6),
-('3 x 30s - 40s', 7),
-('3 x +60s', 8),
+('4 x 30s - 40s', 7),
+('4 x +60s', 8),
 ('Desejável', 9);
 
 -- --------------------------------------------------------
@@ -487,19 +517,16 @@ INSERT INTO `treinos` (`tre_id`, `membro_nome`, `dia_nome`) VALUES
 CREATE TABLE `treino_exercicios` (
   `tre_exe_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
-  `treino_id` int(11) NOT NULL,
-  `exercicio_serie_id` int(11) NOT NULL
+  `treino_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `treino_exercicios`
 --
 
-INSERT INTO `treino_exercicios` (`tre_exe_id`, `usuario_id`, `treino_id`, `exercicio_serie_id`) VALUES
-(1, 1, 1, 1),
-(2, 1, 1, 2),
-(3, 1, 1, 3),
-(4, 1, 1, 4);
+INSERT INTO `treino_exercicios` (`tre_exe_id`, `usuario_id`, `treino_id`) VALUES
+(27, 1, 1),
+(28, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -523,7 +550,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`usu_id`, `usu_nome`, `usu_email`, `usu_senha`, `usu_altura`, `usu_tempo_treinando`, `usu_peso`, `usu_meta`) VALUES
-(1, 'Usuário Teste', 'teste@gmail.com', 'senha123', 1.8, 30, 65, '70 kilos');
+(1, 'Usuário Teste', 'teste@gmail.com', 'senha123', 1.8, 30, 65, '70 kilos'),
+(3, 'teste', 'usuarioteste@gmail.com', '123', 0, 1, 0, '-');
 
 --
 -- Índices para tabelas despejadas
@@ -548,6 +576,14 @@ ALTER TABLE `exercicio_serieordem`
   ADD PRIMARY KEY (`exe_ser_id`),
   ADD KEY `fk_exercicio_id` (`exercicio_id`),
   ADD KEY `fk_serie_id` (`serie_id`);
+
+--
+-- Índices para tabela `lig_treino_exercicios`
+--
+ALTER TABLE `lig_treino_exercicios`
+  ADD PRIMARY KEY (`lig_id`),
+  ADD KEY `treino_exercicio_id` (`treino_exercicio_id`),
+  ADD KEY `exercicio_serie_id` (`exercicio_serie_id`);
 
 --
 -- Índices para tabela `membros`
@@ -575,7 +611,6 @@ ALTER TABLE `treinos`
 ALTER TABLE `treino_exercicios`
   ADD PRIMARY KEY (`tre_exe_id`),
   ADD KEY `fk_treino_id` (`treino_id`),
-  ADD KEY `fk_exercicio_serie_id` (`exercicio_serie_id`),
   ADD KEY `fk_usuario_id` (`usuario_id`);
 
 --
@@ -598,7 +633,13 @@ ALTER TABLE `exercicio`
 -- AUTO_INCREMENT de tabela `exercicio_serieordem`
 --
 ALTER TABLE `exercicio_serieordem`
-  MODIFY `exe_ser_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `exe_ser_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT de tabela `lig_treino_exercicios`
+--
+ALTER TABLE `lig_treino_exercicios`
+  MODIFY `lig_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `treinos`
@@ -610,13 +651,13 @@ ALTER TABLE `treinos`
 -- AUTO_INCREMENT de tabela `treino_exercicios`
 --
 ALTER TABLE `treino_exercicios`
-  MODIFY `tre_exe_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `tre_exe_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para despejos de tabelas
@@ -630,6 +671,13 @@ ALTER TABLE `exercicio_serieordem`
   ADD CONSTRAINT `fk_serie_id` FOREIGN KEY (`serie_id`) REFERENCES `serie_ordem` (`ser_id`);
 
 --
+-- Limitadores para a tabela `lig_treino_exercicios`
+--
+ALTER TABLE `lig_treino_exercicios`
+  ADD CONSTRAINT `lig_treino_exercicios_ibfk_1` FOREIGN KEY (`treino_exercicio_id`) REFERENCES `treino_exercicios` (`tre_exe_id`),
+  ADD CONSTRAINT `lig_treino_exercicios_ibfk_2` FOREIGN KEY (`exercicio_serie_id`) REFERENCES `exercicio_serieordem` (`exe_ser_id`);
+
+--
 -- Limitadores para a tabela `treinos`
 --
 ALTER TABLE `treinos`
@@ -640,7 +688,6 @@ ALTER TABLE `treinos`
 -- Limitadores para a tabela `treino_exercicios`
 --
 ALTER TABLE `treino_exercicios`
-  ADD CONSTRAINT `fk_exercicio_serie_id` FOREIGN KEY (`exercicio_serie_id`) REFERENCES `exercicio_serieordem` (`exe_ser_id`),
   ADD CONSTRAINT `fk_treino_id` FOREIGN KEY (`treino_id`) REFERENCES `treinos` (`tre_id`),
   ADD CONSTRAINT `fk_usuario_id` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usu_id`);
 COMMIT;
