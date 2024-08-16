@@ -1,19 +1,23 @@
 <?php
 
-    // TESTE PARA JUNTAR TODOS OS ADICIONAR TREINO EM SÓMENTE 1.
-
     // Conexão com o banco de dados.
     include("conexao.php");
 
-    // Variáveis vindas do criarTreino.php.
-    $exe_nome = $_POST['peito'];
-    $ser_serie = $_POST['seriePeito'];
-    $usuario_id = $_GET['id'];
-    $membro = $_GET['membro'];
+    $select = isset($_GET['select']) ? $_GET['select'] : null;
+    $serie = isset($_GET['serie']) ? $_GET['serie'] : null;
 
-    // Verificação se $exe_nome e $ser_serie foram escolhidos.
+    $exe_nome = isset($_POST[$select]) ? $_POST[$select] : null;
+    $ser_serie = isset($_POST[$serie]) ? $_POST[$serie] : null;
+    $usuario_id = isset($_GET['id']) ? $_GET['id'] : null;
+    $membro = isset($_GET['membro']) ? $_GET['membro'] : null;
+
+    // Verificação se $exe_nome, $ser_serie e $membro foram escolhidos.
     if (empty($exe_nome) || empty($ser_serie) || empty($membro)) {
-        header("location: ../criarTreino.php?membro=Peito&situacaoMen=faltando&situacao=conectado&id=". $_GET['id']."");
+        header("location: ../criarTreino.php?membro=$membro&situacaoMen=faltando&situacao=conectado&id=". $_GET['id']."");
+        // echo "exe_nome: " . $exe_nome . "<br>";
+        // echo "ser_serie: " . $ser_serie . "<br>";
+        // echo "membro: " . $membro . "<br>";
+
         exit();
     } else {
         // Select específico para pegar o id do exercício existente.
@@ -46,49 +50,36 @@
                     $stmt->close();
 
                     // Pegar o treino correspondente ao usuário.
-
-                    // Pega as informacões totais, como os membros, quantos treinos tem, ID de série, exercicio, etc..
                     $stmt = $conexao->prepare("SELECT 
-                      t.tre_id
-                    FROM treino_exercicios te
-                    INNER JOIN lig_treino_exercicios lte ON te.tre_exe_id = lte.treino_exercicio_id
-                    INNER JOIN treinos t ON te.treino_id = t.tre_id
-                    INNER JOIN usuario u ON te.usuario_id = u.usu_id
-                    WHERE u.usu_id = $usuario_id AND t.membro_nome = '$membro'");
-                    $stmt->execute();
-                    $result_treino = $stmt->get_result();
-                    $stmt->close();
-
-                    // Pega se o usuário possui o membro em algum dia.
-                    $stmt2 = $conexao->prepare("SELECT 
                         te.tre_exe_id,
                         t.membro_nome,
                         u.usu_id
                     FROM treino_exercicios te
                     INNER JOIN treinos t ON te.treino_id = t.tre_id
                     INNER JOIN usuario u ON te.usuario_id = u.usu_id
-                    WHERE u.usu_id = $usuario_id AND t.membro_nome = '$membro'");
-                    $stmt2->execute();
-                    $result_treino_exercicios_organizacao = $stmt2->get_result();
-                    $stmt2->close();
+                    WHERE u.usu_id = ? AND t.membro_nome = ?");
+                    $stmt->bind_param("is", $usuario_id, $membro);
+                    $stmt->execute();
+                    $result_treino = $stmt->get_result();
+                    $stmt->close();
 
-                    if ($result_treino_exercicios_organizacao->num_rows > 0) {
-                        $treino = $result_treino_exercicios_organizacao->fetch_assoc();
+                    if ($result_treino->num_rows > 0) {
+                        $treino = $result_treino->fetch_assoc();
                         $treino_id = $treino['tre_exe_id'];
 
-                        // Inserção na tabela treino_exercicios.
-                        $stmt = $conexao->prepare("INSERT INTO lig_treino_exercicios(exercicio_serie_id, treino_exercicio_id) VALUES ( ? , ? )");
+                        // Inserção na tabela lig_treino_exercicios.
+                        $stmt = $conexao->prepare("INSERT INTO lig_treino_exercicios(exercicio_serie_id, treino_exercicio_id) VALUES (?, ?)");
                         $stmt->bind_param("ii", $exercicio_serie_id, $treino_id);
                         if ($stmt->execute()) {
                             // Sucesso na inserção
-                            header("location: ../criarTreino.php?membro=Peito&situacaoMen=sucesso&situacao=conectado&id=". $_GET['id']."");
+                            header("location: ../criarTreino.php?membro=$membro&situacaoMen=sucesso&situacao=conectado&id=$usuario_id");
                             exit();
                         } else {
                             echo "Erro ao inserir em treino_exercicios: " . $stmt->error;
                         }
                         $stmt->close();
                     } else {
-                        echo "Nenhum treino encontrado para o membro 'Peito'.";
+                        echo "Nenhum treino encontrado para o membro ". $membro .".";
                     }
                 } else {
                     echo "Erro ao inserir em exercicio_serieordem: " . $stmt->error;

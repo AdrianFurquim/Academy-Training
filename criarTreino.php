@@ -332,7 +332,7 @@
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Peito</h1>
             
-            <form action="forms/adicionarTreino.php?membro=Peito&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoPeito">
+            <form action="forms/adicionarTreino.php?membro=Peito&select=peito&serie=seriePeito&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoPeito">
                 <p class="mensagem_peito">Porfavor, selecione o exercício e a série.</p>
                 <label for="peito">Exercício: </label>
                 <select name="peito" id="peito">
@@ -385,7 +385,7 @@
         <div class="form_triceps">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Tríceps</h1>
-            <form action="forms/adicionarTreinoTriceps.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoTriceps">
+            <form action="forms/adicionarTreino.php?membro=Tríceps&select=triceps&serie=serieTriceps&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoTriceps">
                 <p class="mensagem_triceps">Porfavor, selecione o exercício e a série.</p>
                 <label for="triceps">Exercício: </label>
                 <select name="triceps" id="triceps">
@@ -433,7 +433,7 @@
         <div class="form_abdomen">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Abdominal</h1>
-            <form action="forms/adicionarTreinoAbdominal.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoAbdominal">
+            <form action="forms/adicionarTreino.php?membro=Abdominal&select=abdomen&serie=serieAbdomen&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoAbdominal">
                 <p class="mensagem_abdomen">Porfavor, selecione o exercício e a série.</p>
                 <label for="abdomen">Exercício: </label>
                 <select name="abdomen" id="abdomen">
@@ -481,7 +481,7 @@
         <div class="form_costa">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Costa</h1>
-            <form action="forms/adicionarTreinoCosta.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoCosta">
+            <form action="forms/adicionarTreino.php?membro=Costa&select=costa&serie=serieCosta&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoCosta">
                 <p class="mensagem_costa">Porfavor, selecione o exercício e a série.</p>
                 <label for="costa">Exercício: </label>
                 <select name="costa" id="costa">
@@ -529,7 +529,7 @@
         <div class="form_biceps">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Bíceps</h1>
-            <form action="forms/adicionarTreinoBiceps.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoBiceps">
+            <form action="forms/adicionarTreino.php?membro=Bíceps&select=biceps&serie=serieBiceps&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoBiceps">
                 <p class="mensagem_biceps">Porfavor, selecione o exercício e a série.</p>
                 <label for="biceps">Exercício: </label>
                 <select name="biceps" id="biceps">
@@ -577,7 +577,7 @@
         <div class="form_ombro">
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Ombro</h1>
-            <form action="forms/adicionarTreinoOmbro.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoOmbro">
+            <form action="forms/adicionarTreino.php?membro=Ombro&select=ombro&serie=serieOmbro&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoOmbro">
                 <p class="mensagem_ombro">Porfavor, selecione o exercício e a série.</p>
                 <label for="ombro">Exercício: </label>
                 <select name="ombro" id="ombro">
@@ -625,7 +625,7 @@
         <div class="form_mem_inferiores">
         <button onclick="diaVoltar()">Voltar</button>
             <h1>Membros Inferiores</h1>
-            <form action="forms/adicionarTreinoMembrosInferiores.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoMembrosInferiores">
+            <form action="forms/adicionarTreino.php?membro=Membros Inferiores&select=membrosInferiores&serie=serieMembrosInferiores&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoMembrosInferiores">
                 <p class="mensagem_mem_inferiores">Porfavor, selecione o exercício e a série.</p>
                 <label for="membrosInferiores">Exercício: </label>
                 <select name="membrosInferiores" id="membrosInferiores">

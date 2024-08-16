@@ -363,9 +363,6 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row" colspan="3">Sem treino</th>
-            </tr>
             <?php
                 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sexta-Feira");
@@ -384,9 +381,6 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row" colspan="3">Sem treino</th>
-            </tr>
             <?php
                 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Sábado");
