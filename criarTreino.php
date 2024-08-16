@@ -5,27 +5,24 @@
         $usuario_id = $_GET['id'];
         // Comando SQL para resgatar dados do treino ================================================================================
         $comandoTreino = "SELECT 
-            u.usu_nome AS Usuario,
-            t.dia_nome AS Dia,
-            t.membro_nome AS Membro,
+            u.usu_nome AS Usuário,
             e.exe_nome AS Exercício,
-            so.ser_serie AS Serie, 
+            m.mem_nome AS Membro,
+            d.dia_nome AS Dia, 
+            se.ser_serie AS Serie,
             te.tre_exe_id AS IdTreinoExercicio, 
-            eso.exe_ser_id AS IdExercicio
-        FROM 
-            usuario u
-        JOIN 
-            treino_exercicios te ON u.usu_id = te.usuario_id
-        JOIN 
-            treinos t ON te.treino_id = t.tre_id
-        JOIN 
-            exercicio_serieordem eso ON te.exercicio_serie_id = eso.exe_ser_id
-        JOIN 
-            exercicio e ON eso.exercicio_id = e.exe_id
-        JOIN 
-            serie_ordem so ON eso.serie_id = so.ser_id
-        WHERE 
-            u.usu_id = $usuario_id;";
+            eso.exe_ser_id AS IdExercicio, 
+            lte.lig_id AS LigExercício
+        FROM treino_exercicios te
+        INNER JOIN lig_treino_exercicios lte ON te.tre_exe_id = lte.treino_exercicio_id
+        INNER JOIN exercicio_serieordem eso ON lte.exercicio_serie_id = eso.exe_ser_id
+        INNER JOIN exercicio e ON eso.exercicio_id = e.exe_id
+        INNER JOIN serie_ordem se ON eso.serie_id = se.ser_id
+        INNER JOIN treinos t ON te.treino_id = t.tre_id
+        INNER JOIN membros m ON t.membro_nome = m.mem_nome
+        INNER JOIN dias d ON t.dia_nome = d.dia_nome
+        INNER JOIN usuario u ON te.usuario_id = u.usu_id
+        WHERE u.usu_id = $usuario_id;";
 
         $treino=$conexao->query($comandoTreino);
 
@@ -60,7 +57,7 @@
                 echo "<td>".$user_data['Exercício']."</td>";
                 echo "<td>".$user_data['Serie']."</td>";
                 echo "<td>
-                <a href='forms/removerExercicio.php?treinoId=$user_data[IdTreinoExercicio]&exercicioId=$user_data[IdExercicio]&membro=$user_data[Membro]&situacao=conectado&id=". $_GET['id']."' class='remove_exercicio'>Excluir</a></td>";
+                <a href='forms/removerExercicio.php?ligId=$user_data[LigExercício]&exercicioId=$user_data[IdExercicio]&membro=$user_data[Membro]&situacao=conectado&id=". $_GET['id']."' class='remove_exercicio'>Excluir</a></td>";
             }
             echo "</tr>";
          }
@@ -335,7 +332,7 @@
             <button onclick="diaVoltar()">Voltar</button>
             <h1>Peito</h1>
             
-            <form action="forms/adicionarTreinoPeito.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoPeito">
+            <form action="forms/adicionarTreino.php?membro=Peito&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoPeito">
                 <p class="mensagem_peito">Porfavor, selecione o exercício e a série.</p>
                 <label for="peito">Exercício: </label>
                 <select name="peito" id="peito">

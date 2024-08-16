@@ -1,16 +1,16 @@
 <?php
     // Verificação caso não exista nenhum exercicio ou membro.
-    if (isset($_GET['treinoId']) && isset($_GET['exercicioId']) && isset($_GET['membro'])) {
+    if (isset($_GET['ligId']) && isset($_GET['exercicioId']) && isset($_GET['membro'])) {
         // Conexão com o banco de dados.
         include_once('conexao.php');
     
         // Sanitização dos dados recebidos via GET
-        $id_treino = intval($_GET['treinoId']);
+        $lig_id = intval($_GET['ligId']);
         $id_exercicio = intval($_GET['exercicioId']);
         $membro = htmlspecialchars($_GET['membro']);
     
         // Deletando dados da tabela treino_exercicios.
-        $delete_treino = "DELETE FROM treino_exercicios WHERE tre_exe_id = $id_treino";
+        $delete_treino = "DELETE FROM lig_treino_exercicios WHERE lig_id = $lig_id";
         if ($conexao->query($delete_treino) === TRUE) {
             echo "Exercício excluído com sucesso da tabela treino_exercicios.";
         } else {

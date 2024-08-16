@@ -1,4 +1,7 @@
 <?php
+
+    // TESTE PARA JUNTAR TODOS OS ADICIONAR TREINO EM SÓMENTE 1.
+
     // Conexão com o banco de dados.
     include("conexao.php");
 
@@ -6,9 +9,10 @@
     $exe_nome = $_POST['peito'];
     $ser_serie = $_POST['seriePeito'];
     $usuario_id = $_GET['id'];
+    $membro = $_GET['membro'];
 
     // Verificação se $exe_nome e $ser_serie foram escolhidos.
-    if (empty($exe_nome) || empty($ser_serie)) {
+    if (empty($exe_nome) || empty($ser_serie) || empty($membro)) {
         header("location: ../criarTreino.php?membro=Peito&situacaoMen=faltando&situacao=conectado&id=". $_GET['id']."");
         exit();
     } else {
@@ -50,7 +54,7 @@
                     INNER JOIN lig_treino_exercicios lte ON te.tre_exe_id = lte.treino_exercicio_id
                     INNER JOIN treinos t ON te.treino_id = t.tre_id
                     INNER JOIN usuario u ON te.usuario_id = u.usu_id
-                    WHERE u.usu_id = $usuario_id AND t.membro_nome = 'Peito'");
+                    WHERE u.usu_id = $usuario_id AND t.membro_nome = '$membro'");
                     $stmt->execute();
                     $result_treino = $stmt->get_result();
                     $stmt->close();
@@ -63,7 +67,7 @@
                     FROM treino_exercicios te
                     INNER JOIN treinos t ON te.treino_id = t.tre_id
                     INNER JOIN usuario u ON te.usuario_id = u.usu_id
-                    WHERE u.usu_id = $usuario_id AND t.membro_nome = 'Peito'");
+                    WHERE u.usu_id = $usuario_id AND t.membro_nome = '$membro'");
                     $stmt2->execute();
                     $result_treino_exercicios_organizacao = $stmt2->get_result();
                     $stmt2->close();
