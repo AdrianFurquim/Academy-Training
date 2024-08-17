@@ -30,10 +30,10 @@
         while($user_data = mysqli_fetch_assoc($treino)){
             $user_data_array[] = $user_data;
         }
-}
+    }
 
 
-// Comando SQL para resgatar todos os exercicios ================================================================================
+    // Comando SQL para resgatar todos os exercicios ================================================================================
     $comandoExercicios = "SELECT * FROM dados_exercicio";
 
     // Salvando resultados das consultas =========================================================================================================
@@ -131,6 +131,24 @@
                     }
                 }else{
                     echo "<a href='login.php' class='login_link'>";
+                }
+                break;
+                
+            // Login ==========================================================================================
+            case 'orgMem':
+
+                // If para verificar se situação existe.
+                if (isset($_GET['situacao'])) {
+                    $situacao = $_GET['situacao'];
+                    
+                    // If para ver se o usuário esta logado.
+                    if ($situacao == "conectado") {
+                        echo "<a href='OrganizarDiasMembros.php?situacao=conectado&id=". $_GET['id']."'>";
+                    }else{
+                        echo "<a href='OrganizarDiasMembros.php'>";
+                    }
+                }else{
+                    echo "<a href='OrganizarDiasMembros.php'>";
                 }
                 break;
                 
@@ -323,7 +341,9 @@
             <button onclick="membroEscolhido('biceps')">Bíceps</button>
             <button onclick="membroEscolhido('ombro')">Ombro</button>
             <button onclick="membroEscolhido('mem_inferiores')">Membros inferiores</button>
-            <a href="OrganizarDiasMembros.php">
+            <?php
+                gerarLink('orgMem');
+            ?>
                 <button class="organizar_dias_membros">Organizar Dias e Membros</button>
             </a>
         </div>
