@@ -8,7 +8,7 @@
 
     // Verificação se $email e $senha foram escolhidos.
     if (empty($email) || empty($senha)) {
-        header("location: ../login.php?situacao=faltando");
+        header("location: ../login.php?situacao=faltando&situacaoMen=dadosFalt");
         exit();
     } else {
         // Preparar a declaração SQL para evitar SQL Injection
@@ -24,7 +24,7 @@
             header("location: ../login.php?id=" . $usuario['usu_id'] . "&situacao=conectado");
         } else {
             // Se o usuário não for encontrado, redireciona para a página de login com erro
-            header("location: ../login.php?situacao=invalido");
+            header("location: ../login.php?situacao=invalido&situacaoMen=incorreto");
         }
 
         // Fechar a declaração

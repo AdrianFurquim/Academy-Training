@@ -105,7 +105,28 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Organizar Dias e Membros - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style10.css">
+    <link rel="stylesheet" href="./assets/css/style12.css">
+
+    <style>
+        <?php
+            // Verificando a situação do formulário enviado.
+            if (isset($_GET['situacaoMen'])) {
+                $situacaoMen = $_GET['situacaoMen'];
+
+                // Caso o usuário tenha esquecido de algum select.
+                if ($situacaoMen == "dadosFaltando") {
+                    echo ".organiza_falta_dados { display: block; }";
+                    echo ".organiza_ja_existente { display: none }";
+
+                // Caso o usuário já tenha aquele treino.
+                }else if($situacaoMen == "orgExistente"){
+                    echo ".organiza_falta_dados { display: none; }";
+                    echo ".organiza_ja_existente { display: block; }";
+
+                }
+            }
+        ?>
+    </style>
 
 </head>
 <body>
@@ -136,8 +157,15 @@
 
     <section class="organizando_dias_treinos">
         <div class="conteiner_total_opcoes">
+            <?php
+                gerarLink('criarTreino');
+            ?>
+                <button class="btnVoltar">Voltar</button>
+            </a>
             <div class="conteiner_selects">
                 <form action="forms/adicionarDiaMembro.php?situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST">
+                    <p class="organiza_falta_dados" >Por favor, selecione o dia com seu respectivo membro</p>
+                    <p class="organiza_ja_existente" >Este treinamento de membro do dia já foi selecionado</p>
                     <label for="dia">Dia: </label>
                     <select name="dia" id="dia">
                         <option value="">--</option>
@@ -148,7 +176,7 @@
                         <option value="Sexta-Feira">Sexta-Feira</option>
                         <option value="Sábado">Sábado</option>
                         <option value="Domingo">Domingo</option>
-                    </select>
+                    </select> <br><br>
                     <label for="membro_treino">Membro: </label>
                     <select name="membro_treino" id="membro_treino">
                         <option value="">--</option>
@@ -159,7 +187,7 @@
                         <option value="Bíceps">Bíceps</option>
                         <option value="Ombro">Ombro</option>
                         <option value="Membros Inferiores">Membros Inferiores</option>
-                    </select>
+                    </select> <br><br>
                     <button class="btnSalvarConfigTreino" type="submit">Confirmar</button>
                 </form>
             </div>
@@ -171,6 +199,7 @@
                     <tr>
                         <th scope="col">Dia</th>
                         <th scope="col">Membro</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody id="corpoTabelaPeito">
@@ -189,8 +218,7 @@
                         }
                     ?>
                     </tbody>
-                </table>
-                
+                </table>                
             </div>
         </div>
 

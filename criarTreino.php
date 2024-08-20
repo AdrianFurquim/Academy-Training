@@ -170,7 +170,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Criar Treino - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style10.css">
+    <link rel="stylesheet" href="./assets/css/style12.css">
 
     <style>
         <?php
@@ -322,6 +322,7 @@
     </header>
 
     <section class="conteiner_nao_logado">
+        <img src="assets/img/logo.JPG" alt="Desenho de um halter de acadêmia e o nome: Academy Training">
         <div>
             <h2>Para ver seu treino, faça o login</h2>
             <a href="login.php">
@@ -433,11 +434,12 @@
                         <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody id="corpoTabelaTriceps">
                     <tr>
-                        <th scope="row" colspan="3">Tríceps</th>
+                        <th scope="row" colspan="4">Tríceps</th>
                     </tr>
                     <?php
                         if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -481,11 +483,12 @@
                         <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody id="corpoTabelaAbdomen">
                     <tr>
-                        <th scope="row" colspan="3">Amdominal</th>
+                        <th scope="row" colspan="4">Amdominal</th>
                     </tr>
                     <?php
                         if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -529,11 +532,12 @@
                         <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody id="corpoTabelaCosta">
                     <tr>
-                        <th scope="row" colspan="3">Costa</th>
+                        <th scope="row" colspan="4">Costa</th>
                     </tr>
                     <?php
                         if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -577,11 +581,12 @@
                         <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody id="corpoTabelaBiceps">
                     <tr>
-                        <th scope="row" colspan="3">Bíceps</th>
+                        <th scope="row" colspan="4">Bíceps</th>
                     </tr>
                     <?php
                         if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -625,11 +630,12 @@
                         <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody id="corpoTabelaOmbro">
                     <tr>
-                        <th scope="row" colspan="3">Ombro</th>
+                        <th scope="row" colspan="4">Ombro</th>
                     </tr>
                     <?php
                         if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -673,11 +679,12 @@
                         <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody id="corpoTabelaMembrosInferiores">
                     <tr>
-                        <th scope="row" colspan="3">Membros Inferiores</th>
+                        <th scope="row" colspan="4">Membros Inferiores</th>
                     </tr>
                     <?php
                         if (isset($_GET['id']) && is_numeric($_GET['id'])) {

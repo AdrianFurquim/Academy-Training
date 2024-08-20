@@ -80,7 +80,7 @@
                         }
                         $stmt->close();
                     } else {
-                        header("location: ../criarTreino.php?membro=$membro&situacaoMen=semOrgMen&situacao=conectado&id=$usuario_id");
+                        header("location: ../OrganizarDiasMembros.php?situacao=conectado&id=$usuario_id");
                     }
                 } else {
                     echo "Erro ao inserir em exercicio_serieordem: " . $stmt->error;

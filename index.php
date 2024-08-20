@@ -191,7 +191,7 @@
 
     <title>Academy Training</title>
     <link rel="icon" tipe="image/ico" href="./images/icons/icon-152x152.png">
-    <link rel="stylesheet" href="./assets/css/style10.css">
+    <link rel="stylesheet" href="./assets/css/style12.css">
 
     <style>
         <?php
@@ -270,6 +270,7 @@
     </section>
 
     <section class="conteiner_nao_logado">
+        <img src="assets/img/logo.JPG" alt="Desenho de um halter de acadêmia e o nome: Academy Training">
         <div>
             <h2>Para ver seu treino, faça o login</h2>
             <a href="login.php">

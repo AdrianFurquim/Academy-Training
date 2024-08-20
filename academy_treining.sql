@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15-Ago-2024 às 03:01
+-- Tempo de geração: 20-Ago-2024 às 03:20
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -401,8 +401,6 @@ CREATE TABLE `exercicio_serieordem` (
 INSERT INTO `exercicio_serieordem` (`exe_ser_id`, `exercicio_id`, `serie_id`) VALUES
 (1, 83, 1),
 (2, 126, 1),
-(14, 40, 1),
-(19, 57, 5),
 (20, 58, 5),
 (21, 57, 5),
 (25, 25, 1),
@@ -412,7 +410,33 @@ INSERT INTO `exercicio_serieordem` (`exe_ser_id`, `exercicio_id`, `serie_id`) VA
 (31, 18, 1),
 (32, 57, 5),
 (33, 57, 5),
-(34, 3, 1);
+(34, 3, 1),
+(35, 26, 1),
+(36, 27, 2),
+(37, 27, 2),
+(40, 25, 1),
+(41, 25, 1),
+(44, 25, 1),
+(45, 40, 1),
+(46, 40, 1),
+(49, 40, 1),
+(50, 25, 1),
+(51, 27, 2),
+(52, 140, 1),
+(53, 142, 2),
+(54, 18, 1),
+(55, 5, 2),
+(57, 100, 1),
+(61, 3, 1),
+(62, 17, 1),
+(63, 28, 2),
+(65, 58, 7),
+(68, 28, 1),
+(69, 28, 1),
+(70, 138, 1),
+(71, 57, 5),
+(72, 25, 1),
+(73, 26, 1);
 
 -- --------------------------------------------------------
 
@@ -431,8 +455,18 @@ CREATE TABLE `lig_treino_exercicios` (
 --
 
 INSERT INTO `lig_treino_exercicios` (`lig_id`, `exercicio_serie_id`, `treino_exercicio_id`) VALUES
-(1, 14, 27),
-(2, 19, 27);
+(9, 49, 27),
+(10, 50, 27),
+(11, 51, 27),
+(12, 52, 28),
+(13, 53, 28),
+(14, 55, 33),
+(16, 57, 31),
+(20, 61, 30),
+(21, 62, 30),
+(23, 65, 29),
+(26, 72, 41),
+(27, 73, 41);
 
 -- --------------------------------------------------------
 
@@ -505,8 +539,18 @@ INSERT INTO `treinos` (`tre_id`, `membro_nome`, `dia_nome`) VALUES
 (3, 'Abdominal', 'Terça-Feira'),
 (4, 'Costa', 'Quarta-Feira'),
 (5, 'Bíceps', 'Quarta-Feira'),
-(6, 'Ombro', 'Quinta-Feira'),
-(7, 'Membros Inferiores', 'Quinta-Feira');
+(7, 'Membros Inferiores', 'Quinta-Feira'),
+(8, 'Peito', 'Segunda-Feira'),
+(9, 'Peito', 'Segunda-Feira'),
+(10, 'Peito', 'Segunda-Feira'),
+(17, 'Peito', 'Segunda-Feira'),
+(18, 'Peito', 'Segunda-Feira'),
+(19, 'Tríceps', 'Terça-Feira'),
+(20, 'Abdominal', 'Quarta-Feira'),
+(21, 'Costa', 'Quinta-Feira'),
+(22, 'Bíceps', 'Sexta-Feira'),
+(23, 'Ombro', 'Sábado'),
+(24, 'Membros Inferiores', 'Domingo');
 
 -- --------------------------------------------------------
 
@@ -526,7 +570,18 @@ CREATE TABLE `treino_exercicios` (
 
 INSERT INTO `treino_exercicios` (`tre_exe_id`, `usuario_id`, `treino_id`) VALUES
 (27, 1, 1),
-(28, 1, 2);
+(28, 1, 2),
+(29, 1, 3),
+(30, 1, 4),
+(31, 1, 5),
+(33, 1, 7),
+(41, 3, 18),
+(42, 3, 19),
+(43, 3, 20),
+(44, 3, 21),
+(45, 3, 22),
+(46, 3, 23),
+(47, 3, 24);
 
 -- --------------------------------------------------------
 
@@ -633,25 +688,25 @@ ALTER TABLE `exercicio`
 -- AUTO_INCREMENT de tabela `exercicio_serieordem`
 --
 ALTER TABLE `exercicio_serieordem`
-  MODIFY `exe_ser_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `exe_ser_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de tabela `lig_treino_exercicios`
 --
 ALTER TABLE `lig_treino_exercicios`
-  MODIFY `lig_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `lig_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de tabela `treinos`
 --
 ALTER TABLE `treinos`
-  MODIFY `tre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `tre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de tabela `treino_exercicios`
 --
 ALTER TABLE `treino_exercicios`
-  MODIFY `tre_exe_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `tre_exe_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`

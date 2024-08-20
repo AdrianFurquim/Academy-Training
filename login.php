@@ -106,7 +106,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Usuario - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style10.css">
+    <link rel="stylesheet" href="./assets/css/style12.css">
 
     <style>
         <?php
@@ -118,6 +118,26 @@
                 }else{
                     echo ".conteiner_realiza_login { display: block; }";
                     echo ".conteiner_login { display: none; }";
+                }
+            }
+            
+            // Verificando a situação do formulário enviado.
+            if (isset($_GET['situacaoMen'])) {
+                $situacaoMen = $_GET['situacaoMen'];
+
+                // Caso o usuário tenha esquecido de algum select.
+                if ($situacaoMen == "dadosFalt") {
+                    echo ".login_dadosFalt { display: block; }";
+                    echo ".login_incorreto { display: none }";
+
+                // Caso o usuário já tenha aquele treino.
+                }else if($situacaoMen == "incorreto"){
+                    echo ".login_dadosFalt { display: none; }";
+                    echo ".login_incorreto { display: block; }";
+
+                }else{
+                    echo ".login_dadosFalt { display: none; }";
+                    echo ".login_incorreto { display: none; }";
                 }
             }
         ?>
@@ -154,6 +174,8 @@
 
     <section class="conteiner_realiza_login">
         <h1>Acadey Training</h1>
+        <p class="login_dadosFalt">Por favor, preencha todos os campos</p>
+        <p class="login_incorreto">Senha ou Email incorreto, tente novamente</p>
         <form action="forms/confirmaLogin.php" method="POST" class="forms_cad_login">
             <label for="email">Email:</label>
             <input type="email" name="email" id="email">
