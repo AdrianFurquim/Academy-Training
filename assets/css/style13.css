@@ -116,11 +116,12 @@ button{
     background-color: rgb(255, 255, 46);
     border: none;
     padding: 20px;
-    width: 80%;
+    width: 85%;
     font-size: 20px;
     cursor: pointer;
     margin: auto;
     margin-top: 1em;
+    border-radius: 5px;
 }
 
 .button_voltar{
@@ -271,9 +272,15 @@ input[type=checkbox] {
     flex-direction: column;
 }
 
-.montando_treino button{
+.mensagem_membro{
+    border-bottom: 2px solid;
+    width: 90%;
+    justify-content: center;
+}
+
+.botaoEscolha{
     background-color: yellow;
-    width: 75%;
+    width: 85%;
     padding: 10px;
     margin: auto;
     font-size: 20px;
@@ -283,7 +290,38 @@ input[type=checkbox] {
     cursor: pointer;
     justify-content: center;
     border: none;
-    
+    border-radius: 5px;    
+}
+
+.btnVoltarCriar{
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border: none;
+    background-color: yellow;
+    border-radius: 100%;
+    position: absolute;
+    margin-left: -40%;
+    margin-top: 10px;
+}
+
+.btnVoltarCriar svg{
+    width: 20px;
+    height: 20px;
+}
+
+.btnSalvarExercicio{
+    background-color: yellow;
+    width: 80%;
+    padding: 10px;
+    margin: auto;
+    font-size: 20px;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    transition: 0.3s;
+    cursor: pointer;
+    justify-content: center;
+    border: none;
 }
 
 .form_peito, .form_triceps, .form_abdomen, .form_costa, .form_biceps, .form_ombro, .form_mem_inferiores{
@@ -307,7 +345,8 @@ input[type=checkbox] {
     border: none;
     font-size: 15px;
     margin-top: 1em;
-    max-width: 75%;
+    width: 70%;
+    outline: none;
 }
 
 form{
@@ -332,9 +371,10 @@ form{
 /* Login ============================================================================================================================================================== */
 
 .conteiner_login{
-    border: 1px solid white;
-    width: 90%;
-    height: 90%;
+    background-color: #313131;
+    padding: 10px;
+    width: 85%;
+    height: 85%;
     margin: auto;
     margin-top: 1.2em;
     display: none;
@@ -360,7 +400,7 @@ form{
     justify-content: center;
     border: 2px solid #404040;
     border-radius: 15px;
-    width: 80%;
+    width: 90%;
     margin-top: 20%;
     background-color: #313131;
 }
@@ -406,6 +446,23 @@ form{
     color: rgb(255, 174, 0);
 }
 
+.btnVoltarLog{
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border: none;
+    background-color: yellow;
+    border-radius: 100%;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.btnVoltarLog svg{
+    width: 20px;
+    height: 20px;
+}
+
 /* organizando_dias_treinos  ====================================================================================*/
 
 .organizando_dias_treinos{
@@ -416,13 +473,13 @@ form{
 
 .conteiner_total_opcoes{
     background-color: rgb(0, 0, 0, 0.5);
-    width: 75%;
+    width: 85%;
     margin: auto;
     margin-top: 2em;
     border-radius: 15px;
     padding: 15px;
     text-align: center;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .conteiner_selects select{

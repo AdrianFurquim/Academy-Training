@@ -106,7 +106,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Usuario - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style12.css">
+    <link rel="stylesheet" href="./assets/css/style13.css">
 
     <style>
         <?php

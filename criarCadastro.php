@@ -105,7 +105,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Cadastro - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style12.css">
+    <link rel="stylesheet" href="./assets/css/style13.css">
 
     <style>
         
@@ -151,6 +151,15 @@
     </header>
 
     <section class="conteiner_realiza_login">
+        
+        <a href="login.php">
+            <button class="btnVoltarLog">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+            </button>
+        </a>
+
         <h1>Acadey Training</h1>
         <p class="alerta_dados_faltando">Por favor, insira os dados com *</p>
         <form action="forms/confirmaCadastro.php" method="POST" class="forms_cad_login">

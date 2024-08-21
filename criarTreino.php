@@ -53,7 +53,6 @@
             echo "<tr>";
             // IF - ferificação para selecionar apenas os exercícios do membro escolhido.
             if($user_data['Membro'] == $membro){
-                echo "<td>Des</td>";
                 echo "<td>".$user_data['Exercício']."</td>";
                 echo "<td>".$user_data['Serie']."</td>";
                 echo "<td>
@@ -170,7 +169,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Criar Treino - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style12.css">
+    <link rel="stylesheet" href="./assets/css/style13.css">
 
     <style>
         <?php
@@ -334,23 +333,31 @@
     <section class="montando_treino">
     
         <div class="escolha_membro">
-            <h1 class="mensagem_membro">Escolha o membro desejado:</h1>
-            <button onclick="membroEscolhido('peito')">Peito</button>
-            <button onclick="membroEscolhido('triceps')">Tríceps</button>
-            <button onclick="membroEscolhido('abdomen')">Abdomen</button>
-            <button onclick="membroEscolhido('costas')">Costa</button>
-            <button onclick="membroEscolhido('biceps')">Bíceps</button>
-            <button onclick="membroEscolhido('ombro')">Ombro</button>
-            <button onclick="membroEscolhido('mem_inferiores')">Membros inferiores</button>
+            <h1 class="mensagem_membro">Escolha o membro desejado</h1>
+            <button class="botaoEscolha" onclick="membroEscolhido('peito')">Peito</button>
+            <button class="botaoEscolha" onclick="membroEscolhido('triceps')">Tríceps</button>
+            <button class="botaoEscolha" onclick="membroEscolhido('abdomen')">Abdomen</button>
+            <button class="botaoEscolha" onclick="membroEscolhido('costas')">Costa</button>
+            <button class="botaoEscolha" onclick="membroEscolhido('biceps')">Bíceps</button>
+            <button class="botaoEscolha" onclick="membroEscolhido('ombro')">Ombro</button>
+            <button class="botaoEscolha" onclick="membroEscolhido('mem_inferiores')">Membros inferiores</button>
+            <br>
+            <h1 class="mensagem_membro">Onganize seu Treino</h1>
             <?php
                 gerarLink('orgMem');
             ?>
-                <button class="organizar_dias_membros">Organizar Dias e Membros</button>
+                <button class="botaoEscolha" class="organizar_dias_membros">Organizar Dias e Membros</button>
             </a>
         </div>
 
         <div class="form_peito">
-            <button onclick="diaVoltar()">Voltar</button>
+
+            <button class="btnVoltarCriar" onclick="diaVoltar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+            </button>
+            <br>
             <h1>Peito</h1>
             
             <form action="forms/adicionarTreino.php?membro=Peito&select=peito&serie=seriePeito&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoPeito">
@@ -378,7 +385,6 @@
                     </caption>
                     <thead>
                     <tr>
-                        <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
                         <th scope="col"></th>
@@ -399,12 +405,17 @@
                     ?>
                     </tbody>
                 </table>
-                <button id="btnSalvarExercicioPeito" type="submit">Adicionar Exercicío</button><br>
+                <button id="btnSalvarExercicioPeito" class="btnSalvarExercicio" type="submit">Adicionar Exercicío</button><br>
             </form>
         </div>
 
         <div class="form_triceps">
-            <button onclick="diaVoltar()">Voltar</button>
+            <button class="btnVoltarCriar" onclick="diaVoltar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+            </button>
+            <br>
             <h1>Tríceps</h1>
             <form action="forms/adicionarTreino.php?membro=Tríceps&select=triceps&serie=serieTriceps&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoTriceps">
                 <p class="mensagem_triceps">Porfavor, selecione o exercício e a série.</p>
@@ -431,16 +442,15 @@
                     </caption>
                     <thead>
                     <tr>
-                        <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
                         <th scope="col"></th>
                     </tr>
-                    </thead>
-                    <tbody id="corpoTabelaTriceps">
                     <tr>
                         <th scope="row" colspan="4">Tríceps</th>
                     </tr>
+                    </thead>
+                    <tbody id="corpoTabelaTriceps">
                     <?php
                         if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                             echo gerarTabela($user_data_array, "Tríceps");
@@ -448,12 +458,17 @@
                     ?>
                     </tbody>
                 </table>
-                <button id="btnSalvarExercicioTriceps" type="submit">Adicionar Exercicío</button><br>
+                <button id="btnSalvarExercicioTriceps" class="btnSalvarExercicio" type="submit">Adicionar Exercicío</button><br>
             </form>
         </div>
 
         <div class="form_abdomen">
-            <button onclick="diaVoltar()">Voltar</button>
+            <button class="btnVoltarCriar" onclick="diaVoltar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+            </button>
+            <br>
             <h1>Abdominal</h1>
             <form action="forms/adicionarTreino.php?membro=Abdominal&select=abdomen&serie=serieAbdomen&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoAbdominal">
                 <p class="mensagem_abdomen">Porfavor, selecione o exercício e a série.</p>
@@ -480,7 +495,6 @@
                     </caption>
                     <thead>
                     <tr>
-                        <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
                         <th scope="col"></th>
@@ -497,12 +511,17 @@
                     ?>
                     </tbody>
                 </table>
-                <button id="btnSalvarExercicioAbdomen" type="submit">Adicionar Exercicío</button><br>
+                <button id="btnSalvarExercicioAbdomen" class="btnSalvarExercicio" type="submit">Adicionar Exercicío</button><br>
             </form>
         </div>
 
         <div class="form_costa">
-            <button onclick="diaVoltar()">Voltar</button>
+            <button class="btnVoltarCriar" onclick="diaVoltar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+            </button>
+            <br>
             <h1>Costa</h1>
             <form action="forms/adicionarTreino.php?membro=Costa&select=costa&serie=serieCosta&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoCosta">
                 <p class="mensagem_costa">Porfavor, selecione o exercício e a série.</p>
@@ -529,7 +548,6 @@
                     </caption>
                     <thead>
                     <tr>
-                        <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
                         <th scope="col"></th>
@@ -546,12 +564,17 @@
                     ?>
                     </tbody>
                 </table>
-                <button id="btnSalvarExercicioAbdomen" type="submit">Adicionar Exercicío</button><br>
+                <button id="btnSalvarExercicioAbdomen" class="btnSalvarExercicio" type="submit">Adicionar Exercicío</button><br>
             </form>
         </div>
 
         <div class="form_biceps">
-            <button onclick="diaVoltar()">Voltar</button>
+            <button class="btnVoltarCriar" onclick="diaVoltar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+            </button>
+            <br>
             <h1>Bíceps</h1>
             <form action="forms/adicionarTreino.php?membro=Bíceps&select=biceps&serie=serieBiceps&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoBiceps">
                 <p class="mensagem_biceps">Porfavor, selecione o exercício e a série.</p>
@@ -578,7 +601,6 @@
                     </caption>
                     <thead>
                     <tr>
-                        <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
                         <th scope="col"></th>
@@ -595,12 +617,17 @@
                     ?>
                     </tbody>
                 </table>
-                <button id="btnSalvarExercicioBiceps" type="submit">Adicionar Exercicío</button><br>
+                <button id="btnSalvarExercicioBiceps" class="btnSalvarExercicio" type="submit">Adicionar Exercicío</button><br>
             </form>
         </div>
 
         <div class="form_ombro">
-            <button onclick="diaVoltar()">Voltar</button>
+            <button class="btnVoltarCriar" onclick="diaVoltar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+            </button>
+            <br>
             <h1>Ombro</h1>
             <form action="forms/adicionarTreino.php?membro=Ombro&select=ombro&serie=serieOmbro&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoOmbro">
                 <p class="mensagem_ombro">Porfavor, selecione o exercício e a série.</p>
@@ -627,7 +654,6 @@
                     </caption>
                     <thead>
                     <tr>
-                        <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
                         <th scope="col"></th>
@@ -644,12 +670,17 @@
                     ?>
                     </tbody>
                 </table>
-                <button id="btnSalvarExercicioOmbro" type="submit">Adicionar Exercicío</button><br>
+                <button id="btnSalvarExercicioOmbro" class="btnSalvarExercicio" type="submit">Adicionar Exercicío</button><br>
             </form>
         </div>
 
         <div class="form_mem_inferiores">
-        <button onclick="diaVoltar()">Voltar</button>
+            <button class="btnVoltarCriar" onclick="diaVoltar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+            </button>
+            <br>
             <h1>Membros Inferiores</h1>
             <form action="forms/adicionarTreino.php?membro=Membros Inferiores&select=membrosInferiores&serie=serieMembrosInferiores&situacao=conectado&id=<?php echo $_GET['id']; ?>" method="POST" id="adicionarTreinoMembrosInferiores">
                 <p class="mensagem_mem_inferiores">Porfavor, selecione o exercício e a série.</p>
@@ -676,7 +707,6 @@
                     </caption>
                     <thead>
                     <tr>
-                        <th scope="col">Ordem</th>
                         <th scope="col">Exercicío</th>
                         <th scope="col">Série</th>
                         <th scope="col"></th>
@@ -693,7 +723,7 @@
                     ?>
                     </tbody>
                 </table>
-                <button id="btnSalvarExercicioMembrosInferiores" type="submit">Adicionar Exercicío</button><br>
+                <button id="btnSalvarExercicioMembrosInferiores" class="btnSalvarExercicio" type="submit">Adicionar Exercicío</button><br>
             </form>
         </div>
 

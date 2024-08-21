@@ -78,7 +78,7 @@
                             foreach($user_data_array as $user_data_exercicio) {
                                 if ($user_data_membro['membro_nome'] == $user_data_exercicio['Membro']) {
                                     echo "<tr>";
-                                    echo "<td><input type='checkbox'>Escolha</td>";
+                                    echo "<td><input type='checkbox'></td>";
                                     echo "<td>".$user_data_exercicio['Exercício']."</td>";
                                     echo "<td>".$user_data_exercicio['Serie']."</td>";                        
                                     echo "</tr>";
@@ -191,7 +191,7 @@
 
     <title>Academy Training</title>
     <link rel="icon" tipe="image/ico" href="./images/icons/icon-152x152.png">
-    <link rel="stylesheet" href="./assets/css/style12.css">
+    <link rel="stylesheet" href="./assets/css/style13.css">
 
     <style>
         <?php
@@ -303,7 +303,7 @@
         <table id="table_terca">
             <thead>
             <tr>
-                <th scope="col">Ordem</th>
+                <th scope="col">Check</th>
                 <th scope="col">Exercicío</th>
                 <th scope="col">Série</th>
             </tr>
@@ -321,7 +321,7 @@
         <table id="table_quarta">
             <thead>
             <tr>
-                <th scope="col">Ordem</th>
+                <th scope="col">Check</th>
                 <th scope="col">Exercicío</th>
                 <th scope="col">Série</th>
             </tr>
@@ -339,7 +339,7 @@
         <table id="table_quinta">
             <thead>
             <tr>
-                <th scope="col">Ordem</th>
+                <th scope="col">Check</th>
                 <th scope="col">Exercicío</th>
                 <th scope="col">Série</th>
             </tr>
@@ -358,7 +358,7 @@
         <table id="table_sexta">
             <thead>
             <tr>
-                <th scope="col">Ordem</th>
+                <th scope="col">Check</th>
                 <th scope="col">Exercicío</th>
                 <th scope="col">Série</th>
             </tr>
@@ -376,7 +376,7 @@
         <table id="table_sabado">
             <thead>
             <tr>
-                <th scope="col">Ordem</th>
+                <th scope="col">Check</th>
                 <th scope="col">Exercicío</th>
                 <th scope="col">Série</th>
             </tr>
