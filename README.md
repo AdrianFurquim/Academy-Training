@@ -33,7 +33,9 @@ A ideia do projeto é auxiliar na programação de treinamentos para frequentado
    - Abra seu sistema de gerenciamento de banco de dados (por exemplo, phpMyAdmin).
    - Importe o modelo do banco de dados fornecido junto com o projeto.
 4. **Iniciar a Aplicação:** Na barra de pesquisa do navegador, digite: `localhost/academytraining`.
-
+5. **Para melhor usabilidade:**
+   - Precione a tecla f12, irá aparecer algumas opções no canto direito, no topo ao lado do 'elements', aperte na opção com desenho de notebook e um celular para modificar a visibilidade para como se fosse um celular.
+   - No topo em 'Dimension' é possivel escolher entre alguns celulares para simulação.
 ## Equipe
 - **Adrian Eduardo Furquim de Souza**
 
