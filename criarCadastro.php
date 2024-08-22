@@ -105,7 +105,7 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Cadastro - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style13.css">
+    <link rel="stylesheet" href="./assets/css/style14.css">
 
     <style>
         

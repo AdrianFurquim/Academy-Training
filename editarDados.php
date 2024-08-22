@@ -17,14 +17,24 @@
         echo "<div class='dados_login'>";
             foreach($result as $user_data) {
                 if($user_data['usu_id'] == $_GET['id']){
-                    echo "<h2>".$user_data['usu_nome']."</h2>";
-                    echo "<p>Altura:".$user_data['usu_altura']."m</p>";
-                    echo "<p>Peso: ".$user_data['usu_peso']."kg</p>";
-                    echo "<p>dias treinados: ".$user_data['usu_tempo_treinando']." dias</p>";
-                    echo "<p>Meta: ".$user_data['usu_meta']."</p>";
-                    echo "<a href='editarDados.php?situacao=conectado&id=". $_GET['id']."'>";
-                        echo "<button class='btnEditar'>Editar</button>";
-                    echo "</a>";
+
+                    echo "<form action='forms/salvarDados.php?situacao=conectado&id=". $_GET['id']."' method='POST' class='forms_cad_edit_dados'>";
+
+                        echo "<label for='nome'>Nome:</label>";
+                        echo "<input type='text' value=".$user_data['usu_nome']." name='nome' id='nome'>";
+
+                        echo "<label for='altura'>Altura:</label>";
+                        echo "<input type='text' value=".$user_data['usu_altura']." name='altura' id='altura'>";
+
+                        echo "<label for='peso'>Peso:</label>";
+                        echo "<input type='text' value=".$user_data['usu_peso']." name='peso' id='peso'>";
+
+                        echo "<label for='meta'>Meta:</label>";
+                        echo "<input type='text' value=".$user_data['usu_meta']." name='meta' id='meta'>";
+
+                        echo "<button class='btnEditar' type='submit'>Editar</button>";
+
+                    echo "</form>";
                 }
             }
         echo "</div>";

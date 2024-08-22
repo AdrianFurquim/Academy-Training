@@ -225,6 +225,11 @@ input[type=checkbox] {
     width: 90%;
 }
 
+@media (min-width: 900px) {
+    .conteiner_nao_logado img{
+        width: 20%;
+    }
+  }
 
 /* Adicionar Treino ==================================================================================================================== */
 
@@ -393,6 +398,25 @@ form{
 
 .dados_login{
     margin-left: 3em;
+    display: flex;
+    flex-direction: column;
+}
+
+.forms_cad_edit_dados{
+    display: flex;
+    flex-direction: column;
+}
+
+.dados_login input{
+    background-color: transparent;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 1.1em;
+    outline: none;
+    margin-bottom: 2em;
 }
 
 .conteiner_realiza_login{
@@ -461,6 +485,27 @@ form{
 .btnVoltarLog svg{
     width: 20px;
     height: 20px;
+}
+
+.btnEditar{
+    background-color: rgb(79, 79, 255);
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    width: 60%;
+    cursor: pointer;
+}
+
+@media (min-width: 900px) {
+    .foto_login{
+        width: 20%;
+    }
+
+    .btnEditar{
+        width: 10%;
+    }
 }
 
 /* organizando_dias_treinos  ====================================================================================*/
