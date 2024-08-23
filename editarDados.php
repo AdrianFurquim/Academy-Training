@@ -21,16 +21,16 @@
                     echo "<form action='forms/salvarDados.php?situacao=conectado&id=". $_GET['id']."' method='POST' class='forms_cad_edit_dados'>";
 
                         echo "<label for='nome'>Nome:</label>";
-                        echo "<input type='text' value=".$user_data['usu_nome']." name='nome' id='nome'>";
+                        echo "<input type='text' value='".$user_data['usu_nome']."' name='nome' id='nome'>";
 
                         echo "<label for='altura'>Altura:</label>";
-                        echo "<input type='text' value=".$user_data['usu_altura']." name='altura' id='altura'>";
+                        echo "<input type='text' value='".$user_data['usu_altura']."' name='altura' id='altura'>";
 
                         echo "<label for='peso'>Peso:</label>";
-                        echo "<input type='text' value=".$user_data['usu_peso']." name='peso' id='peso'>";
+                        echo "<input type='text' value='".$user_data['usu_peso']."' name='peso' id='peso'>";
 
                         echo "<label for='meta'>Meta:</label>";
-                        echo "<input type='text' value=".$user_data['usu_meta']." name='meta' id='meta'>";
+                        echo "<input type='text' value='" . $user_data['usu_meta'] . "' name='meta' id='meta'>";
 
                         echo "<button class='btnEditar' type='submit'>Editar</button>";
 
@@ -119,7 +119,8 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Usuario - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style14.css">
+    <link rel="stylesheet" href="./assets/css/style15.css">
+    <link rel="icon" tipe="image/ico" href="./images/icons/icon-152x152.png">
 
     <style>
         <?php
@@ -208,6 +209,6 @@
         
     </section>
 
-    <script src="./assets/js/script1.js"></script>
+    <script src="./assets/js/script2.js"></script>
 </body>
 </html>

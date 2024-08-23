@@ -4,6 +4,7 @@ let table_quarta = document.getElementById("table_quarta");
 let table_quinta = document.getElementById("table_quinta");
 let table_sexta = document.getElementById("table_sexta");
 let table_sabado = document.getElementById("table_sabado");
+let table_domingo = document.getElementById("table_domingo");
 let buttons_dias = document.querySelector(".buttons_dias");
 let button_voltar = document.querySelector(".button_voltar");
 
@@ -16,6 +17,7 @@ function sumirBottoes() {
     table_quinta.style.display = "none";
     table_sexta.style.display = "none";
     table_sabado.style.display = "none";
+    table_domingo.style.display = "none";
     buttons_dias.style.display = "none";
     button_voltar.style.display = "none";
 }
@@ -61,12 +63,10 @@ function sabado(){
     button_voltar.style.display = "block";
 }
 
-function confereTreino(index) {
-    if (trs[index].style.background === "") {
-        trs[index].style.background = "rgb(10, 230, 10, 0.5)";
-    } else if(trs[index].style.background = "rgb(10, 230, 10, 0.5)"){
-        trs[index].style.background = "";
-    }
+function domingo(){
+    sumirBottoes();
+    table_domingo.style.display = "block";
+    button_voltar.style.display = "block";
 }
 
 // Criar Treino

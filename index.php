@@ -191,7 +191,7 @@
 
     <title>Academy Training</title>
     <link rel="icon" tipe="image/ico" href="./images/icons/icon-152x152.png">
-    <link rel="stylesheet" href="./assets/css/style14.css">
+    <link rel="stylesheet" href="./assets/css/style15.css">
 
     <style>
         <?php
@@ -258,7 +258,11 @@
     </header>
     
     <section class="conteiner_dia_treino">
-        <button class="button_voltar" onclick="voltar()">Voltar</button>
+        <button class="button_voltar" onclick="voltar()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+            </svg>
+        </button>
         <div class="buttons_dias">
             <button onclick="segunda()">Segunda</button>
             <button onclick="terca()">Terça</button>
@@ -266,6 +270,7 @@
             <button onclick="quinta()">Quinta</button>
             <button onclick="sexta()">Sexta</button>
             <button onclick="sabado()">Sabado</button>
+            <button onclick="domingo()">Domingo</button>
         </div>
     </section>
 
@@ -303,7 +308,7 @@
         <table id="table_terca">
             <thead>
             <tr>
-                <th scope="col">Check</th>
+                <th scope="col">Feito</th>
                 <th scope="col">Exercicío</th>
                 <th scope="col">Série</th>
             </tr>
@@ -321,7 +326,7 @@
         <table id="table_quarta">
             <thead>
             <tr>
-                <th scope="col">Check</th>
+                <th scope="col">Feito</th>
                 <th scope="col">Exercicío</th>
                 <th scope="col">Série</th>
             </tr>
@@ -339,7 +344,7 @@
         <table id="table_quinta">
             <thead>
             <tr>
-                <th scope="col">Check</th>
+                <th scope="col">Feito</th>
                 <th scope="col">Exercicío</th>
                 <th scope="col">Série</th>
             </tr>
@@ -358,7 +363,7 @@
         <table id="table_sexta">
             <thead>
             <tr>
-                <th scope="col">Check</th>
+                <th scope="col">Feito</th>
                 <th scope="col">Exercicío</th>
                 <th scope="col">Série</th>
             </tr>
@@ -376,7 +381,7 @@
         <table id="table_sabado">
             <thead>
             <tr>
-                <th scope="col">Check</th>
+                <th scope="col">Feito</th>
                 <th scope="col">Exercicío</th>
                 <th scope="col">Série</th>
             </tr>
@@ -389,10 +394,28 @@
             ?>
             </tbody>
         </table>
+
+        <!-- Treino de Domingo =========================================================================================================================================== -->
+        <table id="table_domingo">
+            <thead>
+            <tr>
+                <th scope="col">Feito</th>
+                <th scope="col">Exercicío</th>
+                <th scope="col">Série</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+                if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                    echo gerarTabelaTreino($user_data_array_dia_treinamento, $user_data_array_treino_membro, $user_data_array, "Domingo");
+                }
+            ?>
+            </tbody>
+        </table>
     </section>
 
     
 
-    <script src="./assets/js/script1.js"></script>
+    <script src="./assets/js/script2.js"></script>
 </body>
 </html>

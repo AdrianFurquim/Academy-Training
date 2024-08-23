@@ -105,7 +105,8 @@
 
     <meta name="theme-color" content="#FFFF00">
     <title>Cadastro - Academy Training</title>
-    <link rel="stylesheet" href="./assets/css/style14.css">
+    <link rel="icon" tipe="image/ico" href="./images/icons/icon-152x152.png">
+    <link rel="stylesheet" href="./assets/css/style15.css">
 
     <style>
         
@@ -201,6 +202,6 @@
         
     </section>
 
-    <script src="./assets/js/script1.js"></script>
+    <script src="./assets/js/script2.js"></script>
 </body>
 </html>

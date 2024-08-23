@@ -112,7 +112,7 @@ button{
     flex-direction: column;
 }
 
-.conteiner_dia_treino button{
+.buttons_dias button{
     background-color: rgb(255, 255, 46);
     border: none;
     padding: 20px;
@@ -126,6 +126,15 @@ button{
 
 .button_voltar{
     display: none;
+    width: 45px;
+    height: 45px;
+    padding: 5px;
+    border: none;
+    background-color: yellow;
+    border-radius: 100%;
+    position: absolute;
+    margin-left: 20px;
+    margin-top: -20px;
 }
 
 .buttons_dias{
@@ -186,7 +195,7 @@ input[type=checkbox] {
   }
   
 
-#table_segunda, #table_terca, #table_quarta, #table_quinta, #table_sexta, #table_sabado{
+#table_segunda, #table_terca, #table_quarta, #table_quinta, #table_sexta, #table_sabado, #table_domingo{
     display: none;
 }
 
