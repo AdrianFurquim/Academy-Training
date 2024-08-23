@@ -12,13 +12,7 @@ Bem-vindo ao Academy Training! Abaixo você encontrará detalhes sobre a estrutu
 - **MySQL**
 - **PWA**
 
-<h4 align="center">🚧 Projeto em Andamento 🚧</h4>
-<h4 align="center">🚧 Caso alguma função não esteja funcionando, se trata de um projeto ainda sendo implementado 🚧</h4>
-<p align="center">Sistema ainda em desenvolvimento</p>
-
-## Visite o Projeto
-Para visualizar o projeto Academy Training - PWA, clique no link abaixo:
-[Academy Training Visualização](https://academytreining.netlify.app/)
+<h4 align="center">✅ Projeto em Finalizado ✅</h4>
 
 ## O que é Academy Training?
 A ideia do projeto é auxiliar na programação de treinamentos para frequentadores de academias, permitindo criar treinos personalizados, monitorar diversos fatores, mostrar a evolução dos usuários e facilitar a rotina de treinos. O sistema é desenvolvido como uma PWA (Progressive Web App), permitindo que funcione como um aplicativo em qualquer celular, sem ocupar espaço significativo, mas ainda assim oferecendo todas as funcionalidades necessárias para ajudar as pessoas em sua jornada de fitness.
